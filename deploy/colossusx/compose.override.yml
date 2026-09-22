@@ -1,0 +1,22 @@
+# Docker Compose automatically loads this file for the public HTTPS domain.
+services:
+  backend:
+    environment:
+      BLOCKSCOUT_HOST: colossusx.make-cph-great-again.community
+      BLOCKSCOUT_PROTOCOL: https
+      WEBAPP_URL: https://colossusx.make-cph-great-again.community
+      API_URL: https://colossusx.make-cph-great-again.community
+
+  frontend:
+    image: colossusx-frontend:2.7.2-branding
+    pull_policy: never
+    environment:
+      NEXT_PUBLIC_APP_HOST: colossusx.make-cph-great-again.community
+      NEXT_PUBLIC_APP_PROTOCOL: https
+      NEXT_PUBLIC_APP_PORT: "443"
+      NEXT_PUBLIC_API_HOST: colossusx.make-cph-great-again.community
+      NEXT_PUBLIC_API_PROTOCOL: https
+      NEXT_PUBLIC_API_PORT: "443"
+      NEXT_PUBLIC_API_WEBSOCKET_PROTOCOL: wss
+      NEXT_PUBLIC_STATS_API_HOST: https://colossusx.make-cph-great-again.community
+      NEXT_PUBLIC_OTHER_LINKS: "[{'url':'https://colossusx.make-cph-great-again.community/network-info/','text':'Validators & Common Miners'}]"

@@ -1,0 +1,1789 @@
+--- a/apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block/colossusx_rewards.ex
++++ b/apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block/colossusx_rewards.ex
+@@ -0,0 +1,41 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule BlockScoutWeb.Schemas.API.V2.Block.ColossusXRewards do
++  @moduledoc """
++  Exact FHS-D rewards in integer wei. Present only when ColossusX indexing is enabled.
++  Pending amounts are null; a verified rewardless block has decimal-string zeroes.
++  """
++  require OpenApiSpex
++  alias OpenApiSpex.Schema
++
++  @amount %Schema{type: :string, pattern: "^[0-9]+$", nullable: true}
++
++  OpenApiSpex.schema(%{
++    type: :object,
++    nullable: false,
++    properties: %{
++      status: %Schema{type: :string, enum: ["pending", "complete"], nullable: false},
++      rule_version: %Schema{type: :string, enum: ["FHS-D/64c12623"], nullable: false},
++      total: @amount,
++      block_reward: @amount,
++      common_miner_reward: @amount,
++      common_rpc_reward: @amount,
++      payouts: %Schema{
++        type: :array,
++        nullable: false,
++        items: %Schema{
++          type: :object,
++          nullable: false,
++          properties: %{
++            address_hash: %Schema{type: :string, pattern: "^0x[0-9a-fA-F]{40}$", nullable: false},
++            category: %Schema{type: :string, enum: ["block", "common_miner", "common_rpc"], nullable: false},
++            reward: %Schema{type: :string, pattern: "^[0-9]+$", nullable: false}
++          },
++          required: [:address_hash, :category, :reward],
++          additionalProperties: false
++        }
++      }
++    },
++    required: [:status, :rule_version, :total, :block_reward, :common_miner_reward, :common_rpc_reward, :payouts],
++    additionalProperties: false
++  })
++end
+--- a/apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block.ex
++++ b/apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21: document the opt-in FHS-D reward response.
+ defmodule BlockScoutWeb.Schemas.API.V2.Block.ChainTypeCustomizations do
+   @moduledoc false
+   alias BlockScoutWeb.API.V2.ZkSyncView
+@@ -310,6 +311,7 @@
+   @moduledoc """
+   This module defines common schema fields for block.
+   """
++  alias BlockScoutWeb.Schemas.API.V2.Block.ColossusXRewards
+   alias BlockScoutWeb.Schemas.API.V2.{Address, General}
+   alias OpenApiSpex.Schema
+ 
+@@ -404,6 +406,8 @@
+           nullable: false
+         },
+         rewards: @rewards_schema,
++        # This field is emitted only when FETCH_REWARDS_WAY=colossusx.
++        colossusx_rewards: ColossusXRewards,
+         gas_target_percentage: %Schema{type: :number, format: :float, nullable: false},
+         gas_used_percentage: %Schema{type: :number, format: :float, nullable: false},
+         burnt_fees_percentage: %Schema{type: :number, format: :float, nullable: true},
+--- a/apps/block_scout_web/lib/block_scout_web/views/api/rpc/block_view.ex
++++ b/apps/block_scout_web/lib/block_scout_web/views/api/rpc/block_view.ex
+@@ -1,12 +1,81 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
+ defmodule BlockScoutWeb.API.RPC.BlockView do
+   use BlockScoutWeb, :view
+ 
+   alias BlockScoutWeb.API.EthRPC.View, as: EthRPCView
+   alias BlockScoutWeb.API.RPC.RPCView
+   alias Explorer.Chain.{Block, Hash, Wei}
++  alias Explorer.Chain.Block.ColossusXRewards
+   alias Explorer.EthRPC, as: EthRPC
+ 
+-  def render("block_reward.json", %{block: %Block{rewards: [_ | _]} = block}) do
++  def render("block_reward.json", %{block: block}) do
++    if ColossusXRewards.enabled?() do
++      render_colossusx_reward(block)
++    else
++      render_ethereum_reward(block)
++    end
++  end
++
++  def render("block_countdown.json", %{
++        current_block: current_block,
++        countdown_block: countdown_block,
++        remaining_blocks: remaining_blocks,
++        estimated_time_in_sec: estimated_time_in_sec
++      }) do
++    data = %{
++      "CurrentBlock" => to_string(current_block),
++      "CountdownBlock" => to_string(countdown_block),
++      "RemainingBlock" => to_string(remaining_blocks),
++      "EstimateTimeInSec" => to_string(estimated_time_in_sec)
++    }
++
++    RPCView.render("show.json", data: data)
++  end
++
++  def render("getblocknobytime.json", %{block_number: block_number}) do
++    # TODO: migrate to the following format in the next release
++    # RPCView.render("show.json", data: to_string(block_number))
++
++    RPCView.render("show.json",
++      data: %{
++        "blockNumber" => to_string(block_number)
++      }
++    )
++  end
++
++  def render("eth_block_number.json", %{number: number, id: id}) do
++    result = EthRPC.encode_quantity(number)
++
++    EthRPCView.render("show.json", %{result: result, id: id})
++  end
++
++  def render("error.json", %{error: error}) do
++    RPCView.render("error.json", error: error)
++  end
++
++  defp render_colossusx_reward(block) do
++    case ColossusXRewards.summary(block.rewards) do
++      %{status: "pending"} ->
++        RPCView.render("error.json", error: "Reward data is still being indexed")
++
++      summary ->
++        # The legacy field represents block production only. Other beneficiaries
++        # and the combined total are reported explicitly in colossusxRewards.
++        data = %{
++          "blockNumber" => to_string(block.number),
++          "timeStamp" => DateTime.to_unix(block.timestamp),
++          "blockMiner" => block.rewards |> ColossusXRewards.block_beneficiary(block.miner_hash) |> Hash.to_string(),
++          "blockReward" => summary.block_reward,
++          "uncles" => [],
++          "uncleInclusionReward" => "0",
++          "colossusxRewards" => summary
++        }
++
++        RPCView.render("show.json", data: data)
++    end
++  end
++
++  defp render_ethereum_reward(%Block{rewards: [_ | _]} = block) do
+     reward_as_string =
+       block.rewards
+       |> Enum.find(%{reward: Wei.zero()}, &(&1.address_type == :validator))
+@@ -48,7 +117,7 @@
+     RPCView.render("show.json", data: data)
+   end
+ 
+-  def render("block_reward.json", %{block: block}) do
++  defp render_ethereum_reward(block) do
+     data = %{
+       "blockNumber" => to_string(block.number),
+       "timeStamp" => DateTime.to_unix(block.timestamp),
+@@ -60,41 +129,4 @@
+ 
+     RPCView.render("show.json", data: data)
+   end
+-
+-  def render("block_countdown.json", %{
+-        current_block: current_block,
+-        countdown_block: countdown_block,
+-        remaining_blocks: remaining_blocks,
+-        estimated_time_in_sec: estimated_time_in_sec
+-      }) do
+-    data = %{
+-      "CurrentBlock" => to_string(current_block),
+-      "CountdownBlock" => to_string(countdown_block),
+-      "RemainingBlock" => to_string(remaining_blocks),
+-      "EstimateTimeInSec" => to_string(estimated_time_in_sec)
+-    }
+-
+-    RPCView.render("show.json", data: data)
+-  end
+-
+-  def render("getblocknobytime.json", %{block_number: block_number}) do
+-    # TODO: migrate to the following format in the next release
+-    # RPCView.render("show.json", data: to_string(block_number))
+-
+-    RPCView.render("show.json",
+-      data: %{
+-        "blockNumber" => to_string(block_number)
+-      }
+-    )
+-  end
+-
+-  def render("eth_block_number.json", %{number: number, id: id}) do
+-    result = EthRPC.encode_quantity(number)
+-
+-    EthRPCView.render("show.json", %{result: result, id: id})
+-  end
+-
+-  def render("error.json", %{error: error}) do
+-    RPCView.render("error.json", error: error)
+-  end
+ end
+--- a/apps/block_scout_web/lib/block_scout_web/views/api/v2/block_view.ex
++++ b/apps/block_scout_web/lib/block_scout_web/views/api/v2/block_view.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21: expose exact indexed FHS-D payouts and pending state.
+ defmodule BlockScoutWeb.API.V2.BlockView do
+   use BlockScoutWeb, :view
+ 
+@@ -8,6 +9,7 @@
+   alias BlockScoutWeb.API.V2.{ApiView, Helper}
+   alias BlockScoutWeb.BlockView
+   alias Explorer.Chain.Block
++  alias Explorer.Chain.Block.ColossusXRewards
+ 
+   def render("message.json", assigns) do
+     ApiView.render("message.json", assigns)
+@@ -78,6 +80,15 @@
+     }
+     |> chain_type_fields(block, single_block?)
+     |> chain_identity_fields(block, single_block?)
++    |> colossusx_rewards(block.rewards)
++  end
++
++  defp colossusx_rewards(result, rewards) do
++    if ColossusXRewards.enabled?() do
++      Map.put(result, "colossusx_rewards", ColossusXRewards.summary(rewards))
++    else
++      result
++    end
+   end
+ 
+   defp prepare_rewards(rewards, block, single_block?) do
+--- a/apps/block_scout_web/lib/block_scout_web/views/block_view.ex
++++ b/apps/block_scout_web/lib/block_scout_web/views/block_view.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21: label independent Common miner and RPC rewards.
+ defmodule BlockScoutWeb.BlockView do
+   use BlockScoutWeb, :view
+ 
+@@ -77,6 +78,10 @@
+     gettext("Uncle Reward")
+   end
+ 
++  def block_reward_text(%Reward{address_type: :colossusx_pow}, _block_miner_address), do: "Common Miner Reward"
++
++  def block_reward_text(%Reward{address_type: :colossusx_rpc}, _block_miner_address), do: "Common RPC Reward"
++
+   def combined_rewards_value(block) do
+     block
+     |> Block.block_combined_rewards()
+--- a/apps/block_scout_web/test/block_scout_web/controllers/api/v2/colossusx_block_controller_test.exs
++++ b/apps/block_scout_web/test/block_scout_web/controllers/api/v2/colossusx_block_controller_test.exs
+@@ -0,0 +1,97 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule BlockScoutWeb.API.V2.ColossusXBlockControllerTest do
++  use BlockScoutWeb.ConnCase
++
++  setup do
++    Supervisor.terminate_child(Explorer.Supervisor, Explorer.Chain.Cache.Blocks.child_id())
++    Supervisor.restart_child(Explorer.Supervisor, Explorer.Chain.Cache.Blocks.child_id())
++    previous = Application.fetch_env(:indexer, :fetch_rewards_way)
++    Application.put_env(:indexer, :fetch_rewards_way, "colossusx")
++
++    on_exit(fn ->
++      case previous do
++        {:ok, value} -> Application.put_env(:indexer, :fetch_rewards_way, value)
++        :error -> Application.delete_env(:indexer, :fetch_rewards_way)
++      end
++    end)
++
++    :ok
++  end
++
++  test "block detail exposes pending data without an invented zero", %{conn: conn} do
++    block = insert(:block)
++    result = conn |> get("/api/v2/blocks/#{block.number}") |> json_response(200)
++    assert %{"status" => "pending", "total" => nil, "payouts" => []} = result["colossusx_rewards"]
++  end
++
++  test "detail and list preserve exact totals and distinct payout recipients", %{conn: conn} do
++    block = insert(:block)
++    producer = insert(:address)
++    recipient = insert(:address)
++
++    insert(:reward,
++      block_hash: block.hash,
++      address_hash: producer.hash,
++      address_type: :validator,
++      reward: Decimal.new("100000000000000000000000")
++    )
++
++    insert(:reward,
++      block_hash: block.hash,
++      address_hash: recipient.hash,
++      address_type: :colossusx_rpc,
++      reward: Decimal.new("4200000000001")
++    )
++
++    result = conn |> get("/api/v2/blocks/#{block.number}") |> json_response(200)
++
++    assert %{"status" => "complete", "total" => "100000000004200000000001", "common_rpc_reward" => "4200000000001"} =
++             result["colossusx_rewards"]
++
++    assert %{"address_hash" => to_string(recipient.hash), "category" => "common_rpc", "reward" => "4200000000001"} in result[
++             "colossusx_rewards"
++           ]["payouts"]
++
++    assert Enum.any?(result["rewards"], &(&1["type"] == "Common RPC Reward"))
++
++    list = conn |> get("/api/v2/blocks") |> json_response(200)
++    assert [item] = list["items"]
++    assert item["colossusx_rewards"] == result["colossusx_rewards"]
++  end
++
++  test "cached block list refreshes rewards after backfill without a new block", %{conn: conn} do
++    blocks = insert_list(51, :block)
++    block = Enum.max_by(blocks, & &1.number)
++    pending = conn |> get("/api/v2/blocks") |> json_response(200)
++    assert hd(pending["items"])["colossusx_rewards"]["status"] == "pending"
++
++    producer = insert(:address)
++
++    insert(:reward,
++      block_hash: block.hash,
++      address_hash: producer.hash,
++      address_type: :validator,
++      reward: Decimal.new("100000000000000000000000")
++    )
++
++    complete = conn |> get("/api/v2/blocks") |> json_response(200)
++    item = Enum.find(complete["items"], &(&1["height"] == block.number))
++    assert item["colossusx_rewards"]["status"] == "complete"
++    assert item["colossusx_rewards"]["total"] == "100000000000000000000000"
++  end
++
++  test "verified rewardless block is complete with a zero total", %{conn: conn} do
++    block = insert(:block)
++    producer = insert(:address)
++
++    insert(:reward,
++      block_hash: block.hash,
++      address_hash: producer.hash,
++      address_type: :validator,
++      reward: Decimal.new(0)
++    )
++
++    result = conn |> get("/api/v2/blocks/#{block.number}") |> json_response(200)
++    assert %{"status" => "complete", "total" => "0", "payouts" => []} = result["colossusx_rewards"]
++  end
++end
+--- a/apps/block_scout_web/test/block_scout_web/schemas/api/v2/colossusx_rewards_test.exs
++++ b/apps/block_scout_web/test/block_scout_web/schemas/api/v2/colossusx_rewards_test.exs
+@@ -0,0 +1,34 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule BlockScoutWeb.Schemas.API.V2.ColossusXRewardsTest do
++  use ExUnit.Case, async: true
++
++  alias BlockScoutWeb.Schemas.API.V2.Block.ColossusXRewards, as: RewardSchema
++  alias Explorer.Chain.Block.ColossusXRewards
++
++  test "pending summary satisfies the documented schema" do
++    value = ColossusXRewards.summary([]) |> Jason.encode!() |> Jason.decode!()
++    assert {:ok, _} = OpenApiSpex.cast_value(value, RewardSchema.schema())
++  end
++
++  test "complete schema accepts precise integer wei and rejects floats and missing fields" do
++    value = %{
++      "status" => "complete",
++      "rule_version" => "FHS-D/64c12623",
++      "total" => "100000000004200000000001",
++      "block_reward" => "100000000000000000000000",
++      "common_miner_reward" => "0",
++      "common_rpc_reward" => "4200000000001",
++      "payouts" => [
++        %{
++          "address_hash" => "0x1111111111111111111111111111111111111111",
++          "category" => "common_rpc",
++          "reward" => "4200000000001"
++        }
++      ]
++    }
++
++    assert {:ok, _} = OpenApiSpex.cast_value(value, RewardSchema.schema())
++    assert {:error, _} = OpenApiSpex.cast_value(Map.put(value, "total", "1.1"), RewardSchema.schema())
++    assert {:error, _} = OpenApiSpex.cast_value(Map.delete(value, "payouts"), RewardSchema.schema())
++  end
++end
+--- a/apps/block_scout_web/test/block_scout_web/views/api/rpc/colossusx_block_view_test.exs
++++ b/apps/block_scout_web/test/block_scout_web/views/api/rpc/colossusx_block_view_test.exs
+@@ -0,0 +1,74 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule BlockScoutWeb.API.RPC.ColossusXBlockViewTest do
++  use ExUnit.Case, async: false
++
++  alias BlockScoutWeb.API.RPC.BlockView
++  alias Explorer.Chain.{Block, Hash, Wei}
++  alias Explorer.Chain.Block.Reward
++
++  @creator "0x1111111111111111111111111111111111111111"
++  @rpc_miner "0x2222222222222222222222222222222222222222"
++
++  setup do
++    previous = Application.fetch_env(:indexer, :fetch_rewards_way)
++    Application.put_env(:indexer, :fetch_rewards_way, "colossusx")
++
++    on_exit(fn ->
++      case previous do
++        {:ok, value} -> Application.put_env(:indexer, :fetch_rewards_way, value)
++        :error -> Application.delete_env(:indexer, :fetch_rewards_way)
++      end
++    end)
++  end
++
++  test "pending custom rewards are not reported as zero" do
++    assert %{"status" => "0", "message" => "Reward data is still being indexed"} =
++             BlockView.render("block_reward.json", %{block: block([])})
++  end
++
++  test "verified empty block is zero" do
++    assert %{"status" => "1", "result" => result} =
++             BlockView.render("block_reward.json", %{block: block([reward(:validator, @creator, 0)])})
++
++    assert result["blockReward"] == "0"
++    assert result["blockMiner"] == @creator
++    assert result["colossusxRewards"].status == "complete"
++  end
++
++  test "reports the true producer and separately paid rewards without Ethereum fees" do
++    rows = [
++      reward(:validator, @creator, 100_000_000_000_000_000_000_000),
++      reward(:colossusx_pow, @rpc_miner, 100_000_000_000_000_000_000_000),
++      reward(:colossusx_rpc, @rpc_miner, 4_200_000_000_001)
++    ]
++
++    assert %{"status" => "1", "result" => result} =
++             BlockView.render("block_reward.json", %{block: block(rows)})
++
++    assert result["blockMiner"] == @creator
++    assert result["blockReward"] == "100000000000000000000000"
++    assert result["colossusxRewards"].total == "200000000004200000000001"
++    assert result["uncleInclusionReward"] == "0"
++    assert result["uncles"] == []
++  end
++
++  test "default networks retain the upstream response shape" do
++    Application.put_env(:indexer, :fetch_rewards_way, "trace_block")
++
++    assert %{"status" => "1", "result" => result} =
++             BlockView.render("block_reward.json", %{block: block([])})
++
++    assert result["blockReward"] == "0"
++    refute Map.has_key?(result, "colossusxRewards")
++  end
++
++  defp block(rewards) do
++    {:ok, miner_hash} = Hash.Address.cast(@rpc_miner)
++    %Block{number: 64, timestamp: ~U[2026-09-21 00:00:00Z], miner_hash: miner_hash, rewards: rewards}
++  end
++
++  defp reward(type, address, amount) do
++    {:ok, address_hash} = Hash.Address.cast(address)
++    %Reward{address_type: type, address_hash: address_hash, reward: %Wei{value: Decimal.new(amount)}}
++  end
++end
+--- a/apps/ethereum_jsonrpc/lib/ethereum_jsonrpc/colossusx.ex
++++ b/apps/ethereum_jsonrpc/lib/ethereum_jsonrpc/colossusx.ex
+@@ -0,0 +1,342 @@
++defmodule EthereumJSONRPC.ColossusX do
++  @moduledoc """
++  Reconstructs the ColossusX FHS-D rewards verified against cypher commits
++  70862a71 and 64c12623. All amounts are integer wei, never floating point.
++
++  ColossusX modification, 2026-09-21: use the actual header coinbase, key
++  carrier payout and receipt reward recipient instead of Ethereum PoW rewards.
++  Missing or inconsistent RPC data is an error, never a zero reward.
++  """
++
++  import EthereumJSONRPC, only: [integer_to_quantity: 1, json_rpc: 2, request: 1]
++
++  alias EthereumJSONRPC.FetchedBeneficiaries
++
++  @chain_id 10_101_919
++  @static_reward 100_000_000_000_000_000_000_000
++  @zero_address "0x0000000000000000000000000000000000000000"
++  @hash_fields ~w(hash parentHash keyHash transactionsRoot receiptsRoot stateRoot)
++
++  @doc "Fetches verified rewards sequentially, bounding the RPC load per indexer task."
++  def fetch_beneficiaries(block_numbers, named_arguments) when is_list(block_numbers) do
++    with {:ok, genesis_hash} <- configured_genesis_hash(),
++         :ok <- verify_network(genesis_hash, named_arguments) do
++      result =
++        block_numbers
++        |> Enum.uniq()
++        |> Enum.reduce(%FetchedBeneficiaries{}, fn number, acc ->
++          case fetch_block(number, genesis_hash, named_arguments) do
++            {:ok, params} ->
++              %{acc | params_set: MapSet.union(acc.params_set, MapSet.new(params))}
++
++            {:error, reason} ->
++              error = %{
++                code: -32_603,
++                message: "ColossusX reward verification failed: #{inspect(reason)}",
++                data: %{block_quantity: integer_to_quantity(number)}
++              }
++
++              %{acc | errors: [error | acc.errors]}
++          end
++        end)
++
++      {:ok, result}
++    else
++      {:error, reason} ->
++        {:error, %{code: -32_603, message: "ColossusX network verification failed: #{inspect(reason)}"}}
++    end
++  end
++
++  @doc "Returns retry errors for rewards whose canonical hash changed since block indexing."
++  def consensus_errors(params, hash_by_number) do
++    params
++    |> Enum.reject(&(Map.get(hash_by_number, &1.block_number) == &1.block_hash))
++    |> Enum.map(& &1.block_number)
++    |> Enum.uniq()
++    |> Enum.map(fn number ->
++      %{
++        code: -32_603,
++        message: "ColossusX reward block differs from the indexed canonical hash",
++        data: %{block_quantity: integer_to_quantity(number)}
++      }
++    end)
++  end
++
++  defp configured_genesis_hash do
++    :ethereum_jsonrpc
++    |> Application.get_env(__MODULE__, [])
++    |> Keyword.get(:genesis_hash)
++    |> hash()
++  end
++
++  defp verify_network(genesis_hash, named_arguments) do
++    with {:ok, chain_id} <- rpc("eth_chainId", [], named_arguments),
++         {:ok, @chain_id} <- quantity(chain_id),
++         {:ok, genesis} when is_map(genesis) <- rpc("eth_getBlockByNumber", ["0x0", false], named_arguments),
++         {:ok, 0} <- quantity(genesis["number"]),
++         {:ok, ^genesis_hash} <- hash(genesis["hash"]) do
++      :ok
++    else
++      _ -> {:error, :unexpected_chain_or_genesis}
++    end
++  end
++
++  defp fetch_block(number, genesis_hash, named_arguments) do
++    with {:ok, block} when is_map(block) <-
++           rpc("eth_getBlockByNumber", [integer_to_quantity(number), false], named_arguments),
++         {:ok, ^number} <- quantity(block["number"]),
++         {:ok, block_hash} <- hash(block["hash"]),
++         {:ok, header} when is_map(header) <- rpc("eth_getHeaderByHash", [block_hash], named_arguments),
++         {:ok, context} <- block_context(block, header),
++         {:ok, receipts} <- fetch_receipts(context, named_arguments),
++         {:ok, parent_key, new_key} <- fetch_key_blocks(context, named_arguments),
++         :ok <- verify_canonical(context, named_arguments) do
++      parse_rewards(block, header, receipts, parent_key, new_key, genesis_hash)
++    else
++      {:error, reason} -> {:error, reason}
++      _ -> {:error, :missing_or_mismatched_block}
++    end
++  end
++
++  defp fetch_receipts(%{transactions: []}, _named_arguments), do: {:ok, []}
++
++  defp fetch_receipts(%{hash: block_hash}, named_arguments) do
++    rpc("eth_getBlockReceipts", [%{blockHash: block_hash, requireCanonical: true}], named_arguments)
++  end
++
++  defp fetch_key_blocks(%{number: number, type: 1, key_hash: key_hash}, named_arguments) when number > 0 do
++    with {:ok, parent} when is_map(parent) <- rpc("eth_getKeyBlockByHash", [key_hash], named_arguments),
++         {:ok, parent_number} <- natural(parent["keyBlockNumber"]),
++         {:ok, new_key} when is_map(new_key) <-
++           rpc("eth_getKeyBlockByNumber", [integer_to_quantity(parent_number + 1)], named_arguments) do
++      {:ok, parent, new_key}
++    else
++      {:error, reason} -> {:error, reason}
++      _ -> {:error, :missing_key_block}
++    end
++  end
++
++  defp fetch_key_blocks(_context, _named_arguments), do: {:ok, nil, nil}
++
++  # Recheck after receipt/key-chain reads, including reward-bearing empty carriers.
++  defp verify_canonical(%{number: number, hash: block_hash}, named_arguments) do
++    with {:ok, header} when is_map(header) <-
++           rpc("eth_getHeaderByNumber", [integer_to_quantity(number)], named_arguments),
++         {:ok, ^number} <- quantity(header["number"]),
++         {:ok, ^block_hash} <- hash(header["hash"]) do
++      :ok
++    else
++      _ -> {:error, :canonical_block_changed}
++    end
++  end
++
++  defp rpc(method, params, named_arguments) do
++    case json_rpc(request(%{id: 0, method: method, params: params}), named_arguments) do
++      {:ok, nil} -> {:error, {:missing_rpc_result, method}}
++      {:ok, result} -> {:ok, result}
++      {:error, _reason} -> {:error, {:rpc_failed, method}}
++    end
++  end
++
++  @doc "Pure validation and conversion of exact block, header, receipt and key-block RPC results."
++  def parse_rewards(block, header, receipts, parent_key, new_key, genesis_hash) do
++    with {:ok, genesis_hash} <- hash(genesis_hash),
++         {:ok, context} <- block_context(block, header),
++         :ok <- check_genesis(context, genesis_hash),
++         {:ok, receipt_rewards} <- receipt_rewards(receipts, context, genesis_hash),
++         {:ok, pow_rewards} <- pow_rewards(parent_key, new_key, context) do
++      amount =
++        if context.number > 0 and (context.type == 1 or context.transactions != []),
++          do: @static_reward,
++          else: 0
++
++      # A verified zero validator row marks empty blocks as processed for backfill.
++      static = beneficiary(context, context.miner, :validator, amount)
++      {:ok, [static | pow_rewards ++ receipt_rewards]}
++    end
++  end
++
++  defp block_context(block, header) when is_map(block) and is_map(header) do
++    with {:ok, number} <- quantity(block["number"]),
++         {:ok, ^number} <- quantity(header["number"]),
++         type when type in [0, 1, 2] <- block["blockType"],
++         ^type <- header["blockType"],
++         {:ok, block_hash} <- hash(block["hash"]),
++         {:ok, key_hash} <- hash(header["keyHash"]),
++         {:ok, miner} <- address(header["miner"]),
++         {:ok, gas_used} <- quantity(header["gasUsed"]),
++         {:ok, ^gas_used} <- quantity(block["gasUsed"]),
++         [] <- block["uncles"],
++         transactions when is_list(transactions) <- block["transactions"],
++         true <- valid_transactions?(transactions),
++         true <- type != 1 or transactions == [],
++         true <- transactions != [] or gas_used == 0,
++         true <- Enum.all?(@hash_fields, &equal_hash_field?(block, header, &1)) do
++      {:ok,
++       %{
++         number: number,
++         hash: block_hash,
++         key_hash: key_hash,
++         type: type,
++         miner: miner,
++         gas_used: gas_used,
++         transactions: Enum.map(transactions, &String.downcase/1)
++       }}
++    else
++      _ -> {:error, :invalid_block_or_header}
++    end
++  end
++
++  defp block_context(_, _), do: {:error, :invalid_block_or_header}
++
++  defp valid_transactions?(transactions) do
++    Enum.all?(transactions, &match?({:ok, _}, hash(&1))) and
++      MapSet.size(MapSet.new(Enum.map(transactions, &String.downcase/1))) == length(transactions)
++  end
++
++  defp equal_hash_field?(block, header, field) do
++    case {hash(block[field]), hash(header[field])} do
++      {{:ok, value}, {:ok, value}} -> true
++      _ -> false
++    end
++  end
++
++  defp check_genesis(%{number: 0, hash: genesis_hash, transactions: []}, genesis_hash), do: :ok
++  defp check_genesis(%{number: number}, _genesis_hash) when number > 0, do: :ok
++  defp check_genesis(_context, _genesis_hash), do: {:error, :invalid_genesis}
++
++  defp receipt_rewards(receipts, context, genesis_hash) when is_list(receipts) do
++    if length(receipts) == length(context.transactions) do
++      receipts
++      |> Enum.reduce_while({:ok, %{}, MapSet.new(), 0}, fn receipt, {:ok, rewards, indices, gas} ->
++        case receipt_reward(receipt, context, genesis_hash) do
++          {:ok, index, recipient, reward, gas_used} ->
++            if MapSet.member?(indices, index) do
++              {:halt, {:error, :duplicate_receipt}}
++            else
++              totals = Map.update(rewards, recipient, reward, &(&1 + reward))
++              {:cont, {:ok, totals, MapSet.put(indices, index), gas + gas_used}}
++            end
++
++          {:error, _} = error ->
++            {:halt, error}
++        end
++      end)
++      |> receipt_totals(context)
++    else
++      {:error, :receipt_count_mismatch}
++    end
++  end
++
++  defp receipt_rewards(_, _context, _genesis_hash), do: {:error, :missing_receipts}
++
++  defp receipt_totals({:ok, rewards, _indices, gas}, %{gas_used: gas} = context) do
++    params =
++      rewards
++      |> Enum.filter(fn {_address, amount} -> amount > 0 end)
++      |> Enum.map(fn {recipient, amount} -> beneficiary(context, recipient, :colossusx_rpc, amount) end)
++
++    {:ok, params}
++  end
++
++  defp receipt_totals({:error, _} = error, _context), do: error
++  defp receipt_totals(_result, _context), do: {:error, :receipt_gas_mismatch}
++
++  defp receipt_reward(receipt, context, genesis_hash) when is_map(receipt) do
++    with {:ok, block_hash} <- hash(receipt["blockHash"]),
++         true <- block_hash == context.hash,
++         {:ok, number} <- quantity(receipt["blockNumber"]),
++         true <- number == context.number,
++         {:ok, index} <- quantity(receipt["transactionIndex"]),
++         {:ok, tx_hash} <- hash(receipt["transactionHash"]),
++         true <- Enum.at(context.transactions, index) == tx_hash,
++         {:ok, @chain_id} <- quantity(receipt["commonTxAdmissionChainId"]),
++         {:ok, ^genesis_hash} <- hash(receipt["commonTxAdmissionGenesisHash"]),
++         {:ok, approver} <- address(receipt["commonTxApprover"]),
++         true <- approver != @zero_address,
++         {:ok, recipient} <- address(receipt["commonTxRewardRecipient"]),
++         true <- recipient != @zero_address,
++         true <- recipient != approver,
++         {:ok, gas_used} <- quantity(receipt["gasUsed"]),
++         {:ok, gas_price} <- quantity(receipt["effectiveGasPrice"]),
++         {:ok, reward} <- quantity(receipt["commonTxApproverReward"]),
++         {:ok, burn} <- quantity(receipt["commonTxBurn"]),
++         true <- reward == div(gas_used * gas_price, 5),
++         true <- burn == gas_used * gas_price - reward do
++      {:ok, index, recipient, reward, gas_used}
++    else
++      _ -> {:error, :invalid_receipt_reward}
++    end
++  end
++
++  defp receipt_reward(_, _context, _genesis_hash), do: {:error, :invalid_receipt_reward}
++
++  defp pow_rewards(parent_key, new_key, %{number: number, type: 1} = context) when number > 0 do
++    with true <- is_map(parent_key) and is_map(new_key),
++         {:ok, parent_hash} <- hash(parent_key["hash"]),
++         true <- parent_hash == context.key_hash,
++         {:ok, parent_number} <- natural(parent_key["keyBlockNumber"]),
++         true <- parent_key["blockType"] in [1, 2, 3, 4] or (parent_number == 0 and parent_key["blockType"] == 9),
++         {:ok, _new_hash} <- hash(new_key["hash"]),
++         true <- new_key["blockType"] in [1, 2, 3, 4],
++         {:ok, ^parent_hash} <- hash(new_key["parentHash"]),
++         {:ok, new_number} <- natural(new_key["keyBlockNumber"]),
++         true <- new_number == parent_number + 1,
++         {:ok, tx_number} <- natural(new_key["TxBlockNumber"]),
++         true <- tx_number == number - 1,
++         {:ok, recipient} <- pow_recipient(new_key["outAddress"]) do
++      params = if recipient, do: [beneficiary(context, recipient, :colossusx_pow, @static_reward)], else: []
++      {:ok, params}
++    else
++      _ -> {:error, :invalid_key_block_link}
++    end
++  end
++
++  defp pow_rewards(nil, nil, _context), do: {:ok, []}
++  defp pow_rewards(_, _, _context), do: {:error, :unexpected_key_block}
++
++  defp pow_recipient(value) when is_binary(value) do
++    case String.replace_prefix(value, "*", "") do
++      "" -> {:ok, nil}
++      "0x" <> _ = address -> address(address)
++      address -> address("0x" <> address)
++    end
++  end
++
++  defp pow_recipient(_), do: {:error, :invalid_pow_recipient}
++
++  defp beneficiary(context, recipient, type, amount) do
++    %{
++      address_hash: recipient,
++      address_type: type,
++      block_hash: context.hash,
++      block_number: context.number,
++      reward: integer_to_quantity(amount)
++    }
++  end
++
++  defp natural(value) when is_integer(value) and value >= 0, do: {:ok, value}
++  defp natural(_), do: {:error, :invalid_integer}
++
++  defp quantity(value) when is_binary(value) do
++    if Regex.match?(~r/^0x(?:0|[1-9a-fA-F][0-9a-fA-F]*)$/, value) do
++      {number, ""} = value |> String.slice(2..-1//1) |> Integer.parse(16)
++      {:ok, number}
++    else
++      {:error, :invalid_quantity}
++    end
++  end
++
++  defp quantity(_), do: {:error, :invalid_quantity}
++
++  defp hash(value), do: hexadecimal(value, 64)
++  defp address(value), do: hexadecimal(value, 40)
++
++  defp hexadecimal(value, size) when is_binary(value) do
++    if byte_size(value) == size + 2 and Regex.match?(~r/^0x[0-9a-fA-F]+$/, value),
++      do: {:ok, String.downcase(value)},
++      else: {:error, :invalid_hexadecimal}
++  end
++
++  defp hexadecimal(_, _), do: {:error, :invalid_hexadecimal}
++end
+--- a/apps/ethereum_jsonrpc/test/ethereum_jsonrpc/colossusx_test.exs
++++ b/apps/ethereum_jsonrpc/test/ethereum_jsonrpc/colossusx_test.exs
+@@ -0,0 +1,246 @@
++defmodule EthereumJSONRPC.ColossusXTest do
++  use EthereumJSONRPC.Case, async: false
++
++  import Mox
++  import EthereumJSONRPC, only: [integer_to_quantity: 1, quantity_to_integer: 1]
++
++  alias EthereumJSONRPC.{ColossusX, ColossusXFixture, FetchedBeneficiaries}
++
++  @static_reward 100_000_000_000_000_000_000_000
++
++  setup :verify_on_exit!
++
++  setup do
++    previous = Application.get_env(:ethereum_jsonrpc, ColossusX)
++    Application.put_env(:ethereum_jsonrpc, ColossusX, genesis_hash: ColossusXFixture.genesis_hash())
++
++    on_exit(fn ->
++      if previous,
++        do: Application.put_env(:ethereum_jsonrpc, ColossusX, previous),
++        else: Application.delete_env(:ethereum_jsonrpc, ColossusX)
++    end)
++
++    {:ok, arguments: [transport: EthereumJSONRPC.Mox, transport_options: [], variant: EthereumJSONRPC.Geth]}
++  end
++
++  test "uses header creator and exact receipt recipient, not block miner or approver" do
++    {block, header} = ColossusXFixture.block()
++    receipt = ColossusXFixture.receipt(block)
++    assert {:ok, rewards} = parse(block, header, [receipt])
++    assert [static] = Enum.filter(rewards, &(&1.address_type == :validator))
++    assert static.address_hash == header["miner"]
++    assert static.address_hash != block["miner"]
++    assert quantity_to_integer(static.reward) == @static_reward
++    assert [rpc] = Enum.filter(rewards, &(&1.address_type == :colossusx_rpc))
++    assert rpc.address_hash == receipt["commonTxRewardRecipient"]
++    assert rpc.address_hash != receipt["commonTxApprover"]
++    assert quantity_to_integer(rpc.reward) == 4_200_000_000_000
++  end
++
++  test "verified genesis and empty FastTx/SlowTx blocks have zero processed markers" do
++    for {number, type} <- [{0, 0}, {10, 0}, {10, 2}] do
++      {block, header} = ColossusXFixture.block(number, type, [])
++      assert {:ok, [%{address_type: :validator, reward: "0x0"}]} = parse(block, header, [])
++    end
++  end
++
++  test "nonempty SlowTx receives the static reward" do
++    {block, header} = ColossusXFixture.block(10, 2)
++    assert {:ok, rewards} = parse(block, header, [ColossusXFixture.receipt(block)])
++    assert quantity_to_integer(hd(rewards).reward) == @static_reward
++  end
++
++  test "key carrier pays static and common miner even without transactions" do
++    {block, header} = ColossusXFixture.block(10, 1, [])
++    {parent, key} = ColossusXFixture.key_blocks(block)
++    assert {:ok, [static, pow]} = parse(block, header, [], parent, key)
++    assert static.address_type == :validator
++    assert pow.address_type == :colossusx_pow
++    assert pow.address_hash == ColossusXFixture.address("d")
++    assert quantity_to_integer(static.reward) == @static_reward
++    assert quantity_to_integer(pow.reward) == @static_reward
++  end
++
++  test "empty outAddress is a verified absence of common-miner payout" do
++    {block, header} = ColossusXFixture.block(10, 1, [])
++    {parent, key} = ColossusXFixture.key_blocks(block, "")
++    assert {:ok, [%{address_type: :validator}]} = parse(block, header, [], parent, key)
++  end
++
++  test "aggregates repeated receipt recipients and preserves multiple recipients" do
++    {block, header} = ColossusXFixture.block(10, 0, Enum.map(~w(a b c), &ColossusXFixture.hash/1))
++    receipts = for index <- 0..2, do: ColossusXFixture.receipt(block, index)
++    receipts = List.update_at(receipts, 2, &Map.put(&1, "commonTxRewardRecipient", ColossusXFixture.address("e")))
++    assert {:ok, rewards} = parse(block, header, Enum.reverse(receipts))
++
++    rpc =
++      rewards
++      |> Enum.filter(&(&1.address_type == :colossusx_rpc))
++      |> Map.new(&{&1.address_hash, quantity_to_integer(&1.reward)})
++
++    assert rpc[ColossusXFixture.address("b")] == 8_400_000_000_000
++    assert rpc[ColossusXFixture.address("e")] == 4_200_000_000_000
++  end
++
++  test "fee division rounds down in wei and the burn keeps the remainder" do
++    {block, header} = ColossusXFixture.block()
++    block = Map.put(block, "gasUsed", "0x7")
++    header = Map.put(header, "gasUsed", "0x7")
++
++    receipt =
++      ColossusXFixture.receipt(block)
++      |> Map.merge(%{
++        "gasUsed" => "0x7",
++        "effectiveGasPrice" => "0x3",
++        "commonTxApproverReward" => "0x4",
++        "commonTxBurn" => "0x11"
++      })
++
++    assert {:ok, rewards} = parse(block, header, [receipt])
++    assert Enum.find(rewards, &(&1.address_type == :colossusx_rpc)).reward == "0x4"
++    assert {:error, _} = parse(block, header, [Map.put(receipt, "commonTxBurn", "0x10")])
++  end
++
++  test "missing, duplicate, mismatched and partial receipts cannot become zero rewards" do
++    {block, header} = ColossusXFixture.block()
++    receipt = ColossusXFixture.receipt(block)
++    assert {:error, _} = parse(block, header, [])
++    assert {:error, _} = parse(block, header, nil)
++    assert {:error, _} = parse(block, header, [receipt, receipt])
++
++    for key <-
++          ~w(blockHash blockNumber transactionHash transactionIndex commonTxRewardRecipient commonTxApproverReward commonTxBurn commonTxAdmissionGenesisHash commonTxAdmissionChainId effectiveGasPrice) do
++      assert {:error, _} = parse(block, header, [Map.delete(receipt, key)])
++    end
++
++    assert {:error, _} = parse(block, header, [Map.put(receipt, "blockHash", ColossusXFixture.hash("f"))])
++    assert {:error, _} = parse(block, header, [Map.put(receipt, "commonTxApproverReward", "0x0")])
++
++    assert {:error, _} =
++             parse(block, header, [Map.put(receipt, "commonTxRewardRecipient", receipt["commonTxApprover"])])
++  end
++
++  test "duplicate receipt indices and a mismatched gas total are rejected" do
++    {block, header} = ColossusXFixture.block(10, 0, Enum.map(~w(a b), &ColossusXFixture.hash/1))
++    receipt = ColossusXFixture.receipt(block)
++    assert {:error, :duplicate_receipt} = parse(block, header, [receipt, receipt])
++    receipts = [receipt, ColossusXFixture.receipt(block, 1)]
++    assert {:error, _} = parse(Map.put(block, "gasUsed", "0x1"), Map.put(header, "gasUsed", "0x1"), receipts)
++  end
++
++  test "rejects mismatched headers, unexpected types, uncles and missing genesis" do
++    {block, header} = ColossusXFixture.block(10, 0, [])
++    assert {:error, _} = parse(block, Map.put(header, "hash", ColossusXFixture.hash("f")), [])
++    assert {:error, _} = parse(block, Map.put(header, "number", "0xB"), [])
++    assert {:error, _} = parse(Map.put(block, "blockType", 3), Map.put(header, "blockType", 3), [])
++    assert {:error, _} = parse(Map.put(block, "uncles", [ColossusXFixture.hash("f")]), header, [])
++    assert {:error, _} = ColossusX.parse_rewards(block, header, [], nil, nil, nil)
++  end
++
++  test "key payout requires exact parent, sequential key number and carrier height" do
++    {block, header} = ColossusXFixture.block(10, 1, [])
++    {parent, key} = ColossusXFixture.key_blocks(block)
++    assert {:error, _} = parse(block, header, [], nil, nil)
++
++    for {field, value} <- [
++          {"parentHash", ColossusXFixture.hash("f")},
++          {"keyBlockNumber", 7},
++          {"TxBlockNumber", 10},
++          {"outAddress", "**abcd"},
++          {"blockType", 8}
++        ] do
++      assert {:error, _} = parse(block, header, [], parent, Map.put(key, field, value))
++    end
++  end
++
++  test "fetch checks network identity and uses canonical receipts", %{arguments: arguments} do
++    {block, header} = ColossusXFixture.block()
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", ["0xA", false], block)
++    expect_rpc("eth_getHeaderByHash", [block["hash"]], header)
++
++    expect_rpc("eth_getBlockReceipts", [%{blockHash: block["hash"], requireCanonical: true}], [
++      ColossusXFixture.receipt(block)
++    ])
++
++    expect_rpc("eth_getHeaderByNumber", ["0xA"], header)
++    assert {:ok, %FetchedBeneficiaries{errors: [], params_set: params}} = ColossusX.fetch_beneficiaries([10], arguments)
++    assert MapSet.size(params) == 2
++  end
++
++  test "wrong chain or genesis rejects the entire batch", %{arguments: arguments} do
++    expect_rpc("eth_chainId", [], "0x1")
++    assert {:error, _} = ColossusX.fetch_beneficiaries([10], arguments)
++    expect_rpc("eth_chainId", [], "0x9a249f")
++    expect_rpc("eth_getBlockByNumber", ["0x0", false], %{"number" => "0x0", "hash" => ColossusXFixture.hash("f")})
++    assert {:error, _} = ColossusX.fetch_beneficiaries([10], arguments)
++  end
++
++  test "RPC null creates a retry error and never a zero processed marker", %{arguments: arguments} do
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", ["0xA", false], nil)
++
++    assert {:ok, %FetchedBeneficiaries{params_set: params, errors: [error]}} =
++             ColossusX.fetch_beneficiaries([10], arguments)
++
++    assert MapSet.size(params) == 0
++    assert error.data.block_quantity == "0xA"
++  end
++
++  test "receipt RPC errors leave the block pending", %{arguments: arguments} do
++    {block, header} = ColossusXFixture.block()
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", ["0xA", false], block)
++    expect_rpc("eth_getHeaderByHash", [block["hash"]], header)
++
++    expect(EthereumJSONRPC.Mox, :json_rpc, fn %{method: "eth_getBlockReceipts"}, _ ->
++      {:error, %{code: -32_601, message: "Method unavailable"}}
++    end)
++
++    assert {:ok, %FetchedBeneficiaries{params_set: params, errors: [error]}} =
++             ColossusX.fetch_beneficiaries([10], arguments)
++
++    assert MapSet.size(params) == 0
++    assert error.data.block_quantity == "0xA"
++  end
++
++  test "reorg after empty carrier key reads rejects all payouts", %{arguments: arguments} do
++    {block, header} = ColossusXFixture.block(10, 1, [])
++    {parent, key} = ColossusXFixture.key_blocks(block)
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", ["0xA", false], block)
++    expect_rpc("eth_getHeaderByHash", [block["hash"]], header)
++    expect_rpc("eth_getKeyBlockByHash", [header["keyHash"]], parent)
++    expect_rpc("eth_getKeyBlockByNumber", ["0x6"], key)
++    expect_rpc("eth_getHeaderByNumber", ["0xA"], Map.put(header, "hash", ColossusXFixture.hash("f")))
++
++    assert {:ok, %FetchedBeneficiaries{params_set: params, errors: [_error]}} =
++             ColossusX.fetch_beneficiaries([10], arguments)
++
++    assert MapSet.size(params) == 0
++  end
++
++  test "canonical-hash mismatches create one retry per block" do
++    params = [
++      %{block_number: 10, block_hash: "old"},
++      %{block_number: 10, block_hash: "old"},
++      %{block_number: 11, block_hash: "current"}
++    ]
++
++    assert [%{data: %{block_quantity: "0xA"}}] =
++             ColossusX.consensus_errors(params, %{10 => "new", 11 => "current"})
++  end
++
++  defp parse(block, header, receipts, parent \\ nil, key \\ nil) do
++    ColossusX.parse_rewards(block, header, receipts, parent, key, ColossusXFixture.genesis_hash())
++  end
++
++  defp expect_identity do
++    expect_rpc("eth_chainId", [], integer_to_quantity(10_101_919))
++    expect_rpc("eth_getBlockByNumber", ["0x0", false], %{"number" => "0x0", "hash" => ColossusXFixture.genesis_hash()})
++  end
++
++  defp expect_rpc(method, params, result) do
++    expect(EthereumJSONRPC.Mox, :json_rpc, fn %{method: ^method, params: ^params}, _options -> {:ok, result} end)
++  end
++end
+--- a/apps/ethereum_jsonrpc/test/support/ethereum_jsonrpc/colossusx_fixture.ex
++++ b/apps/ethereum_jsonrpc/test/support/ethereum_jsonrpc/colossusx_fixture.ex
+@@ -0,0 +1,58 @@
++defmodule EthereumJSONRPC.ColossusXFixture do
++  @moduledoc false
++  # ColossusX modification, 2026-09-21: synthetic FHS-D protocol fixtures.
++  import EthereumJSONRPC, only: [integer_to_quantity: 1]
++
++  def hash(character), do: "0x" <> String.duplicate(character, 64)
++  def address(character), do: "0x" <> String.duplicate(character, 40)
++  def genesis_hash, do: hash("0")
++
++  def block(number \\ 10, type \\ 0, transactions \\ [hash("a")]) do
++    header = %{
++      "number" => integer_to_quantity(number),
++      "blockType" => type,
++      "hash" => if(number == 0, do: genesis_hash(), else: hash("1")),
++      "parentHash" => hash("2"),
++      "keyHash" => hash("3"),
++      "transactionsRoot" => hash("4"),
++      "receiptsRoot" => hash("5"),
++      "stateRoot" => hash("6"),
++      "miner" => address("7"),
++      "gasUsed" => integer_to_quantity(length(transactions) * 21_000)
++    }
++
++    {Map.merge(header, %{"miner" => address("8"), "transactions" => transactions, "uncles" => []}), header}
++  end
++
++  def receipt(block, index \\ 0, recipient \\ address("b")) do
++    %{
++      "blockHash" => block["hash"],
++      "blockNumber" => block["number"],
++      "transactionHash" => Enum.at(block["transactions"], index),
++      "transactionIndex" => integer_to_quantity(index),
++      "gasUsed" => "0x5208",
++      "effectiveGasPrice" => "0x3b9aca00",
++      "commonTxAdmissionChainId" => "0x9a249f",
++      "commonTxAdmissionGenesisHash" => genesis_hash(),
++      "commonTxApprover" => address("c"),
++      "commonTxRewardRecipient" => recipient,
++      "commonTxApproverReward" => integer_to_quantity(4_200_000_000_000),
++      "commonTxBurn" => integer_to_quantity(16_800_000_000_000)
++    }
++  end
++
++  def key_blocks(block, recipient \\ "*" <> String.duplicate("d", 40)) do
++    parent = %{"hash" => block["keyHash"], "keyBlockNumber" => 5, "blockType" => 2}
++
++    new_key = %{
++      "hash" => hash("e"),
++      "parentHash" => block["keyHash"],
++      "keyBlockNumber" => 6,
++      "TxBlockNumber" => EthereumJSONRPC.quantity_to_integer(block["number"]) - 1,
++      "outAddress" => recipient,
++      "blockType" => 2
++    }
++
++    {parent, new_key}
++  end
++end
+--- a/apps/explorer/lib/explorer/chain/block/colossusx_rewards.ex
++++ b/apps/explorer/lib/explorer/chain/block/colossusx_rewards.ex
+@@ -0,0 +1,86 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule Explorer.Chain.Block.ColossusXRewards do
++  @moduledoc """
++  Presents indexed FHS-D payouts without applying Ethereum fee arithmetic.
++
++  A validator row, including an explicit zero, marks a completely verified block.
++  The fetcher imports this row and all additional payouts atomically. Missing
++  rows are pending, never evidence that the protocol paid zero.
++  """
++
++  alias Explorer.Chain.{Hash, Wei}
++
++  @categories %{validator: "block", colossusx_pow: "common_miner", colossusx_rpc: "common_rpc"}
++  @rule_version "FHS-D/64c12623"
++
++  def enabled?, do: Application.get_env(:indexer, :fetch_rewards_way) == "colossusx"
++
++  def summary(rewards) do
++    if complete?(rewards) do
++      complete_summary(rewards)
++    else
++      %{
++        status: "pending",
++        rule_version: @rule_version,
++        total: nil,
++        block_reward: nil,
++        common_miner_reward: nil,
++        common_rpc_reward: nil,
++        payouts: []
++      }
++    end
++  end
++
++  def block_beneficiary(rewards, fallback) when is_list(rewards) do
++    case Enum.find(rewards, &(&1.address_type == :validator)) do
++      nil -> fallback
++      reward -> reward.address_hash
++    end
++  end
++
++  def block_beneficiary(_, fallback), do: fallback
++
++  defp complete?(rewards) when is_list(rewards) do
++    Enum.any?(rewards, &(&1.address_type == :validator)) and
++      Enum.all?(rewards, fn reward ->
++        Map.has_key?(@categories, reward.address_type) and
++          Decimal.compare(Wei.to(reward.reward, :wei), 0) != :lt
++      end)
++  end
++
++  defp complete?(_), do: false
++
++  defp complete_summary(rewards) do
++    payouts =
++      rewards
++      |> Enum.reject(&(Decimal.compare(Wei.to(&1.reward, :wei), 0) == :eq))
++      |> Enum.map(fn reward ->
++        %{
++          address_hash: Hash.to_string(reward.address_hash),
++          category: Map.fetch!(@categories, reward.address_type),
++          reward: amount(reward.reward)
++        }
++      end)
++      |> Enum.sort_by(&{&1.category, &1.address_hash})
++
++    %{
++      status: "complete",
++      rule_version: @rule_version,
++      total: sum(rewards),
++      block_reward: sum_type(rewards, :validator),
++      common_miner_reward: sum_type(rewards, :colossusx_pow),
++      common_rpc_reward: sum_type(rewards, :colossusx_rpc),
++      payouts: payouts
++    }
++  end
++
++  defp amount(value), do: value |> Wei.to(:wei) |> Decimal.to_string(:normal)
++
++  defp sum_type(rewards, type), do: rewards |> Enum.filter(&(&1.address_type == type)) |> sum()
++
++  defp sum(rewards) do
++    rewards
++    |> Enum.reduce(0, &(Decimal.to_integer(Wei.to(&1.reward, :wei)) + &2))
++    |> Integer.to_string()
++  end
++end
+--- a/apps/explorer/lib/explorer/chain/block/reward/address_type.ex
++++ b/apps/explorer/lib/explorer/chain/block/reward/address_type.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21: preserve distinct Common miner and RPC payouts.
+ defmodule Explorer.Chain.Block.Reward.AddressType do
+   @moduledoc """
+   Block reward address types
+@@ -10,7 +11,7 @@
+    * `:uncle`
+    * `:validator`
+   """
+-  @type t :: :emission_funds | :uncle | :validator
++  @type t :: :emission_funds | :uncle | :validator | :colossusx_pow | :colossusx_rpc
+ 
+   @doc """
+   Casts `term` to `t:t/0`
+@@ -41,10 +42,12 @@
+   """
+   @impl Ecto.Type
+   @spec cast(term()) :: {:ok, t()} | :error
+-  def cast(t) when t in ~w(emission_funds uncle validator)a, do: {:ok, t}
++  def cast(t) when t in ~w(emission_funds uncle validator colossusx_pow colossusx_rpc)a, do: {:ok, t}
+   def cast("emission_funds"), do: {:ok, :emission_funds}
+   def cast("uncle"), do: {:ok, :uncle}
+   def cast("validator"), do: {:ok, :validator}
++  def cast("colossusx_pow"), do: {:ok, :colossusx_pow}
++  def cast("colossusx_rpc"), do: {:ok, :colossusx_rpc}
+   def cast(_), do: :error
+ 
+   @doc """
+@@ -69,6 +72,8 @@
+   def dump(:emission_funds), do: {:ok, "emission_funds"}
+   def dump(:uncle), do: {:ok, "uncle"}
+   def dump(:validator), do: {:ok, "validator"}
++  def dump(:colossusx_pow), do: {:ok, "colossusx_pow"}
++  def dump(:colossusx_rpc), do: {:ok, "colossusx_rpc"}
+   def dump(_), do: :error
+ 
+   @doc """
+@@ -92,6 +97,8 @@
+   def load("emission_funds"), do: {:ok, :emission_funds}
+   def load("uncle"), do: {:ok, :uncle}
+   def load("validator"), do: {:ok, :validator}
++  def load("colossusx_pow"), do: {:ok, :colossusx_pow}
++  def load("colossusx_rpc"), do: {:ok, :colossusx_rpc}
+   def load(_), do: :error
+ 
+   @doc """
+--- a/apps/explorer/lib/explorer/chain/block/reward.ex
++++ b/apps/explorer/lib/explorer/chain/block/reward.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
+ defmodule Explorer.Chain.Block.Reward do
+   @moduledoc """
+   Represents the total reward given to an address in a block.
+@@ -101,6 +102,7 @@
+       |> limit(^paging_options.page_size)
+       |> order_by([_, block], desc: block.number)
+       |> where([reward], reward.address_hash == ^address_hash)
++      |> where([reward], reward.address_type in [:validator, :emission_funds])
+       |> address_rewards_blocks_ranges_clause(min_block_number, max_block_number, paging_options)
+       |> Chain.select_repo(options).all()
+ 
+--- a/apps/explorer/lib/explorer/chain.ex
++++ b/apps/explorer/lib/explorer/chain.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
+ defmodule Explorer.Chain do
+   @moduledoc """
+   The chain context.
+@@ -1208,6 +1209,16 @@
+         elements
+ 
+       blocks ->
++        # ColossusX modification, 2026-09-21: reward backfill can complete after
++        # these blocks were cached, including while the chain head is unchanged.
++        blocks =
++          if Application.get_env(:indexer, :fetch_rewards_way) == "colossusx" and
++               Map.has_key?(necessity_by_association, :rewards) do
++            select_repo(options).preload(blocks, :rewards, force: true)
++          else
++            blocks
++          end
++
+         blocks |> select_repo(options).preload(Map.keys(necessity_by_association))
+     end
+   end
+--- a/apps/explorer/test/explorer/chain/block/colossusx_rewards_test.exs
++++ b/apps/explorer/test/explorer/chain/block/colossusx_rewards_test.exs
+@@ -0,0 +1,77 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule Explorer.Chain.Block.ColossusXRewardsTest do
++  use ExUnit.Case, async: true
++
++  alias Explorer.Chain.{Hash, Wei}
++  alias Explorer.Chain.Block.{ColossusXRewards, Reward}
++  alias Explorer.Chain.Block.Reward.AddressType
++
++  @creator "0x1111111111111111111111111111111111111111"
++  @recipient "0x2222222222222222222222222222222222222222"
++  @subsidy 100_000_000_000_000_000_000_000
++
++  test "missing or partial reward data remains pending" do
++    for rows <- [[], nil, [reward(:colossusx_rpc, @recipient, 4_200_000_000_000)]] do
++      assert %{status: "pending", total: nil, block_reward: nil, payouts: []} = ColossusXRewards.summary(rows)
++    end
++  end
++
++  test "an explicit zero marker distinguishes a rewardless block" do
++    result = ColossusXRewards.summary([reward(:validator, @creator, 0)])
++    assert result.status == "complete"
++    assert result.total == "0"
++    assert result.block_reward == "0"
++    assert result.common_miner_reward == "0"
++    assert result.common_rpc_reward == "0"
++    assert result.payouts == []
++  end
++
++  test "all payout categories preserve exact wei and their separate recipients" do
++    rows = [
++      reward(:validator, @creator, @subsidy),
++      reward(:colossusx_pow, @recipient, @subsidy),
++      reward(:colossusx_rpc, @recipient, 4_200_000_000_001),
++      reward(:colossusx_rpc, @creator, 1)
++    ]
++
++    result = ColossusXRewards.summary(rows)
++    assert result.total == "200000000004200000000002"
++    assert result.block_reward == Integer.to_string(@subsidy)
++    assert result.common_miner_reward == Integer.to_string(@subsidy)
++    assert result.common_rpc_reward == "4200000000002"
++    assert length(result.payouts) == 4
++    assert %{address_hash: @recipient, category: "common_miner", reward: Integer.to_string(@subsidy)} in result.payouts
++    assert Hash.to_string(ColossusXRewards.block_beneficiary(rows, nil)) == @creator
++  end
++
++  test "totals remain exact beyond the default Decimal arithmetic precision" do
++    large = 100_000_000_000_000_000_000_000_000_000_000_000_000
++
++    result =
++      ColossusXRewards.summary([reward(:validator, @creator, @subsidy), reward(:colossusx_rpc, @recipient, large + 1)])
++
++    assert result.total == Integer.to_string(large + 1 + @subsidy)
++    assert result.common_rpc_reward == Integer.to_string(large + 1)
++  end
++
++  test "an unsupported legacy reward does not masquerade as verified FHS-D data" do
++    result = ColossusXRewards.summary([reward(:validator, @creator, @subsidy), reward(:uncle, @recipient, 1)])
++    assert result.status == "pending"
++  end
++
++  test "custom address types round-trip through the database representation" do
++    for type <- [:colossusx_pow, :colossusx_rpc] do
++      assert {:ok, ^type} = AddressType.cast(type)
++      assert {:ok, value} = AddressType.dump(type)
++      assert {:ok, ^type} = AddressType.cast(value)
++      assert {:ok, ^type} = AddressType.load(value)
++    end
++
++    assert :error = AddressType.cast("unknown_reward_type")
++  end
++
++  defp reward(type, address, amount) do
++    {:ok, address_hash} = Hash.Address.cast(address)
++    %Reward{address_type: type, address_hash: address_hash, reward: %Wei{value: Decimal.new(amount)}}
++  end
++end
+--- a/apps/indexer/lib/indexer/block/fetcher.ex
++++ b/apps/indexer/lib/indexer/block/fetcher.ex
+@@ -13,7 +13,7 @@
+ 
+   import EthereumJSONRPC, only: [quantity_to_integer: 1]
+ 
+-  alias EthereumJSONRPC.{Blocks, FetchedBeneficiaries}
++  alias EthereumJSONRPC.{Blocks, ColossusX, FetchedBeneficiaries}
+   alias Explorer.{Chain, Repo}
+   alias Explorer.Chain.{Address, Block, Hash, Import, Transaction, Wei, Withdrawal}
+   alias Explorer.Chain.Block.Reward
+@@ -736,6 +736,8 @@
+   defp fetch_beneficiaries(blocks, all_transactions, json_rpc_named_arguments) do
+     case Application.get_env(:indexer, :fetch_rewards_way) do
+       "manual" -> fetch_beneficiaries_manual(blocks, all_transactions)
++      # ColossusX modification, 2026-09-21: verified FHS-D protocol payouts.
++      "colossusx" -> fetch_beneficiaries_by_trace_block(blocks, json_rpc_named_arguments, ColossusX)
+       _ -> fetch_beneficiaries_by_trace_block(blocks, json_rpc_named_arguments)
+     end
+   end
+@@ -774,7 +776,7 @@
+     ])
+   end
+ 
+-  defp fetch_beneficiaries_by_trace_block(blocks, json_rpc_named_arguments) do
++  defp fetch_beneficiaries_by_trace_block(blocks, json_rpc_named_arguments, rpc_module \\ EthereumJSONRPC) do
+     hash_string_by_number =
+       Enum.into(blocks, %{}, fn %{number: number, hash: hash_string}
+                                 when is_integer(number) and is_binary(hash_string) ->
+@@ -783,12 +785,19 @@
+ 
+     hash_string_by_number
+     |> Map.keys()
+-    |> EthereumJSONRPC.fetch_beneficiaries(json_rpc_named_arguments)
++    |> rpc_module.fetch_beneficiaries(json_rpc_named_arguments)
+     |> case do
+       {:ok, %FetchedBeneficiaries{params_set: params_set} = fetched_beneficiaries} ->
+         consensus_params_set = consensus_params_set(params_set, hash_string_by_number)
+ 
+-        %FetchedBeneficiaries{fetched_beneficiaries | params_set: consensus_params_set}
++        errors =
++          if rpc_module == ColossusX do
++            fetched_beneficiaries.errors ++ ColossusX.consensus_errors(params_set, hash_string_by_number)
++          else
++            fetched_beneficiaries.errors
++          end
++
++        %FetchedBeneficiaries{fetched_beneficiaries | params_set: consensus_params_set, errors: errors}
+ 
+       {:error, reason} ->
+         Logger.error(fn -> ["Could not fetch beneficiaries: ", inspect(reason)] end)
+@@ -840,7 +849,8 @@
+ 
+   defp beneficiaries_with_gas_payment(blocks, beneficiary_params_set, transactions_with_receipts) do
+     case Application.get_env(:indexer, :fetch_rewards_way) do
+-      "manual" ->
++      mode when mode in ["manual", "colossusx"] ->
++        # FHS-D receipts already contain the exact fee payout. Never add gas again.
+         beneficiary_params_set
+ 
+       _ ->
+--- a/apps/indexer/lib/indexer/fetcher/block_reward.ex
++++ b/apps/indexer/lib/indexer/fetcher/block_reward.ex
+@@ -14,7 +14,7 @@
+   import EthereumJSONRPC, only: [quantity_to_integer: 1]
+ 
+   alias Ecto.Changeset
+-  alias EthereumJSONRPC.FetchedBeneficiaries
++  alias EthereumJSONRPC.{ColossusX, FetchedBeneficiaries}
+   alias Explorer.Chain
+   alias Explorer.Chain.{Block, Wei}
+   alias Explorer.Chain.Cache.Accounts
+@@ -88,8 +88,12 @@
+ 
+     Logger.debug(fn -> "fetching" end)
+ 
++    # ColossusX modification, 2026-09-21: share the verified adapter with realtime import.
++    rpc_module =
++      if Application.get_env(:indexer, :fetch_rewards_way) == "colossusx", do: ColossusX, else: EthereumJSONRPC
++
+     consensus_numbers
+-    |> EthereumJSONRPC.fetch_beneficiaries(json_rpc_named_arguments)
++    |> rpc_module.fetch_beneficiaries(json_rpc_named_arguments)
+     |> case do
+       {:ok, fetched_beneficiaries} ->
+         run_fetched_beneficiaries(fetched_beneficiaries, hash_string_by_number)
+@@ -118,6 +122,13 @@
+   end
+ 
+   defp run_fetched_beneficiaries(%FetchedBeneficiaries{params_set: params_set, errors: errors}, hash_string_by_number) do
++    errors =
++      if Application.get_env(:indexer, :fetch_rewards_way) == "colossusx" do
++        errors ++ ColossusX.consensus_errors(params_set, hash_string_by_number)
++      else
++        errors
++      end
++
+     params_set
+     |> filter_consensus_params(hash_string_by_number)
+     |> case do
+@@ -180,9 +191,14 @@
+   end
+ 
+   defp add_gas_payments(beneficiaries_params) do
+-    beneficiaries_params
+-    |> add_validator_rewards()
+-    |> reduce_uncle_rewards()
++    if Application.get_env(:indexer, :fetch_rewards_way) == "colossusx" do
++      # Static, common-miner and common-RPC rewards are already complete.
++      beneficiaries_params
++    else
++      beneficiaries_params
++      |> add_validator_rewards()
++      |> reduce_uncle_rewards()
++    end
+   end
+ 
+   def add_timestamp(beneficiaries_params) do
+--- a/apps/indexer/lib/indexer/supervisor.ex
++++ b/apps/indexer/lib/indexer/supervisor.ex
+@@ -1,3 +1,4 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
+ defmodule Indexer.Supervisor do
+   @moduledoc """
+   Supervisor of all indexer worker supervision trees
+@@ -352,13 +353,19 @@
+          fetchers,
+          {_, [[json_rpc_named_arguments: json_rpc_named_arguments, memory_monitor: _memory_monitor]]} = params
+        ) do
+-    case Keyword.fetch(json_rpc_named_arguments, :variant) do
+-      {:ok, ignored_variant} when ignored_variant not in @variants_with_implemented_fetch_beneficiaries ->
+-        Application.put_env(:indexer, Indexer.Fetcher.BlockReward.Supervisor, disabled?: true)
+-        fetchers
++    # ColossusX uses its own beneficiary adapter even when tracing uses Geth.
++    # Keep the operator's disabled flag; the child supervisor honors it at startup.
++    if Application.get_env(:indexer, :fetch_rewards_way) == "colossusx" do
++      [params | fetchers]
++    else
++      case Keyword.fetch(json_rpc_named_arguments, :variant) do
++        {:ok, ignored_variant} when ignored_variant not in @variants_with_implemented_fetch_beneficiaries ->
++          Application.put_env(:indexer, Indexer.Fetcher.BlockReward.Supervisor, disabled?: true)
++          fetchers
+ 
+-      _ ->
+-        [params | fetchers]
++        _ ->
++          [params | fetchers]
++      end
+     end
+   end
+ 
+--- a/apps/indexer/test/indexer/colossusx_supervisor_test.exs
++++ b/apps/indexer/test/indexer/colossusx_supervisor_test.exs
+@@ -0,0 +1,62 @@
++# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
++defmodule Indexer.ColossusXSupervisorTest do
++  use ExUnit.Case, async: false
++
++  alias Indexer.Fetcher.BlockReward.Supervisor, as: RewardSupervisor
++
++  setup do
++    keys = [
++      :fetch_rewards_way,
++      :json_rpc_named_arguments,
++      :block_interval,
++      :subscribe_named_arguments,
++      RewardSupervisor
++    ]
++
++    previous = Map.new(keys, &{&1, Application.fetch_env(:indexer, &1)})
++    Application.put_env(:indexer, RewardSupervisor, disabled?: false)
++    Application.put_env(:indexer, :block_interval, 500)
++    Application.put_env(:indexer, :subscribe_named_arguments, [])
++
++    on_exit(fn ->
++      Enum.each(previous, fn
++        {key, {:ok, value}} -> Application.put_env(:indexer, key, value)
++        {key, :error} -> Application.delete_env(:indexer, key)
++      end)
++    end)
++
++    :ok
++  end
++
++  test "ColossusX starts reward backfill with the Geth tracing variant" do
++    children = children("colossusx", EthereumJSONRPC.Geth)
++    assert Enum.any?(children, &(&1.id == RewardSupervisor))
++    refute RewardSupervisor.disabled?()
++  end
++
++  test "default Geth mode retains upstream unsupported-reward behavior" do
++    children = children("trace_block", EthereumJSONRPC.Geth)
++    refute Enum.any?(children, &(&1.id == RewardSupervisor))
++    assert RewardSupervisor.disabled?()
++  end
++
++  test "supported upstream variants still include reward backfill" do
++    children = children("trace_block", EthereumJSONRPC.Nethermind)
++    assert Enum.any?(children, &(&1.id == RewardSupervisor))
++    refute RewardSupervisor.disabled?()
++  end
++
++  test "the operator can explicitly disable custom reward backfill" do
++    Application.put_env(:indexer, RewardSupervisor, disabled?: true)
++    children("colossusx", EthereumJSONRPC.Geth)
++    assert RewardSupervisor.disabled?()
++  end
++
++  defp children(mode, variant) do
++    Application.put_env(:indexer, :fetch_rewards_way, mode)
++    arguments = Application.fetch_env!(:indexer, :json_rpc_named_arguments)
++    Application.put_env(:indexer, :json_rpc_named_arguments, Keyword.put(arguments, :variant, variant))
++    {:ok, {_flags, children}} = Indexer.Supervisor.init(%{memory_monitor: nil})
++    children
++  end
++end
+--- a/apps/indexer/test/indexer/fetcher/colossusx_block_reward_test.exs
++++ b/apps/indexer/test/indexer/fetcher/colossusx_block_reward_test.exs
+@@ -0,0 +1,131 @@
++defmodule Indexer.Fetcher.ColossusXBlockRewardTest do
++  # ColossusX modification, 2026-09-21: persistence, backfill and retry regression coverage.
++  use EthereumJSONRPC.Case, async: false
++  use Explorer.DataCase
++
++  import Mox
++
++  alias EthereumJSONRPC.{ColossusX, ColossusXFixture}
++  alias Explorer.Chain.{Block, Wei}
++  alias Explorer.Chain.Block.Reward
++  alias Indexer.Fetcher.BlockReward
++  alias Indexer.Fetcher.CoinBalance.Catchup, as: CoinBalanceCatchup
++
++  @static_reward 100_000_000_000_000_000_000_000
++  @moduletag :capture_log
++
++  setup :set_mox_global
++  setup :verify_on_exit!
++
++  defmodule BalanceSink do
++    @moduledoc false
++    use GenServer
++    def start_link(owner), do: GenServer.start_link(__MODULE__, owner, name: CoinBalanceCatchup)
++    def init(owner), do: {:ok, owner}
++
++    def handle_call({:buffer, entries, _realtime}, _from, owner) do
++      send(owner, {:balance_entries, entries})
++      {:reply, :ok, owner}
++    end
++  end
++
++  setup do
++    mode = Application.get_env(:indexer, :fetch_rewards_way)
++    settings = Application.get_env(:ethereum_jsonrpc, ColossusX)
++    balance_settings = Application.get_env(:indexer, Indexer.Fetcher.CoinBalance.Supervisor)
++    Application.put_env(:indexer, :fetch_rewards_way, "colossusx")
++    Application.put_env(:ethereum_jsonrpc, ColossusX, genesis_hash: ColossusXFixture.genesis_hash())
++    Application.put_env(:indexer, Indexer.Fetcher.CoinBalance.Supervisor, disabled?: false)
++    start_supervised!({BalanceSink, self()})
++
++    on_exit(fn ->
++      Application.put_env(:indexer, :fetch_rewards_way, mode)
++      Application.put_env(:ethereum_jsonrpc, ColossusX, settings || [])
++      Application.put_env(:indexer, Indexer.Fetcher.CoinBalance.Supervisor, balance_settings)
++    end)
++
++    {:ok, arguments: [transport: EthereumJSONRPC.Mox, transport_options: [], variant: EthereumJSONRPC.Geth]}
++  end
++
++  test "backfill persists exact payouts without gas addition and is idempotent", %{arguments: arguments} do
++    block = insert(:block, number: 10)
++
++    transaction =
++      :transaction
++      |> insert(gas_price: 1_000_000_000)
++      |> with_block(block, gas_used: 21_000, cumulative_gas_used: 21_000, status: :ok)
++
++    {rpc_block, header} = fixture(block, [to_string(transaction.hash)])
++    receipt = ColossusXFixture.receipt(rpc_block)
++
++    for _attempt <- 1..2 do
++      expect_block(rpc_block, header, [receipt])
++      assert :ok = BlockReward.run([block.number], arguments)
++      assert_receive {:balance_entries, entries}
++      assert length(entries) == 2
++    end
++
++    rewards = Repo.all(Reward)
++    assert length(rewards) == 2
++    static = Enum.find(rewards, &(&1.address_type == :validator))
++    rpc = Enum.find(rewards, &(&1.address_type == :colossusx_rpc))
++    assert Decimal.equal?(Wei.to(static.reward, :wei), @static_reward)
++    assert Decimal.equal?(Wei.to(rpc.reward, :wei), 4_200_000_000_000)
++    assert to_string(static.address_hash) == header["miner"]
++    assert to_string(rpc.address_hash) == receipt["commonTxRewardRecipient"]
++    assert Repo.all(Block.blocks_without_reward_query()) == []
++  end
++
++  test "verified empty block is marked processed while missing RPC result is retried", %{arguments: arguments} do
++    block = insert(:block, number: 10)
++    {rpc_block, header} = fixture(block, [])
++    expect_block(rpc_block, header, [])
++    assert :ok = BlockReward.run([block.number], arguments)
++    assert [%Reward{address_type: :validator, reward: reward}] = Repo.all(Reward)
++    assert Decimal.equal?(Wei.to(reward, :wei), 0)
++    assert Repo.all(Block.blocks_without_reward_query()) == []
++
++    other_block = insert(:block, number: 11)
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", ["0xB", false], nil)
++    assert {:retry, [11]} = BlockReward.run([other_block.number], arguments)
++    assert length(Repo.all(Reward)) == 1
++    assert Enum.map(Repo.all(Block.blocks_without_reward_query()), & &1.number) == [11]
++  end
++
++  test "a different canonical hash cannot be imported into the indexed block", %{arguments: arguments} do
++    block = insert(:block, number: 10)
++    {rpc_block, header} = ColossusXFixture.block(10, 0, [])
++    expect_block(rpc_block, header, [])
++    assert {:retry, [10]} = BlockReward.run([block.number], arguments)
++    assert Repo.all(Reward) == []
++    assert Enum.map(Repo.all(Block.blocks_without_reward_query()), & &1.number) == [10]
++  end
++
++  defp fixture(block, transactions) do
++    {rpc_block, header} = ColossusXFixture.block(block.number, 0, transactions)
++    fields = %{"hash" => to_string(block.hash), "parentHash" => to_string(block.parent_hash)}
++    {Map.merge(rpc_block, fields), Map.merge(header, fields)}
++  end
++
++  defp expect_block(block, header, receipts) do
++    expect_identity()
++    expect_rpc("eth_getBlockByNumber", [block["number"], false], block)
++    expect_rpc("eth_getHeaderByHash", [block["hash"]], header)
++
++    if receipts != [] do
++      expect_rpc("eth_getBlockReceipts", [%{blockHash: block["hash"], requireCanonical: true}], receipts)
++    end
++
++    expect_rpc("eth_getHeaderByNumber", [block["number"]], header)
++  end
++
++  defp expect_identity do
++    expect_rpc("eth_chainId", [], "0x9a249f")
++    expect_rpc("eth_getBlockByNumber", ["0x0", false], %{"number" => "0x0", "hash" => ColossusXFixture.genesis_hash()})
++  end
++
++  defp expect_rpc(method, params, result) do
++    expect(EthereumJSONRPC.Mox, :json_rpc, fn %{method: ^method, params: ^params}, _options -> {:ok, result} end)
++  end
++end
+--- a/config/runtime.exs
++++ b/config/runtime.exs
+@@ -995,6 +995,18 @@
+ optimism_l2_isthmus_timestamp =
+   ConfigHelper.parse_integer_or_nil_env_var("INDEXER_OPTIMISM_L2_ISTHMUS_TIMESTAMP")
+ 
++# ColossusX modification, 2026-09-21: opt-in, genesis-pinned FHS-D reward indexing.
++fetch_rewards_way = System.get_env("FETCH_REWARDS_WAY", "trace_block")
++colossusx_rewards_genesis_hash = System.get_env("COLOSSUSX_REWARDS_GENESIS_HASH")
++
++if fetch_rewards_way == "colossusx" and
++     (not is_binary(colossusx_rewards_genesis_hash) or
++        not Regex.match?(~r/^0x[0-9a-fA-F]{64}$/, colossusx_rewards_genesis_hash)) do
++  raise "FETCH_REWARDS_WAY=colossusx requires COLOSSUSX_REWARDS_GENESIS_HASH (0x plus 64 hexadecimal digits)"
++end
++
++config :ethereum_jsonrpc, EthereumJSONRPC.ColossusX, genesis_hash: colossusx_rewards_genesis_hash
++
+ config :indexer,
+   block_transformer: ConfigHelper.block_transformer(),
+   chain_id: System.get_env("CHAIN_ID"),
+@@ -1005,7 +1017,7 @@
+   trace_block_ranges: trace_block_ranges,
+   trace_first_block: trace_first_block,
+   trace_last_block: trace_last_block,
+-  fetch_rewards_way: System.get_env("FETCH_REWARDS_WAY", "trace_block"),
++  fetch_rewards_way: fetch_rewards_way,
+   memory_limit: ConfigHelper.indexer_memory_limit(),
+   system_memory_percentage: ConfigHelper.parse_integer_env_var("INDEXER_SYSTEM_MEMORY_PERCENTAGE", 60),
+   receipts_batch_size: ConfigHelper.parse_integer_env_var("INDEXER_RECEIPTS_BATCH_SIZE", 250),
+@@ -1197,8 +1209,16 @@
+   concurrency: ConfigHelper.parse_integer_env_var("INDEXER_CATCHUP_BLOCKS_CONCURRENCY", 10)
+ 
+ config :indexer, Indexer.Fetcher.BlockReward,
+-  batch_size: ConfigHelper.parse_integer_env_var("INDEXER_BLOCK_REWARD_BATCH_SIZE", 10),
+-  concurrency: ConfigHelper.parse_integer_env_var("INDEXER_BLOCK_REWARD_CONCURRENCY", 4)
++  batch_size:
++    ConfigHelper.parse_integer_env_var(
++      "INDEXER_BLOCK_REWARD_BATCH_SIZE",
++      if(fetch_rewards_way == "colossusx", do: 1, else: 10)
++    ),
++  concurrency:
++    ConfigHelper.parse_integer_env_var(
++      "INDEXER_BLOCK_REWARD_CONCURRENCY",
++      if(fetch_rewards_way == "colossusx", do: 1, else: 4)
++    )
+ 
+ config :indexer, Indexer.Fetcher.TokenInstance.Helper,
+   base_uri_retry?: ConfigHelper.parse_bool_env_var("INDEXER_TOKEN_INSTANCE_USE_BASE_URI_RETRY"),
+--- a/docker-compose/envs/common-blockscout.env
++++ b/docker-compose/envs/common-blockscout.env
+@@ -465,6 +465,9 @@
+ # API_RATE_LIMIT_IS_BLOCKSCOUT_BEHIND_PROXY=false
+ # API_RATE_LIMIT_UI_V2_TOKEN_TTL_IN_SECONDS=18000
+ # FETCH_REWARDS_WAY=trace_block
++# ColossusX FHS-D rewards: set FETCH_REWARDS_WAY=colossusx and pin this network's genesis hash.
++# The adapter additionally requires RPC chain ID 10101919; no reward is imported on validation failure.
++# COLOSSUSX_REWARDS_GENESIS_HASH=
+ # MICROSERVICE_SC_VERIFIER_ENABLED=true
+ # MICROSERVICE_SC_VERIFIER_URL=http://smart-contract-verifier:8050/
+ # MICROSERVICE_SC_VERIFIER_TYPE=sc_verifier

@@ -1,0 +1,834 @@
+{
+  "image": "sha256:e233637a88f45690a2cc195e45687fb85292232843bc419f6ee271ddaee8eb54",
+  "imageTag": "colossusx-frontend-deps:2.7.2",
+  "reviewDate": "2026-09-21",
+  "scope": "Installed npm manifests and top-level license/notice files, including nested node_modules; not every bundled code or native/OS dependency.",
+  "packageInstances": 3993,
+  "uniqueNameVersionPairs": 2514,
+  "rootPackageInstances": {
+    "/app/node_modules": 3535,
+    "/feature-reporter/node_modules": 157,
+    "/envs-validator/node_modules": 30,
+    "/favicon-generator/node_modules": 158,
+    "/sitemap-generator/node_modules": 22,
+    "/multichain-config-generator/node_modules": 17,
+    "/essential-dapps-chains-config-generator/node_modules": 44,
+    "/llms-txt-generator/node_modules": 30
+  },
+  "licenseCounts": {
+    "\"MIT\"": 3086,
+    "\"Apache-2.0 OR MIT\"": 209,
+    "\"Apache-2.0\"": 297,
+    "\"CC0-1.0\"": 8,
+    "\"ISC\"": 178,
+    "\"CC-BY-4.0\"": 5,
+    "\"BSD-2-Clause\"": 71,
+    "\"CC BY-SA 4.0\"": 1,
+    "\"MIT-0\"": 2,
+    "\"MPL-2.0\"": 5,
+    "\"BSD-3-Clause\"": 73,
+    "\"LGPL-3.0-or-later\"": 4,
+    "\"MPL 2.0\"": 1,
+    "\"GPL-3.0\"": 2,
+    "\"0BSD\"": 15,
+    "null": 4,
+    "\"(MIT OR CC0-1.0)\"": 4,
+    "\"Python-2.0\"": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://github.com/uber/bufrw/raw/master/LICENSE\"}]": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://github.com/Raynos/error/raw/master/LICENSE\"}]": 2,
+    "\"(MPL-2.0 OR Apache-2.0)\"": 1,
+    "\"(MIT OR WTFPL)\"": 1,
+    "\"Zlib\"": 2,
+    "\"W3C\"": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://sjs.mit-license.org\"}]": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://github.com/jcorbin/hexer/raw/master/LICENSE\"}]": 1,
+    "\"BlueOak-1.0.0\"": 4,
+    "\"(BSD-3-Clause OR GPL-2.0)\"": 1,
+    "\"(WTFPL OR MIT)\"": 2,
+    "\"(BSD-2-Clause OR MIT OR Apache-2.0)\"": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://mths.be/mit\"}]": 1,
+    "\"Unlicense\"": 2,
+    "{\"type\": \"MIT\", \"url\": \"http://github.com/isaacs/node-lru-cache/raw/master/LICENSE\"}": 1,
+    "\"WTFPL OR ISC\"": 1,
+    "\"(MIT AND BSD-3-Clause)\"": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://github.com/Matt-Esch/string-template/raw/master/LICENSE\"}]": 1,
+    "[{\"type\": \"MIT\", \"url\": \"http://github.com/thriftrw/thriftrw-node/raw/master/LICENSE\"}]": 1,
+    "\"WTFPL\"": 1
+  },
+  "excludedSDKPackagesFound": [],
+  "restrictedOrUnreviewedDeclaredLicenses": [],
+  "missingPackageLicenseFields": 4,
+  "missingDeclarationsReview": [
+    {
+      "name": "ansi-color",
+      "version": "0.2.1",
+      "licenseFromIncludedFile": "BSD-3-Clause",
+      "noticeFiles": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "cli-table",
+      "version": "0.3.11",
+      "licenseFromIncludedFile": "MIT",
+      "noticeFiles": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "process",
+      "version": "0.10.1",
+      "licenseFromIncludedFile": "MIT",
+      "noticeFiles": [
+        "LICENSE"
+      ]
+    },
+    {
+      "name": "tiny-parse-argv",
+      "version": "2.4.0",
+      "licenseFromIncludedFile": "MIT",
+      "noticeFiles": [
+        "license"
+      ]
+    }
+  ],
+  "supplementedNoticePairs": [
+    {
+      "name": "@blockscout/bens-types",
+      "version": "1.4.1"
+    },
+    {
+      "name": "@blockscout/visualizer-types",
+      "version": "0.2.0"
+    },
+    {
+      "name": "@esbuild/linux-x64",
+      "version": "0.25.2"
+    },
+    {
+      "name": "@esbuild/linux-x64",
+      "version": "0.25.5"
+    },
+    {
+      "name": "@graphiql/plugin-doc-explorer",
+      "version": "0.2.2"
+    },
+    {
+      "name": "@graphiql/plugin-history",
+      "version": "0.2.2"
+    },
+    {
+      "name": "@growthbook/growthbook",
+      "version": "0.31.0"
+    },
+    {
+      "name": "@growthbook/growthbook-react",
+      "version": "0.21.0"
+    },
+    {
+      "name": "@helia/bitswap",
+      "version": "2.1.1"
+    },
+    {
+      "name": "@helia/block-brokers",
+      "version": "4.2.1"
+    },
+    {
+      "name": "@helia/car",
+      "version": "4.1.1"
+    },
+    {
+      "name": "@helia/interface",
+      "version": "5.3.1"
+    },
+    {
+      "name": "@helia/ipns",
+      "version": "8.2.2"
+    },
+    {
+      "name": "@helia/routers",
+      "version": "3.1.1"
+    },
+    {
+      "name": "@helia/unixfs",
+      "version": "5.0.2"
+    },
+    {
+      "name": "@helia/utils",
+      "version": "1.3.1"
+    },
+    {
+      "name": "@img/sharp-libvips-linux-x64",
+      "version": "1.0.4"
+    },
+    {
+      "name": "@img/sharp-libvips-linuxmusl-x64",
+      "version": "1.0.4"
+    },
+    {
+      "name": "@ipshipyard/libp2p-auto-tls",
+      "version": "1.0.0"
+    },
+    {
+      "name": "@libp2p/autonat",
+      "version": "2.0.30"
+    },
+    {
+      "name": "@libp2p/bootstrap",
+      "version": "11.0.35"
+    },
+    {
+      "name": "@libp2p/circuit-relay-v2",
+      "version": "3.2.11"
+    },
+    {
+      "name": "@libp2p/config",
+      "version": "1.1.6"
+    },
+    {
+      "name": "@libp2p/crypto",
+      "version": "5.1.1"
+    },
+    {
+      "name": "@libp2p/dcutr",
+      "version": "2.0.29"
+    },
+    {
+      "name": "@libp2p/identify",
+      "version": "3.0.29"
+    },
+    {
+      "name": "@libp2p/interface",
+      "version": "2.9.0"
+    },
+    {
+      "name": "@libp2p/interface-internal",
+      "version": "2.3.11"
+    },
+    {
+      "name": "@libp2p/kad-dht",
+      "version": "15.0.2"
+    },
+    {
+      "name": "@libp2p/keychain",
+      "version": "5.2.1"
+    },
+    {
+      "name": "@libp2p/logger",
+      "version": "5.1.15"
+    },
+    {
+      "name": "@libp2p/mdns",
+      "version": "11.0.35"
+    },
+    {
+      "name": "@libp2p/mplex",
+      "version": "11.0.35"
+    },
+    {
+      "name": "@libp2p/multistream-select",
+      "version": "6.0.22"
+    },
+    {
+      "name": "@libp2p/peer-collections",
+      "version": "6.0.27"
+    },
+    {
+      "name": "@libp2p/peer-id",
+      "version": "5.1.2"
+    },
+    {
+      "name": "@libp2p/peer-record",
+      "version": "8.0.27"
+    },
+    {
+      "name": "@libp2p/peer-store",
+      "version": "11.1.4"
+    },
+    {
+      "name": "@libp2p/ping",
+      "version": "2.0.29"
+    },
+    {
+      "name": "@libp2p/record",
+      "version": "4.0.5"
+    },
+    {
+      "name": "@libp2p/tcp",
+      "version": "10.1.10"
+    },
+    {
+      "name": "@libp2p/tls",
+      "version": "2.2.0"
+    },
+    {
+      "name": "@libp2p/upnp-nat",
+      "version": "3.1.13"
+    },
+    {
+      "name": "@libp2p/utils",
+      "version": "6.6.2"
+    },
+    {
+      "name": "@libp2p/webrtc",
+      "version": "5.2.12"
+    },
+    {
+      "name": "@libp2p/websockets",
+      "version": "9.2.10"
+    },
+    {
+      "name": "@multiformats/multiaddr-matcher",
+      "version": "1.7.2"
+    },
+    {
+      "name": "@next/env",
+      "version": "13.5.8"
+    },
+    {
+      "name": "@next/eslint-plugin-next",
+      "version": "15.0.3"
+    },
+    {
+      "name": "@pkgr/utils",
+      "version": "2.3.1"
+    },
+    {
+      "name": "@polka/url",
+      "version": "1.0.0-next.25"
+    },
+    {
+      "name": "@radix-ui/primitive",
+      "version": "1.1.2"
+    },
+    {
+      "name": "@radix-ui/react-compose-refs",
+      "version": "1.1.2"
+    },
+    {
+      "name": "@radix-ui/react-context",
+      "version": "1.1.2"
+    },
+    {
+      "name": "@radix-ui/react-direction",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-focus-guards",
+      "version": "1.1.2"
+    },
+    {
+      "name": "@radix-ui/react-id",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-use-callback-ref",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-use-escape-keydown",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-use-layout-effect",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-use-rect",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/react-use-size",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@radix-ui/rect",
+      "version": "1.1.1"
+    },
+    {
+      "name": "@rollup/pluginutils",
+      "version": "5.0.2"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.41.1"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.41.1"
+    },
+    {
+      "name": "@rrweb/types",
+      "version": "2.0.0-alpha.18"
+    },
+    {
+      "name": "@rrweb/utils",
+      "version": "2.0.0-alpha.18"
+    },
+    {
+      "name": "abort-error",
+      "version": "1.0.1"
+    },
+    {
+      "name": "helia",
+      "version": "5.4.1"
+    },
+    {
+      "name": "it-byte-stream",
+      "version": "2.0.2"
+    },
+    {
+      "name": "it-glob",
+      "version": "3.0.3"
+    },
+    {
+      "name": "it-length-prefixed-stream",
+      "version": "2.0.2"
+    },
+    {
+      "name": "it-map",
+      "version": "3.1.3"
+    },
+    {
+      "name": "it-protobuf-stream",
+      "version": "2.0.2"
+    },
+    {
+      "name": "it-queueless-pushable",
+      "version": "1.0.2"
+    },
+    {
+      "name": "it-queueless-pushable",
+      "version": "2.0.1"
+    },
+    {
+      "name": "it-to-browser-readablestream",
+      "version": "2.0.11"
+    },
+    {
+      "name": "libp2p",
+      "version": "2.8.5"
+    },
+    {
+      "name": "next-sitemap",
+      "version": "4.2.3"
+    },
+    {
+      "name": "react-compiler-runtime",
+      "version": "19.1.0-rc.1"
+    },
+    {
+      "name": "react-scroll",
+      "version": "1.9.3"
+    },
+    {
+      "name": "rrdom",
+      "version": "2.0.0-alpha.18"
+    },
+    {
+      "name": "rrweb",
+      "version": "2.0.0-alpha.18"
+    },
+    {
+      "name": "rrweb-snapshot",
+      "version": "2.0.0-alpha.18"
+    },
+    {
+      "name": "saxes",
+      "version": "6.0.0"
+    },
+    {
+      "name": "sirv",
+      "version": "2.0.4"
+    },
+    {
+      "name": "undici-types",
+      "version": "5.26.5"
+    }
+  ],
+  "unrecoveredNoticePairs": [
+    {
+      "name": "@assemblyscript/loader",
+      "version": "0.9.4"
+    },
+    {
+      "name": "@blockscout/interchain-indexer-types",
+      "version": "0.0.10"
+    },
+    {
+      "name": "@blockscout/multichain-aggregator-types",
+      "version": "2.1.2"
+    },
+    {
+      "name": "@blockscout/points-types",
+      "version": "1.4.0-alpha.1"
+    },
+    {
+      "name": "@blockscout/stats-types",
+      "version": "2.11.1"
+    },
+    {
+      "name": "@blockscout/tac-operation-lifecycle-types",
+      "version": "1.1.0"
+    },
+    {
+      "name": "@blockscout/zetachain-cctx-types",
+      "version": "1.0.0-rc.8"
+    },
+    {
+      "name": "@clack/core",
+      "version": "0.3.3"
+    },
+    {
+      "name": "@corex/deepmerge",
+      "version": "4.0.43"
+    },
+    {
+      "name": "@esbuild/linux-x64",
+      "version": "0.25.10"
+    },
+    {
+      "name": "@esbuild/linux-x64",
+      "version": "0.25.12"
+    },
+    {
+      "name": "@esbuild/linux-x64",
+      "version": "0.25.9"
+    },
+    {
+      "name": "@ethersproject/logger",
+      "version": "5.8.0"
+    },
+    {
+      "name": "@img/sharp-libvips-linux-x64",
+      "version": "1.2.0"
+    },
+    {
+      "name": "@img/sharp-libvips-linuxmusl-x64",
+      "version": "1.2.0"
+    },
+    {
+      "name": "@kessler/tableify",
+      "version": "1.0.2"
+    },
+    {
+      "name": "@next/bundle-analyzer",
+      "version": "15.5.9"
+    },
+    {
+      "name": "@next/env",
+      "version": "15.5.10"
+    },
+    {
+      "name": "@next/eslint-plugin-next",
+      "version": "15.4.10"
+    },
+    {
+      "name": "@next/swc-linux-x64-gnu",
+      "version": "15.5.7"
+    },
+    {
+      "name": "@next/swc-linux-x64-musl",
+      "version": "15.5.7"
+    },
+    {
+      "name": "@nouns/assets",
+      "version": "0.10.0"
+    },
+    {
+      "name": "@openzeppelin/contracts",
+      "version": "5.4.0"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.46.4"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.52.4"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.53.2"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-gnu",
+      "version": "4.53.3"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.46.4"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.52.4"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.53.2"
+    },
+    {
+      "name": "@rollup/rollup-linux-x64-musl",
+      "version": "4.53.3"
+    },
+    {
+      "name": "@swagger-api/apidom-ns-asyncapi-3",
+      "version": "1.0.0"
+    },
+    {
+      "name": "@tokenizer/token",
+      "version": "0.3.0"
+    },
+    {
+      "name": "@types/json5",
+      "version": "0.0.29"
+    },
+    {
+      "name": "@webassemblyjs/helper-api-error",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/helper-numbers",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/helper-wasm-bytecode",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/ieee754",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/utf8",
+      "version": "1.11.6"
+    },
+    {
+      "name": "acorn-import-assertions",
+      "version": "1.9.0"
+    },
+    {
+      "name": "boolbase",
+      "version": "1.0.0"
+    },
+    {
+      "name": "bundle-n-require",
+      "version": "1.1.2"
+    },
+    {
+      "name": "change-case",
+      "version": "5.4.4"
+    },
+    {
+      "name": "client-only",
+      "version": "0.0.1"
+    },
+    {
+      "name": "colors",
+      "version": "1.0.3"
+    },
+    {
+      "name": "console-polyfill",
+      "version": "0.3.0"
+    },
+    {
+      "name": "dappscout-iframe",
+      "version": "0.4.0"
+    },
+    {
+      "name": "data-uri-to-buffer",
+      "version": "4.0.0"
+    },
+    {
+      "name": "eastasianwidth",
+      "version": "0.2.0"
+    },
+    {
+      "name": "easy-table",
+      "version": "1.2.0"
+    },
+    {
+      "name": "encode-utf8",
+      "version": "1.0.3"
+    },
+    {
+      "name": "err-code",
+      "version": "3.0.1"
+    },
+    {
+      "name": "error",
+      "version": "7.0.2"
+    },
+    {
+      "name": "error",
+      "version": "7.2.1"
+    },
+    {
+      "name": "eslint-config-next",
+      "version": "15.4.10"
+    },
+    {
+      "name": "eslint-plugin-import-helpers",
+      "version": "2.0.1"
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0"
+    },
+    {
+      "name": "event-iterator",
+      "version": "2.0.0"
+    },
+    {
+      "name": "format",
+      "version": "0.2.2"
+    },
+    {
+      "name": "glob-to-regexp",
+      "version": "0.4.1"
+    },
+    {
+      "name": "hash.js",
+      "version": "1.1.7"
+    },
+    {
+      "name": "highlightjs-vue",
+      "version": "1.0.0"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4"
+    },
+    {
+      "name": "isarray",
+      "version": "1.0.0"
+    },
+    {
+      "name": "keyv",
+      "version": "4.5.4"
+    },
+    {
+      "name": "language-subtag-registry",
+      "version": "0.3.22"
+    },
+    {
+      "name": "language-tags",
+      "version": "1.0.9"
+    },
+    {
+      "name": "lilconfig",
+      "version": "2.0.5"
+    },
+    {
+      "name": "mersenne-twister",
+      "version": "1.1.0"
+    },
+    {
+      "name": "natural-compare",
+      "version": "1.4.0"
+    },
+    {
+      "name": "natural-compare-lite",
+      "version": "1.4.0"
+    },
+    {
+      "name": "netmask",
+      "version": "2.0.2"
+    },
+    {
+      "name": "node-eval",
+      "version": "2.0.0"
+    },
+    {
+      "name": "pg-types",
+      "version": "2.2.0"
+    },
+    {
+      "name": "pg-types",
+      "version": "4.0.1"
+    },
+    {
+      "name": "rabin-wasm",
+      "version": "0.1.5"
+    },
+    {
+      "name": "react-identicons",
+      "version": "1.2.5"
+    },
+    {
+      "name": "react-remove-scroll-bar",
+      "version": "2.3.8"
+    },
+    {
+      "name": "short-unique-id",
+      "version": "5.3.2"
+    },
+    {
+      "name": "sparse-array",
+      "version": "1.3.2"
+    },
+    {
+      "name": "stable",
+      "version": "0.1.8"
+    },
+    {
+      "name": "stackback",
+      "version": "0.0.2"
+    },
+    {
+      "name": "string-hash",
+      "version": "1.1.3"
+    },
+    {
+      "name": "svg-parser",
+      "version": "2.0.4"
+    },
+    {
+      "name": "tiny-case",
+      "version": "1.0.3"
+    },
+    {
+      "name": "toggle-selection",
+      "version": "1.0.6"
+    },
+    {
+      "name": "tr46",
+      "version": "0.0.3"
+    },
+    {
+      "name": "truncate-utf8-bytes",
+      "version": "1.0.2"
+    },
+    {
+      "name": "tsc",
+      "version": "2.0.4"
+    },
+    {
+      "name": "type-fest",
+      "version": "2.19.0"
+    },
+    {
+      "name": "use-font-face-observer",
+      "version": "1.3.0"
+    },
+    {
+      "name": "varint",
+      "version": "6.0.0"
+    }
+  ],
+  "nativeOsAndBundledSourceAuditComplete": false,
+  "mainAppMetadataAndNoticesMatchValidatedWorkspace": true,
+  "inventorySha256": "591f681f1a1f7f726c39972783d598030d29123dbce47f2618310d56c842d554",
+  "renderedNoticesSha256": "22dbf7ef71222cea37bb79e65eaad849fad56ae9fb0e0ee39c3ad9a6f1156506",
+  "renderedNoticeSets": 2514,
+  "copyleftOrAttributionLicenseDeclarations": [
+    "\"(BSD-3-Clause OR GPL-2.0)\"",
+    "\"(MPL-2.0 OR Apache-2.0)\"",
+    "\"CC BY-SA 4.0\"",
+    "\"CC-BY-4.0\"",
+    "\"GPL-3.0\"",
+    "\"LGPL-3.0-or-later\"",
+    "\"MPL 2.0\"",
+    "\"MPL-2.0\""
+  ]
+}

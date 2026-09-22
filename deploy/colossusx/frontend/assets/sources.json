@@ -1,0 +1,77 @@
+{
+  "repository": "https://github.com/CypherTroopers/logo",
+  "commit": "45563d754dc544d4d05d29d5a588adec97637520",
+  "variant": "Original full-body CypherTrooper for page logos; larger upper-body crop for browser favicons. No Wrapped CPH assets.",
+  "assets": [
+    {
+      "file": "logo-16.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-16.png",
+      "sha256": "30375e841d77df12bd438612f811082ddc7a23ed4dca1b05790ac330dc482fa6"
+    },
+    {
+      "file": "logo-32.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-32.png",
+      "sha256": "63fc77cea4bbaa1d9548597281d6c4c8cecb178be3edcdd415a02527587f4559"
+    },
+    {
+      "file": "logo-48.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-48.png",
+      "sha256": "80c7d0b13fc01222a5d2dfca9dd750305e226793a36ac50641de72deeb7a39cc"
+    },
+    {
+      "file": "logo-64.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-64.png",
+      "sha256": "995d57128a868baeaed9983b4dda01f9bc8f666de0a78709694c852b84237cee"
+    },
+    {
+      "file": "logo-128.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-128.png",
+      "sha256": "e5055441cf376f213cd1f22cdc2c47e50217157034ef39eaf59c5e7366c4bbd3"
+    },
+    {
+      "file": "logo-256.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-256.png",
+      "sha256": "df3f6981a397a1082454649299a751e4bd095514d88399608032028cc02a730a"
+    },
+    {
+      "file": "logo-512.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-logo-512.png",
+      "sha256": "9e75dbb4e071f8341849072e4eae525d0d7a22204475068f2fd3a9d29c678f3a"
+    },
+    {
+      "file": "favicons/favicon.ico",
+      "sha256": "5f566dca36e98b4e06d2cc53e4979587882e1510bc7224f7d97c9a7b0ccbe0da",
+      "derived_from": "favicon-master.png"
+    },
+    {
+      "file": "favicons/apple-touch-icon-180x180.png",
+      "source": "https://raw.githubusercontent.com/CypherTroopers/logo/45563d754dc544d4d05d29d5a588adec97637520/CypherTrooper-apple-touch-icon.png",
+      "sha256": "00a580a8354edd061e037b33b8e9706c3e0a6ee42e87383a74d8c488adba98a1"
+    },
+    {
+      "file": "favicons/android-chrome-192x192.png",
+      "sha256": "508fd254c47c5fe529f34ee30a2928665c68bcc98b7f615b1c13bd3d08350d35",
+      "derived_from": "favicon-master.png"
+    },
+    {
+      "file": "favicon-master.png",
+      "derived_from": "logo-512.png (imagegen upper-body reframing)",
+      "sha256": "c3ed9ef833c7d038d1e0065104b1735069a87f91ed8c977f5cc210d5104543f5"
+    },
+    {
+      "file": "favicons/favicon-16x16.png",
+      "derived_from": "favicon-master.png",
+      "sha256": "973fc5b355f3a351aff8a7ed5b9cc3388ef884b776ec647b7aed9211501be744"
+    },
+    {
+      "file": "favicons/favicon-32x32.png",
+      "derived_from": "favicon-master.png",
+      "sha256": "a5723057edcee25b7ad457ad7ac0f6c33343aa212325f64492d780be6b09832d"
+    },
+    {
+      "file": "favicons/favicon-48x48.png",
+      "derived_from": "favicon-master.png",
+      "sha256": "1ca14af6fe17a96b22a8886ed676e7e3fe6870ec43dd7fab6bcaaabc61b98355"
+    }
+  ]
+}

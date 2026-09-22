@@ -1,0 +1,300 @@
+{
+  "image": "sha256:35137b69f3a163b370a6a75984943300abad81c8877bd96295d5498b3991e589",
+  "packageInstances": 3463,
+  "uniqueNameVersionPairs": 2377,
+  "knownRemovedRestrictedAndUnverifiedPackagePathsAbsent": true,
+  "missingPackageLicenseFields": 5,
+  "missingFieldsResolvedByBundledLicenseFiles": true,
+  "unrecoveredNoticePairs": [
+    {
+      "name": "@assemblyscript/loader",
+      "version": "0.9.4"
+    },
+    {
+      "name": "@blockscout/points-types",
+      "version": "1.3.0-alpha.2"
+    },
+    {
+      "name": "@clack/core",
+      "version": "0.3.3"
+    },
+    {
+      "name": "@corex/deepmerge",
+      "version": "4.0.43"
+    },
+    {
+      "name": "@swc/counter",
+      "version": "0.1.3"
+    },
+    {
+      "name": "@tokenizer/token",
+      "version": "0.3.0"
+    },
+    {
+      "name": "@types/json5",
+      "version": "0.0.29"
+    },
+    {
+      "name": "@webassemblyjs/helper-api-error",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/helper-numbers",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/helper-wasm-bytecode",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/ieee754",
+      "version": "1.11.6"
+    },
+    {
+      "name": "@webassemblyjs/utf8",
+      "version": "1.11.6"
+    },
+    {
+      "name": "acorn-import-assertions",
+      "version": "1.9.0"
+    },
+    {
+      "name": "agent-base",
+      "version": "6.0.2"
+    },
+    {
+      "name": "boolbase",
+      "version": "1.0.0"
+    },
+    {
+      "name": "bser",
+      "version": "2.1.1"
+    },
+    {
+      "name": "bundle-n-require",
+      "version": "1.1.2"
+    },
+    {
+      "name": "client-only",
+      "version": "0.0.1"
+    },
+    {
+      "name": "colors",
+      "version": "1.0.3"
+    },
+    {
+      "name": "console-polyfill",
+      "version": "0.3.0"
+    },
+    {
+      "name": "dappscout-iframe",
+      "version": "0.3.0"
+    },
+    {
+      "name": "data-uri-to-buffer",
+      "version": "4.0.0"
+    },
+    {
+      "name": "de-indent",
+      "version": "1.0.2"
+    },
+    {
+      "name": "decache",
+      "version": "3.1.0"
+    },
+    {
+      "name": "eastasianwidth",
+      "version": "0.2.0"
+    },
+    {
+      "name": "encode-utf8",
+      "version": "1.0.3"
+    },
+    {
+      "name": "err-code",
+      "version": "3.0.1"
+    },
+    {
+      "name": "error",
+      "version": "7.0.2"
+    },
+    {
+      "name": "error",
+      "version": "7.2.1"
+    },
+    {
+      "name": "eslint-plugin-import-helpers",
+      "version": "2.0.1"
+    },
+    {
+      "name": "eslint-plugin-no-cyrillic-string",
+      "version": "1.0.5"
+    },
+    {
+      "name": "esrecurse",
+      "version": "4.3.0"
+    },
+    {
+      "name": "event-iterator",
+      "version": "2.0.0"
+    },
+    {
+      "name": "fb-watchman",
+      "version": "2.0.2"
+    },
+    {
+      "name": "format",
+      "version": "0.2.2"
+    },
+    {
+      "name": "glob-to-regexp",
+      "version": "0.4.1"
+    },
+    {
+      "name": "highlightjs-vue",
+      "version": "1.0.0"
+    },
+    {
+      "name": "http-proxy-agent",
+      "version": "5.0.0"
+    },
+    {
+      "name": "https-proxy-agent",
+      "version": "5.0.1"
+    },
+    {
+      "name": "imurmurhash",
+      "version": "0.1.4"
+    },
+    {
+      "name": "isarray",
+      "version": "1.0.0"
+    },
+    {
+      "name": "jest-pnp-resolver",
+      "version": "1.2.3"
+    },
+    {
+      "name": "keyv",
+      "version": "4.5.4"
+    },
+    {
+      "name": "language-subtag-registry",
+      "version": "0.3.22"
+    },
+    {
+      "name": "language-tags",
+      "version": "1.0.9"
+    },
+    {
+      "name": "lilconfig",
+      "version": "2.0.5"
+    },
+    {
+      "name": "mersenne-twister",
+      "version": "1.1.0"
+    },
+    {
+      "name": "natural-compare",
+      "version": "1.4.0"
+    },
+    {
+      "name": "natural-compare-lite",
+      "version": "1.4.0"
+    },
+    {
+      "name": "netmask",
+      "version": "2.0.2"
+    },
+    {
+      "name": "node-eval",
+      "version": "2.0.0"
+    },
+    {
+      "name": "pg-types",
+      "version": "2.2.0"
+    },
+    {
+      "name": "pg-types",
+      "version": "4.0.1"
+    },
+    {
+      "name": "rabin-wasm",
+      "version": "0.1.5"
+    },
+    {
+      "name": "react-identicons",
+      "version": "1.2.5"
+    },
+    {
+      "name": "react-remove-scroll-bar",
+      "version": "2.3.8"
+    },
+    {
+      "name": "react-select",
+      "version": "5.7.0"
+    },
+    {
+      "name": "short-unique-id",
+      "version": "5.0.3"
+    },
+    {
+      "name": "sparse-array",
+      "version": "1.3.2"
+    },
+    {
+      "name": "stable",
+      "version": "0.1.8"
+    },
+    {
+      "name": "string-hash",
+      "version": "1.1.3"
+    },
+    {
+      "name": "svg-icons-cli",
+      "version": "0.0.5"
+    },
+    {
+      "name": "svg-parser",
+      "version": "2.0.4"
+    },
+    {
+      "name": "tiny-case",
+      "version": "1.0.3"
+    },
+    {
+      "name": "toggle-selection",
+      "version": "1.0.6"
+    },
+    {
+      "name": "tr46",
+      "version": "0.0.3"
+    },
+    {
+      "name": "traverse-chain",
+      "version": "0.1.0"
+    },
+    {
+      "name": "truncate-utf8-bytes",
+      "version": "1.0.2"
+    },
+    {
+      "name": "tsc",
+      "version": "2.0.4"
+    },
+    {
+      "name": "type-fest",
+      "version": "2.19.0"
+    },
+    {
+      "name": "use-font-face-observer",
+      "version": "1.3.0"
+    },
+    {
+      "name": "varint",
+      "version": "6.0.0"
+    }
+  ],
+  "noticeTextRestrictedPhraseMatches": [],
+  "limitations": "Root notices only; no proof of complete bundled/native license coverage or legal compatibility."
+}

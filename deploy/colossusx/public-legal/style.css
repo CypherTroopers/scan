@@ -1,0 +1,13 @@
+/* ColossusX legal and source pages. Created 2026-09-21; GPL-3.0-only. */
+:root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.6; }
+body { max-width: 58rem; margin: 0 auto; padding: 2rem 1.25rem; }
+a { color: light-dark(#154cb4, #9fc5ff); text-underline-offset: .18em; }
+nav, footer { display: flex; flex-wrap: wrap; gap: 1rem; }
+nav { padding-bottom: 1rem; border-bottom: 1px solid #8886; }
+h1, h2 { line-height: 1.25; }
+h2 { margin-top: 2rem; }
+code { overflow-wrap: anywhere; }
+td, th { border-bottom: 1px solid #8886; padding: .6rem; text-align: left; vertical-align: top; }
+table { width: 100%; border-collapse: collapse; }
+.table-scroll { overflow-x: auto; }
+footer { border-top: 1px solid #8886; margin-top: 2rem; padding-top: 1rem; }

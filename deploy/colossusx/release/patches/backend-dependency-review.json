@@ -1,0 +1,3102 @@
+{
+  "schema": "colossusx-backend-upgrade-review-v1",
+  "reviewedOn": "2026-09-21",
+  "upstreamVersion": "10.2.6",
+  "sourceCommit": "90f7dd8e9348123b74dfd23f69ab7da76191a820",
+  "previousSourceCommit": "ed93c12dc1835ec0e7fb3e4be3504ceb7061610e",
+  "scope": "All mix.lock references, including development/test/optional packages. Metadata is not a complete native or combined-binary license audit. No dependencies are bundled by the source assembler.",
+  "counts": {
+    "previous": 180,
+    "current": 188,
+    "added": 9,
+    "removed": 1,
+    "changed": 54
+  },
+  "added": [
+    "ddskerl",
+    "ex_eth_bls",
+    "joken_jwks",
+    "libcluster",
+    "phoenix_html_helpers",
+    "phoenix_template",
+    "phoenix_view",
+    "websock",
+    "websock_adapter"
+  ],
+  "removed": [
+    "quantile_estimator"
+  ],
+  "changed": [
+    {
+      "name": "absinthe",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.7.10",
+      "toType": "hex",
+      "toVersionOrCommit": "1.9.0"
+    },
+    {
+      "name": "absinthe_phoenix",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.0.3",
+      "toType": "hex",
+      "toVersionOrCommit": "2.0.4"
+    },
+    {
+      "name": "absinthe_relay",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.5.2",
+      "toType": "hex",
+      "toVersionOrCommit": "1.6.0"
+    },
+    {
+      "name": "benchee",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.4.0",
+      "toType": "hex",
+      "toVersionOrCommit": "1.5.0"
+    },
+    {
+      "name": "castore",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.0.15",
+      "toType": "hex",
+      "toVersionOrCommit": "1.0.17"
+    },
+    {
+      "name": "cldr_utils",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.28.3",
+      "toType": "hex",
+      "toVersionOrCommit": "2.29.4"
+    },
+    {
+      "name": "cowboy",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.13.0",
+      "toType": "hex",
+      "toVersionOrCommit": "2.14.2"
+    },
+    {
+      "name": "cowlib",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.15.0",
+      "toType": "hex",
+      "toVersionOrCommit": "2.16.0"
+    },
+    {
+      "name": "credo",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.7.12",
+      "toType": "hex",
+      "toVersionOrCommit": "1.7.15"
+    },
+    {
+      "name": "db_connection",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.8.0",
+      "toType": "hex",
+      "toVersionOrCommit": "2.9.0"
+    },
+    {
+      "name": "dialyxir",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.4.6",
+      "toType": "hex",
+      "toVersionOrCommit": "1.4.7"
+    },
+    {
+      "name": "ecto",
+      "fromType": "hex",
+      "fromVersionOrCommit": "3.13.2",
+      "toType": "hex",
+      "toVersionOrCommit": "3.13.5"
+    },
+    {
+      "name": "ecto_sql",
+      "fromType": "hex",
+      "fromVersionOrCommit": "3.13.2",
+      "toType": "hex",
+      "toVersionOrCommit": "3.13.4"
+    },
+    {
+      "name": "erlex",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.2.7",
+      "toType": "hex",
+      "toVersionOrCommit": "0.2.8"
+    },
+    {
+      "name": "ex_aws",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.5.10",
+      "toType": "hex",
+      "toVersionOrCommit": "2.6.1"
+    },
+    {
+      "name": "ex_aws_s3",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.5.7",
+      "toType": "hex",
+      "toVersionOrCommit": "2.5.9"
+    },
+    {
+      "name": "ex_cldr",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.42.0",
+      "toType": "hex",
+      "toVersionOrCommit": "2.47.0"
+    },
+    {
+      "name": "ex_cldr_currencies",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.16.4",
+      "toType": "hex",
+      "toVersionOrCommit": "2.17.0"
+    },
+    {
+      "name": "ex_cldr_numbers",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.35.1",
+      "toType": "hex",
+      "toVersionOrCommit": "2.38.0"
+    },
+    {
+      "name": "ex_cldr_units",
+      "fromType": "hex",
+      "fromVersionOrCommit": "3.19.0",
+      "toType": "hex",
+      "toVersionOrCommit": "3.20.1"
+    },
+    {
+      "name": "ex_doc",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.38.2",
+      "toType": "hex",
+      "toVersionOrCommit": "0.40.1"
+    },
+    {
+      "name": "ex_json_schema",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.11.1",
+      "toType": "hex",
+      "toVersionOrCommit": "0.11.2"
+    },
+    {
+      "name": "ex_secp256k1",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.7.5",
+      "toType": "hex",
+      "toVersionOrCommit": "0.8.0"
+    },
+    {
+      "name": "expo",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.1.0",
+      "toType": "hex",
+      "toVersionOrCommit": "1.1.1"
+    },
+    {
+      "name": "ezstd",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.2.2",
+      "toType": "hex",
+      "toVersionOrCommit": "1.2.3"
+    },
+    {
+      "name": "file_system",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.2.10",
+      "toType": "hex",
+      "toVersionOrCommit": "1.1.1"
+    },
+    {
+      "name": "floki",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.37.1",
+      "toType": "hex",
+      "toVersionOrCommit": "0.38.0"
+    },
+    {
+      "name": "hammer",
+      "fromType": "hex",
+      "fromVersionOrCommit": "7.1.0",
+      "toType": "hex",
+      "toVersionOrCommit": "7.2.0"
+    },
+    {
+      "name": "httpoison",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.2.3",
+      "toType": "hex",
+      "toVersionOrCommit": "2.3.0"
+    },
+    {
+      "name": "image",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.62.0",
+      "toType": "hex",
+      "toVersionOrCommit": "0.63.0"
+    },
+    {
+      "name": "inet_cidr",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.0.8",
+      "toType": "hex",
+      "toVersionOrCommit": "1.0.9"
+    },
+    {
+      "name": "logger_json",
+      "fromType": "hex",
+      "fromVersionOrCommit": "5.1.4",
+      "toType": "hex",
+      "toVersionOrCommit": "7.0.4"
+    },
+    {
+      "name": "makeup_erlang",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.0.2",
+      "toType": "hex",
+      "toVersionOrCommit": "1.0.3"
+    },
+    {
+      "name": "open_api_spex",
+      "fromType": "hex",
+      "fromVersionOrCommit": "3.22.0",
+      "toType": "hex",
+      "toVersionOrCommit": "3.22.2"
+    },
+    {
+      "name": "phoenix",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.5.14",
+      "toType": "hex",
+      "toVersionOrCommit": "1.6.16"
+    },
+    {
+      "name": "phoenix_ecto",
+      "fromType": "hex",
+      "fromVersionOrCommit": "4.6.5",
+      "toType": "hex",
+      "toVersionOrCommit": "4.7.0"
+    },
+    {
+      "name": "phoenix_html",
+      "fromType": "hex",
+      "fromVersionOrCommit": "3.3.4",
+      "toType": "hex",
+      "toVersionOrCommit": "4.2.1"
+    },
+    {
+      "name": "phoenix_live_reload",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.3.3",
+      "toType": "hex",
+      "toVersionOrCommit": "1.6.2"
+    },
+    {
+      "name": "phoenix_live_view",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.17.7",
+      "toType": "hex",
+      "toVersionOrCommit": "1.1.24"
+    },
+    {
+      "name": "phoenix_pubsub",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.1.3",
+      "toType": "hex",
+      "toVersionOrCommit": "2.2.0"
+    },
+    {
+      "name": "plug",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.18.1",
+      "toType": "hex",
+      "toVersionOrCommit": "1.19.1"
+    },
+    {
+      "name": "plug_cowboy",
+      "fromType": "hex",
+      "fromVersionOrCommit": "2.7.4",
+      "toType": "hex",
+      "toVersionOrCommit": "2.8.0"
+    },
+    {
+      "name": "poison",
+      "fromType": "hex",
+      "fromVersionOrCommit": "4.0.1",
+      "toType": "hex",
+      "toVersionOrCommit": "5.0.0"
+    },
+    {
+      "name": "postgrex",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.21.1",
+      "toType": "hex",
+      "toVersionOrCommit": "0.22.0"
+    },
+    {
+      "name": "prometheus",
+      "fromType": "hex",
+      "fromVersionOrCommit": "4.11.0",
+      "toType": "hex",
+      "toVersionOrCommit": "6.1.2"
+    },
+    {
+      "name": "prometheus_ex",
+      "fromType": "git",
+      "fromVersionOrCommit": "31f7fbe4b71b79ba27efc2a5085746c4011ceb8f",
+      "toType": "hex",
+      "toVersionOrCommit": "5.1.0"
+    },
+    {
+      "name": "redix",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.5.2",
+      "toType": "hex",
+      "toVersionOrCommit": "1.5.3"
+    },
+    {
+      "name": "rustler_precompiled",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.8.3",
+      "toType": "hex",
+      "toVersionOrCommit": "0.8.4"
+    },
+    {
+      "name": "sobelow",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.14.0",
+      "toType": "hex",
+      "toVersionOrCommit": "0.14.1"
+    },
+    {
+      "name": "statistex",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.0.0",
+      "toType": "hex",
+      "toVersionOrCommit": "1.1.0"
+    },
+    {
+      "name": "tesla",
+      "fromType": "hex",
+      "fromVersionOrCommit": "1.15.3",
+      "toType": "hex",
+      "toVersionOrCommit": "1.16.0"
+    },
+    {
+      "name": "vix",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.35.0",
+      "toType": "hex",
+      "toVersionOrCommit": "0.38.0"
+    },
+    {
+      "name": "wallaby",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.30.10",
+      "toType": "hex",
+      "toVersionOrCommit": "0.30.12"
+    },
+    {
+      "name": "websockex",
+      "fromType": "hex",
+      "fromVersionOrCommit": "0.4.3",
+      "toType": "hex",
+      "toVersionOrCommit": "0.5.1"
+    }
+  ],
+  "packages": [
+    {
+      "name": "absinthe",
+      "type": "hex",
+      "hexName": "absinthe",
+      "version": "1.9.0",
+      "lockChecksum": "28f11753d01c0e8b6cb6e764a23cf4081e0e6cae88f53f4c9e4320912aee9c07",
+      "archiveChecksum": "db65993420944ad90e932827663d4ab704262b007d4e3900cd69615f14ccc8ce",
+      "metadataUrl": "https://repo.hex.pm/tarballs/absinthe-1.9.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "absinthe_phoenix",
+      "type": "hex",
+      "hexName": "absinthe_phoenix",
+      "version": "2.0.4",
+      "lockChecksum": "f36999412fbd6a2339abb5b7e24a4cc9492bbc7909d5806deeef83b06f55c508",
+      "archiveChecksum": "66617ee63b725256ca16264364148b10b19e2ecb177488cd6353584f2e6c1cf3",
+      "metadataUrl": "https://repo.hex.pm/tarballs/absinthe_phoenix-2.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "absinthe_plug",
+      "type": "git",
+      "url": "https://github.com/blockscout/absinthe_plug.git",
+      "commit": "90a8188e94e2650f13259fb16462075a87f98e18",
+      "repository": "https://github.com/blockscout/absinthe_plug.git",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Pinned upstream root license file",
+      "metadataUrl": "https://raw.githubusercontent.com/blockscout/absinthe_plug/90a8188e94e2650f13259fb16462075a87f98e18/LICENSE.md"
+    },
+    {
+      "name": "absinthe_relay",
+      "type": "hex",
+      "hexName": "absinthe_relay",
+      "version": "1.6.0",
+      "lockChecksum": "73590bdb0dcc192622f39fa11da6fca9df4e339b603c45ec7a93493eb94f1829",
+      "archiveChecksum": "32d6397a7af3fd02678ef9bc8e2f574487f14593cb3e4f9110fb1c695d4d2ac0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/absinthe_relay-1.6.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "accept",
+      "type": "hex",
+      "hexName": "accept",
+      "version": "0.3.5",
+      "lockChecksum": "b33b127abca7cc948bbe6caa4c263369abf1347cfa9d8e699c6d214660f10cd1",
+      "archiveChecksum": "11b18c220bcc2eab63b5470c038ef10eb6783bcb1fcdb11aa4137defa5ac1bb8",
+      "metadataUrl": "https://repo.hex.pm/tarballs/accept-0.3.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "bamboo",
+      "type": "hex",
+      "hexName": "bamboo",
+      "version": "2.5.0",
+      "lockChecksum": "973f5cb1471a1d2d7d9da7b8e4f6096afb6a133f85394631184fd40be8adb8ab",
+      "archiveChecksum": "35c8635ff6677a81ab7258944ff15739280f3254a041b6f0229dddeb9b90ad3d",
+      "metadataUrl": "https://repo.hex.pm/tarballs/bamboo-2.5.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "bcrypt_elixir",
+      "type": "hex",
+      "hexName": "bcrypt_elixir",
+      "version": "3.3.2",
+      "lockChecksum": "d50091e3c9492d73e17fc1e1619a9b09d6a5ef99160eb4d736926fd475a16ca3",
+      "archiveChecksum": "471be5151874ae7931911057d1467d908955f93554f7a6cd1b7d804cac8cef53",
+      "metadataUrl": "https://repo.hex.pm/tarballs/bcrypt_elixir-3.3.2.tar",
+      "license": [
+        "BSD-3-Clause",
+        "ISC",
+        "BSD-4-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "benchee",
+      "type": "hex",
+      "hexName": "benchee",
+      "version": "1.5.0",
+      "lockChecksum": "4d812c31d54b0ec0167e91278e7de3f596324a78a096fd3d0bea68bb0c513b10",
+      "archiveChecksum": "5b075393aea81b8ae74eadd1c28b1d87e8a63696c649d8293db7c4df3eb67535",
+      "metadataUrl": "https://repo.hex.pm/tarballs/benchee-1.5.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "benchee_csv",
+      "type": "hex",
+      "hexName": "benchee_csv",
+      "version": "1.0.0",
+      "lockChecksum": "0b3b9223290bfcb8003552705bec9bcf1a89b4a83b70bd686e45295c264f3d16",
+      "archiveChecksum": "cdefb804c021dcf7a99199492026584be9b5a21d6644ac0d01c81c5d97c520d5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/benchee_csv-1.0.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "blake2",
+      "type": "hex",
+      "hexName": "blake2",
+      "version": "1.0.4",
+      "lockChecksum": "8263c69a191142922bc2510f1ffc0de0ae96e8c3bd5e2ad3fac7e87aed94c8b1",
+      "archiveChecksum": "e9f4120d163ba14d86304195e50745fa18483e6ad2be94c864ae449bbdd6a189",
+      "metadataUrl": "https://repo.hex.pm/tarballs/blake2-1.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "briefly",
+      "type": "git",
+      "url": "https://github.com/CargoSense/briefly.git",
+      "commit": "4836ba322ffb504a102a15cc6e35d928ef97120e",
+      "repository": "https://github.com/CargoSense/briefly.git",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Pinned upstream root license file",
+      "metadataUrl": "https://raw.githubusercontent.com/CargoSense/briefly/4836ba322ffb504a102a15cc6e35d928ef97120e/LICENSE"
+    },
+    {
+      "name": "brotli",
+      "type": "hex",
+      "hexName": "brotli",
+      "version": "0.3.2",
+      "lockChecksum": "59cf45a399098516f1d34f70d8e010e5c9bf326659d3ef34c7cc56793339002b",
+      "archiveChecksum": "9ec3ef9c753f80d0c657b4905193c55e5198f169fa1d1c044d8601d4d931a2ad",
+      "metadataUrl": "https://repo.hex.pm/tarballs/brotli-0.3.2.tar",
+      "license": [
+        "BSD-3-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "bunt",
+      "type": "hex",
+      "hexName": "bunt",
+      "version": "1.0.0",
+      "lockChecksum": "081c2c665f086849e6d57900292b3a161727ab40431219529f13c4ddcf3e7a44",
+      "archiveChecksum": "dc5f86aa08a5f6fa6b8096f0735c4e76d54ae5c9fa2c143e5a1fc7c1cd9bb6b5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/bunt-1.0.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "bureaucrat",
+      "type": "hex",
+      "hexName": "bureaucrat",
+      "version": "0.2.10",
+      "lockChecksum": "b0de157dad540e40007b663b683f716ced21f85ff0591093aadb209ad0d967e1",
+      "archiveChecksum": "bc7e5162b911c29c8ebefee87a2c16fbf13821a58f448a8fd024eb6c17fae15c",
+      "metadataUrl": "https://repo.hex.pm/tarballs/bureaucrat-0.2.10.tar",
+      "license": [
+        "Unlicense"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "bypass",
+      "type": "hex",
+      "hexName": "bypass",
+      "version": "2.1.0",
+      "lockChecksum": "909782781bf8e20ee86a9cabde36b259d44af8b9f38756173e8f5e2e1fabb9b1",
+      "archiveChecksum": "d9b5df8fa5b7a6efa08384e9bbecfe4ce61c77d28a4282f79e02f1ef78d96b80",
+      "metadataUrl": "https://repo.hex.pm/tarballs/bypass-2.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cachex",
+      "type": "hex",
+      "hexName": "cachex",
+      "version": "4.1.1",
+      "lockChecksum": "574c5cd28473db313a0a76aac8c945fe44191659538ca6a1e8946ec300b1a19f",
+      "archiveChecksum": "d6b7449ff98d6bb92dda58bd4fc3189cae9f99e7042054d669596f56dc503cd8",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cachex-4.1.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cafezinho",
+      "type": "hex",
+      "hexName": "cafezinho",
+      "version": "0.4.4",
+      "lockChecksum": "36c31fc5456b1284180d8a9d968c7eaaf474782df5af023a8f8b66937c5b2785",
+      "archiveChecksum": "3ca334f2a2992ec081868c39ad0487eb97d213292702aae6b197fd5e6f04fd58",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cafezinho-0.4.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "castore",
+      "type": "hex",
+      "hexName": "castore",
+      "version": "1.0.17",
+      "lockChecksum": "4f9770d2d45fbd91dcf6bd404cf64e7e58fed04fadda0923dc32acca0badffa2",
+      "archiveChecksum": "12d24b9d80b910dd3953e165636d68f147a31db945d2dcb9365e441f8b5351e5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/castore-1.0.17.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "cbor",
+      "type": "hex",
+      "hexName": "cbor",
+      "version": "1.0.1",
+      "lockChecksum": "39511158e8ea5a57c1fcb9639aaa7efde67129678fee49ebbda780f6f24959b0",
+      "archiveChecksum": "5431acbe7a7908f17f6a9cd43311002836a34a8ab01876918d8cfb709cd8b6a2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cbor-1.0.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cc_precompiler",
+      "type": "hex",
+      "hexName": "cc_precompiler",
+      "version": "0.1.11",
+      "lockChecksum": "8c844d0b9fb98a3edea067f94f616b3f6b29b959b6b3bf25fee94ffe34364768",
+      "archiveChecksum": "3427232caf0835f94680e5bcf082408a70b48ad68a5f5c0b02a3bea9f3a075b9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cc_precompiler-0.1.11.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "certifi",
+      "type": "hex",
+      "hexName": "certifi",
+      "version": "2.15.0",
+      "lockChecksum": "0e6e882fcdaaa0a5a9f2b3db55b1394dba07e8d6d9bcad08318fb604c6839712",
+      "archiveChecksum": "b147ed22ce71d72eafdad94f055165c1c182f61a2ff49df28bcc71d1d5b94a60",
+      "metadataUrl": "https://repo.hex.pm/tarballs/certifi-2.15.0.tar",
+      "license": [
+        "BSD-3-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cldr_utils",
+      "type": "hex",
+      "hexName": "cldr_utils",
+      "version": "2.29.4",
+      "lockChecksum": "11437b0bf9a0d57db4eccdf751c49f675a04fa4261c5dae1e23552a0347e25c9",
+      "archiveChecksum": "e72a43e69a3f546979085cbdbeae7e9049998cd21cedfdd796cff9155998114e",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cldr_utils-2.29.4.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "cloak",
+      "type": "hex",
+      "hexName": "cloak",
+      "version": "1.1.4",
+      "lockChecksum": "aba387b22ea4d80d92d38ab1890cc528b06e0e7ef2a4581d71c3fdad59e997e7",
+      "archiveChecksum": "92b20527b9aba3d939fab0dd32ce592ff86361547cfdc87d74edce6f980eb3d7",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cloak-1.1.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cloak_ecto",
+      "type": "hex",
+      "hexName": "cloak_ecto",
+      "version": "1.3.0",
+      "lockChecksum": "0de127c857d7452ba3c3367f53fb814b0410ff9c680a8d20fbe8b9a3c57a1118",
+      "archiveChecksum": "314beb0c123b8a800418ca1d51065b27ba3b15f085977e65c0f7b2adab2de1cc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cloak_ecto-1.3.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "combine",
+      "type": "hex",
+      "hexName": "combine",
+      "version": "0.10.0",
+      "lockChecksum": "eff8224eeb56498a2af13011d142c5e7997a80c8f5b97c499f84c841032e429f",
+      "archiveChecksum": "1b1dbc1790073076580d0d1d64e42eae2366583e7aecd455d1215b0d16f2451b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/combine-0.10.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "comeonin",
+      "type": "hex",
+      "hexName": "comeonin",
+      "version": "5.5.1",
+      "lockChecksum": "5113e5f3800799787de08a6e0db307133850e635d34e9fab23c70b6501669510",
+      "archiveChecksum": "65aac8f19938145377cee73973f192c5645873dcf550a8a6b18187d17c13ccdb",
+      "metadataUrl": "https://repo.hex.pm/tarballs/comeonin-5.5.1.tar",
+      "license": [
+        "BSD-3-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "complex",
+      "type": "hex",
+      "hexName": "complex",
+      "version": "0.6.0",
+      "lockChecksum": "b0130086a7a8c33574d293b2e0e250f4685580418eac52a5658a4bd148f3ccf1",
+      "archiveChecksum": "0a5fa95580dcaf30fcd60fe1aaf24327c0fe401e98c24d892e172e79498269f9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/complex-0.6.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "con_cache",
+      "type": "hex",
+      "hexName": "con_cache",
+      "version": "1.1.1",
+      "lockChecksum": "9f47a68dfef5ac3bbff8ce2c499869dbc5ba889dadde6ac4aff8eb78ddaf6d82",
+      "archiveChecksum": "1def4d1bec296564c75b5bbc60a19f2b5649d81bfa345a2febcc6ae380e8ae15",
+      "metadataUrl": "https://repo.hex.pm/tarballs/con_cache-1.1.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "connection",
+      "type": "hex",
+      "hexName": "connection",
+      "version": "1.1.0",
+      "lockChecksum": "ff2a49c4b75b6fb3e674bfc5536451607270aac754ffd1bdfe175abe4a6d7a68",
+      "archiveChecksum": "722c1eb0a418fbe91ba7bd59a47e28008a189d47e37e0e7bb85585a016b2869c",
+      "metadataUrl": "https://repo.hex.pm/tarballs/connection-1.1.0.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cors_plug",
+      "type": "hex",
+      "hexName": "cors_plug",
+      "version": "3.0.3",
+      "lockChecksum": "7c3ac52b39624bc616db2e937c282f3f623f25f8d550068b6710e58d04a0e330",
+      "archiveChecksum": "3f2d759e8c272ed3835fab2ef11b46bddab8c1ab9528167bd463b6452edf830d",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cors_plug-3.0.3.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cowboy",
+      "type": "hex",
+      "hexName": "cowboy",
+      "version": "2.14.2",
+      "lockChecksum": "4008be1df6ade45e4f2a4e9e2d22b36d0b5aba4e20b0a0d7049e28d124e34847",
+      "archiveChecksum": "569081da046e7b41b5df36aa359be71a0c8874e5b9cff6f747073fc57baf1ab9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cowboy-2.14.2.tar",
+      "license": [
+        "ISC"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "cowboy_telemetry",
+      "type": "hex",
+      "hexName": "cowboy_telemetry",
+      "version": "0.4.0",
+      "lockChecksum": "f239f68b588efa7707abce16a84d0d2acf3a0f50571f8bb7f56a15865aae820c",
+      "archiveChecksum": "7d98bac1ee4565d31b62d59f8823dfd8356a169e7fcbb83831b8a5397404c9de",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cowboy_telemetry-0.4.0.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "cowlib",
+      "type": "hex",
+      "hexName": "cowlib",
+      "version": "2.16.0",
+      "lockChecksum": "54592074ebbbb92ee4746c8a8846e5605052f29309d3a873468d76cdf932076f",
+      "archiveChecksum": "7f478d80d66b747344f0ea7708c187645cfcc08b11aa424632f78e25bf05db51",
+      "metadataUrl": "https://repo.hex.pm/tarballs/cowlib-2.16.0.tar",
+      "license": [
+        "ISC"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "credo",
+      "type": "hex",
+      "hexName": "credo",
+      "version": "1.7.15",
+      "lockChecksum": "283da72eeb2fd3ccf7248f4941a0527efb97afa224bcdef30b4b580bc8258e1c",
+      "archiveChecksum": "291e8645ea3fea7481829f1e1eb0881b8395db212821338e577a90bf225c5607",
+      "metadataUrl": "https://repo.hex.pm/tarballs/credo-1.7.15.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "csv",
+      "type": "hex",
+      "hexName": "csv",
+      "version": "2.5.0",
+      "lockChecksum": "c47b5a5221bf2e56d6e8eb79e77884046d7fd516280dc7d9b674251e0ae46246",
+      "archiveChecksum": "e821f541487045c7591a1963eeb42afff0dfa99bdcdbeb3410795a2f59c77d34",
+      "metadataUrl": "https://repo.hex.pm/tarballs/csv-2.5.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "dataloader",
+      "type": "hex",
+      "hexName": "dataloader",
+      "version": "2.0.2",
+      "lockChecksum": "c45075e0692e68638a315e14f747bd8d7065fb5f38705cf980f62d4cd344401f",
+      "archiveChecksum": "4c6cabc0b55e96e7de74d14bf37f4a5786f0ab69aa06764a1f39dda40079b098",
+      "metadataUrl": "https://repo.hex.pm/tarballs/dataloader-2.0.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "db_connection",
+      "type": "hex",
+      "hexName": "db_connection",
+      "version": "2.9.0",
+      "lockChecksum": "a6a97c5c958a2d7091a58a9be40caf41ab496b0701d21e1d1abff3fa27a7f371",
+      "archiveChecksum": "17d502eacaf61829db98facf6f20808ed33da6ccf495354a41e64fe42f9c509c",
+      "metadataUrl": "https://repo.hex.pm/tarballs/db_connection-2.9.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ddskerl",
+      "type": "hex",
+      "hexName": "ddskerl",
+      "version": "0.4.3",
+      "lockChecksum": "bb97b90eef1b5906520cebdd38da29b18a770b5567f6297927f53566eae9bebb",
+      "archiveChecksum": "4e0f6047c6a002ce38f6ea155276dd918cd635fd0a5edb9e0b46aeb6f7aff2c2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ddskerl-0.4.3.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "0d43ce77344d36c79065df5e75e680f501544a24c3c81b7d89f9fd850f5e40d3",
+          "text": "# Apache License\nVersion 2.0, January 2004\n\nhttp://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n## 1. Definitions.\n\n\"License\" shall mean the terms and conditions for use, reproduction, and\ndistribution as defined by Sections 1 through 9 of this document.\n\n\"Licensor\" shall mean the copyright owner or entity authorized by the copyright\nowner that is granting the License.\n\n\"Legal Entity\" shall mean the union of the acting entity and all other entities\nthat control, are controlled by, or are under common control with that entity.\nFor the purposes of this definition, \"control\" means (i) the power, direct or\nindirect, to cause the direction or management of such entity, whether by\ncontract or otherwise, or (ii) ownership of fifty percent (50%) or more of the\noutstanding shares, or (iii) beneficial ownership of such entity.\n\n\"You\" (or \"Your\") shall mean an individual or Legal Entity exercising\npermissions granted by this License.\n\n\"Source\" form shall mean the preferred form for making modifications, including\nbut not limited to software source code, documentation source, and configuration\nfiles.\n\n\"Object\" form shall mean any form resulting from mechanical transformation or\ntranslation of a Source form, including but not limited to compiled object code,\ngenerated documentation, and conversions to other media types.\n\n\"Work\" shall mean the work of authorship, whether in Source or Object form, made\navailable under the License, as indicated by a copyright notice that is included\nin or attached to the work (an example is provided in the Appendix below).\n\n\"Derivative Works\" shall mean any work, whether in Source or Object form, that\nis based on (or derived from) the Work and for which the editorial revisions,\nannotations, elaborations, or other modifications represent, as a whole, an\noriginal work of authorship. For the purposes of this License, Derivative Works\nshall not include works that remain separable from, or merely link (or bind by\nname) to the interfaces of, the Work and Derivative Works thereof.\n\n\"Contribution\" shall mean any work of authorship, including the original version\nof the Work and any modifications or additions to that Work or Derivative Works\nthereof, that is intentionally submitted to Licensor for inclusion in the Work\nby the copyright owner or by an individual or Legal Entity authorized to submit\non behalf of the copyright owner. For the purposes of this definition,\n\"submitted\" means any form of electronic, verbal, or written communication sent\nto the Licensor or its representatives, including but not limited to\ncommunication on electronic mailing lists, source code control systems, and\nissue tracking systems that are managed by, or on behalf of, the Licensor for\nthe purpose of discussing and improving the Work, but excluding communication\nthat is conspicuously marked or otherwise designated in writing by the copyright\nowner as \"Not a Contribution.\"\n\n\"Contributor\" shall mean Licensor and any individual or Legal Entity on behalf\nof whom a Contribution has been received by Licensor and subsequently\nincorporated within the Work.\n\n## 2. Grant of Copyright License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable copyright license to reproduce, prepare Derivative Works of,\npublicly display, publicly perform, sublicense, and distribute the Work and such\nDerivative Works in Source or Object form.\n\n## 3. Grant of Patent License.\n\nSubject to the terms and conditions of this License, each Contributor hereby\ngrants to You a perpetual, worldwide, non-exclusive, no-charge, royalty-free,\nirrevocable (except as stated in this section) patent license to make, have\nmade, use, offer to sell, sell, import, and otherwise transfer the Work, where\nsuch license applies only to those patent claims licensable by such Contributor\nthat are necessarily infringed by their Contribution(s) alone or by combination\nof their Contribution(s) with the Work to which such Contribution(s) was\nsubmitted. If You institute patent litigation against any entity (including a\ncross-claim or counterclaim in a lawsuit) alleging that the Work or a\nContribution incorporated within the Work constitutes direct or contributory\npatent infringement, then any patent licenses granted to You under this License\nfor that Work shall terminate as of the date such litigation is filed.\n\n## 4. Redistribution.\n\nYou may reproduce and distribute copies of the Work or Derivative Works thereof\nin any medium, with or without modifications, and in Source or Object form,\nprovided that You meet the following conditions:\n\n1. You must give any other recipients of the Work or Derivative Works a copy of\n   this License; and\n\n2. You must cause any modified files to carry prominent notices stating that\n   You changed the files; and\n\n3. You must retain, in the Source form of any Derivative Works that You\n   distribute, all copyright, patent, trademark, and attribution notices from\n   the Source form of the Work, excluding those notices that do not pertain to\n   any part of the Derivative Works; and\n\n4. If the Work includes a \"NOTICE\" text file as part of its distribution, then\n   any Derivative Works that You distribute must include a readable copy of the\n   attribution notices contained within such NOTICE file, excluding those\n   notices that do not pertain to any part of the Derivative Works, in at least\n   one of the following places: within a NOTICE text file distributed as part\n   of the Derivative Works; within the Source form or documentation, if\n   provided along with the Derivative Works; or, within a display generated by\n   the Derivative Works, if and wherever such third-party notices normally\n   appear. The contents of the NOTICE file are for informational purposes only\n   and do not modify the License. You may add Your own attribution notices\n   within Derivative Works that You distribute, alongside or as an addendum to\n   the NOTICE text from the Work, provided that such additional attribution\n   notices cannot be construed as modifying the License.\n\nYou may add Your own copyright statement to Your modifications and may provide\nadditional or different license terms and conditions for use, reproduction, or\ndistribution of Your modifications, or for any such Derivative Works as a whole,\nprovided Your use, reproduction, and distribution of the Work otherwise complies\nwith the conditions stated in this License.\n\n## 5. Submission of Contributions.\n\nUnless You explicitly state otherwise, any Contribution intentionally submitted\nfor inclusion in the Work by You to the Licensor shall be under the terms and\nconditions of this License, without any additional terms or conditions.\nNotwithstanding the above, nothing herein shall supersede or modify the terms of\nany separate license agreement you may have executed with Licensor regarding\nsuch Contributions.\n\n## 6. Trademarks.\n\nThis License does not grant permission to use the trade names, trademarks,\nservice marks, or product names of the Licensor, except as required for\nreasonable and customary use in describing the origin of the Work and\nreproducing the content of the NOTICE file.\n\n## 7. Disclaimer of Warranty.\n\nUnless required by applicable law or agreed to in writing, Licensor provides the\nWork (and each Contributor provides its Contributions) on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied,\nincluding, without limitation, any warranties or conditions of TITLE, NON-\nINFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A PARTICULAR PURPOSE. You are\nsolely responsible for determining the appropriateness of using or\nredistributing the Work and assume any risks associated with Your exercise of\npermissions under this License.\n\n## 8. Limitation of Liability.\n\nIn no event and under no legal theory, whether in tort (including negligence),\ncontract, or otherwise, unless required by applicable law (such as deliberate\nand grossly negligent acts) or agreed to in writing, shall any Contributor be\nliable to You for damages, including any direct, indirect, special, incidental,\nor consequential damages of any character arising as a result of this License or\nout of the use or inability to use the Work (including but not limited to\ndamages for loss of goodwill, work stoppage, computer failure or malfunction, or\nany and all other commercial damages or losses), even if such Contributor has\nbeen advised of the possibility of such damages.\n\n## 9. Accepting Warranty or Additional Liability.\n\nWhile redistributing the Work or Derivative Works thereof, You may choose to\noffer, and charge a fee for, acceptance of support, warranty, indemnity, or\nother liability obligations and/or rights consistent with this License. However,\nin accepting such obligations, You may act only on Your own behalf and on Your\nsole responsibility, not on behalf of any other Contributor, and only if You\nagree to indemnify, defend, and hold each Contributor harmless for any liability\nincurred by, or claims asserted against, such Contributor by reason of your\naccepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nCopyright 2025, Nelson Vides <videsnelson@gmail.com>.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\nhttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n"
+        }
+      ]
+    },
+    {
+      "name": "decimal",
+      "type": "hex",
+      "hexName": "decimal",
+      "version": "2.3.0",
+      "lockChecksum": "3ad6255aa77b4a3c4f818171b12d237500e63525c2fd056699967a3e7ea20f62",
+      "archiveChecksum": "a4d66355cb29cb47c3cf30e71329e58361cfcb37c34235ef3bf1d7bf3773aeac",
+      "metadataUrl": "https://repo.hex.pm/tarballs/decimal-2.3.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "decorator",
+      "type": "hex",
+      "hexName": "decorator",
+      "version": "1.4.0",
+      "lockChecksum": "a57ac32c823ea7e4e67f5af56412d12b33274661bb7640ec7fc882f8d23ac419",
+      "archiveChecksum": "0a07cedd9083da875c7418dea95b78361197cf2bf3211d743f6f7ce39656597f",
+      "metadataUrl": "https://repo.hex.pm/tarballs/decorator-1.4.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "deep_merge",
+      "type": "hex",
+      "hexName": "deep_merge",
+      "version": "1.0.0",
+      "lockChecksum": "b4aa1a0d1acac393bdf38b2291af38cb1d4a52806cf7a4906f718e1feb5ee961",
+      "archiveChecksum": "ce708e5f094b9cd4e8f2be4f00d2f4250c4095be93f8cd6d018c753894885430",
+      "metadataUrl": "https://repo.hex.pm/tarballs/deep_merge-1.0.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "dialyxir",
+      "type": "hex",
+      "hexName": "dialyxir",
+      "version": "1.4.7",
+      "lockChecksum": "dda948fcee52962e4b6c5b4b16b2d8fa7d50d8645bbae8b8685c3f9ecb7f5f4d",
+      "archiveChecksum": "b34527202e6eb8cee198efec110996c25c5898f43a4094df157f8d28f27d9efe",
+      "metadataUrl": "https://repo.hex.pm/tarballs/dialyxir-1.4.7.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "digital_token",
+      "type": "hex",
+      "hexName": "digital_token",
+      "version": "1.0.0",
+      "lockChecksum": "454a4444061943f7349a51ef74b7fb1ebd19e6a94f43ef711f7dae88c09347df",
+      "archiveChecksum": "8ed6f5a8c2fa7b07147b9963db506a1b4c7475d9afca6492136535b064c9e9e6",
+      "metadataUrl": "https://repo.hex.pm/tarballs/digital_token-1.0.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "dns",
+      "type": "hex",
+      "hexName": "dns",
+      "version": "2.4.0",
+      "lockChecksum": "44790a0375b28bdc7b59fc894460bfcb03ffeec4c5984e2c3e8b0797b1518327",
+      "archiveChecksum": "e178e353c469820d02ba889d6a80d01c8c27b47dfcda4016a9cbc6218e3eed64",
+      "metadataUrl": "https://repo.hex.pm/tarballs/dns-2.4.0.tar",
+      "license": [
+        "BSD-3-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "earmark_parser",
+      "type": "hex",
+      "hexName": "earmark_parser",
+      "version": "1.4.44",
+      "lockChecksum": "f20830dd6b5c77afe2b063777ddbbff09f9759396500cdbe7523efd58d7a339c",
+      "archiveChecksum": "4778ac752b4701a5599215f7030989c989ffdc4f6df457c5f36938cc2d2a2750",
+      "metadataUrl": "https://repo.hex.pm/tarballs/earmark_parser-1.4.44.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ecto",
+      "type": "hex",
+      "hexName": "ecto",
+      "version": "3.13.5",
+      "lockChecksum": "9d4a69700183f33bf97208294768e561f5c7f1ecf417e0fa1006e4a91713a834",
+      "archiveChecksum": "df9efebf70cf94142739ba357499661ef5dbb559ef902b68ea1f3c1fabce36de",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ecto-3.13.5.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ecto_sql",
+      "type": "hex",
+      "hexName": "ecto_sql",
+      "version": "3.13.4",
+      "lockChecksum": "b6e9d07557ddba62508a9ce4a484989a5bb5e9a048ae0e695f6d93f095c25d60",
+      "archiveChecksum": "2b38cf0749ca4d1c5a8bcbff79bbe15446861ca12a61f9fba604486cb6b62a14",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ecto_sql-3.13.4.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "elixir_make",
+      "type": "hex",
+      "hexName": "elixir_make",
+      "version": "0.9.0",
+      "lockChecksum": "6484b3cd8c0cee58f09f05ecaf1a140a8c97670671a6a0e7ab4dc326c3109726",
+      "archiveChecksum": "db23d4fd8b757462ad02f8aa73431a426fe6671c80b200d9710caf3d1dd0ffdb",
+      "metadataUrl": "https://repo.hex.pm/tarballs/elixir_make-0.9.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "erlex",
+      "type": "hex",
+      "hexName": "erlex",
+      "version": "0.2.8",
+      "lockChecksum": "cd8116f20f3c0afe376d1e8d1f0ae2452337729f68be016ea544a72f767d9c12",
+      "archiveChecksum": "9d66ff9fedf69e49dc3fd12831e12a8a37b76f8651dd21cd45fcf5561a8a7590",
+      "metadataUrl": "https://repo.hex.pm/tarballs/erlex-0.2.8.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "eternal",
+      "type": "hex",
+      "hexName": "eternal",
+      "version": "1.2.2",
+      "lockChecksum": "d1641c86368de99375b98d183042dd6c2b234262b8d08dfd72b9eeaafc2a1abd",
+      "archiveChecksum": "2c9fe32b9c3726703ba5e1d43a1d255a4f3f2d8f8f9bc19f094c7cb1a7a9e782",
+      "metadataUrl": "https://repo.hex.pm/tarballs/eternal-1.2.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "evil_crc32c",
+      "type": "hex",
+      "hexName": "evil_crc32c",
+      "version": "0.2.9",
+      "lockChecksum": "9e4082418c4cc27c88869c1773f114f15a9257121ebb019037bea60c75c601d2",
+      "archiveChecksum": "86ba14f8aad0fe55eda0b57e79e3d8dffe39ea326b753eac12463ae2bec757bf",
+      "metadataUrl": "https://repo.hex.pm/tarballs/evil_crc32c-0.2.9.tar",
+      "license": [
+        "WTFPL"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "evision",
+      "type": "hex",
+      "hexName": "evision",
+      "version": "0.2.14",
+      "lockChecksum": "6005e44b38ea61a33109694c5b097d42e81c767723c55d0c230d9662d6c87987",
+      "archiveChecksum": "630714395f2c242e488944b4c9c75a5de96cbb95d3cbb69f0525bdb3e0a88775",
+      "metadataUrl": "https://repo.hex.pm/tarballs/evision-0.2.14.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_abi",
+      "type": "hex",
+      "hexName": "ex_abi",
+      "version": "0.8.3",
+      "lockChecksum": "e01cbafd81008db9e8bc8ac0a4ae5bf08e86a2d82afdca242550269445b80e04",
+      "archiveChecksum": "6349a10331c54a1e09865811f705913fa181bc75b4c9a2d326fd96e21bf60cd4",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_abi-0.8.3.tar",
+      "license": [
+        "GPL-3.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_aws",
+      "type": "hex",
+      "hexName": "ex_aws",
+      "version": "2.6.1",
+      "lockChecksum": "194582c7b09455de8a5ab18a0182e6dd937d53df82be2e63c619d01bddaccdfa",
+      "archiveChecksum": "67842a08c90a1d9a09dbe4ac05754175c7ca253abe4912987c759395d4bd9d26",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_aws-2.6.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_aws_s3",
+      "type": "hex",
+      "hexName": "ex_aws_s3",
+      "version": "2.5.9",
+      "lockChecksum": "862b7792f2e60d7010e2920d79964e3fab289bc0fd951b0ba8457a3f7f9d1199",
+      "archiveChecksum": "a480d2bb2da64610014021629800e1e9457ca5e4a62f6775bffd963360c2bf90",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_aws_s3-2.5.9.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_brotli",
+      "type": "hex",
+      "hexName": "ex_brotli",
+      "version": "0.5.0",
+      "lockChecksum": "573645db5201317b6176b8858b668ea4ca89dc5c21852e84b9867579d483c220",
+      "archiveChecksum": "8447d98d51f8f312629fd38619d4f564507dcf3a03d175c3f8f4ddf98e46dd92",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_brotli-0.5.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_cldr",
+      "type": "hex",
+      "hexName": "ex_cldr",
+      "version": "2.47.0",
+      "lockChecksum": "350cab41e7deac2ab65cedf71e21e055a52927543dc84570abd8c686ac00cb4d",
+      "archiveChecksum": "3e454cbe4354f042795ae0562686e5137d4cfb953f3bc54c87077ac24c17be09",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_cldr-2.47.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_cldr_currencies",
+      "type": "hex",
+      "hexName": "ex_cldr_currencies",
+      "version": "2.17.0",
+      "lockChecksum": "c38d76339dbee413f7dd1aba4cdf05758bd4c0bbfe9c3b1c8602f96082c2890a",
+      "archiveChecksum": "9af59bd29407dcca59fa39ded8c1649ae1cf6ec29fd0611576dcad0279bce0db",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_cldr_currencies-2.17.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_cldr_lists",
+      "type": "hex",
+      "hexName": "ex_cldr_lists",
+      "version": "2.11.1",
+      "lockChecksum": "ad18f861d7c5ca82aac6d173469c6a2339645c96790172ab0aa255b64fb7303b",
+      "archiveChecksum": "00161c04510ccb3f18b19a6b8562e50c21f1e9c15b8ff4c934bea5aad0b4ade2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_cldr_lists-2.11.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_cldr_numbers",
+      "type": "hex",
+      "hexName": "ex_cldr_numbers",
+      "version": "2.38.0",
+      "lockChecksum": "b5564b57d3769c85e16689472a9bb65804f71ccd3484144e31998398fda25ad1",
+      "archiveChecksum": "b29e4d723c69db5d0a3f3bcef7583a0bc87dda1cd642187c589fec4bfc59a703",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_cldr_numbers-2.38.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_cldr_units",
+      "type": "hex",
+      "hexName": "ex_cldr_units",
+      "version": "3.20.1",
+      "lockChecksum": "b27ec81814a67ed77d1c06c64ef74519b141497b74244ec18e1a1a2f78f8e313",
+      "archiveChecksum": "879af22563b06570f16c28bed3decaadc0c1233906f4516b2d5d28e2bbbadee0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_cldr_units-3.20.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_doc",
+      "type": "hex",
+      "hexName": "ex_doc",
+      "version": "0.40.1",
+      "lockChecksum": "67542e4b6dde74811cfd580e2c0149b78010fd13001fda7cfeb2b2c2ffb1344d",
+      "archiveChecksum": "bcef0e2d360d93ac19f01a85d58f91752d930c0a30e2681145feea6bd3516e00",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_doc-0.40.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_eth_bls",
+      "type": "hex",
+      "hexName": "ex_eth_bls",
+      "version": "0.1.0",
+      "lockChecksum": "33c2bf424b360e4b64d7630dd72ec028dac63df56802d0a14ade54a23ad1c743",
+      "archiveChecksum": "25f6ffc36de4952e55adff1c712f0b9680850773678550f1da970d4d18329365",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_eth_bls-0.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": []
+    },
+    {
+      "name": "ex_hash_ring",
+      "type": "hex",
+      "hexName": "ex_hash_ring",
+      "version": "6.0.4",
+      "lockChecksum": "bef9d2d796afbbe25ab5b5a7ed746e06b99c76604f558113c273466d52fa6d6b",
+      "archiveChecksum": "89adabf31f7d3dfaa36802ce598ce918e9b5b33bae8909ac1a4d052e1e567d18",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_hash_ring-6.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_json_schema",
+      "type": "hex",
+      "hexName": "ex_json_schema",
+      "version": "0.11.2",
+      "lockChecksum": "8f8200e6afa5473f37dbebd1e72bf97d8d5dd0128125123ed1532611267f0138",
+      "archiveChecksum": "395f4aaf32ea0a14d861b16695e7bc8a1b5d841e0fd374d25aef9701bf8da825",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_json_schema-0.11.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_keccak",
+      "type": "hex",
+      "hexName": "ex_keccak",
+      "version": "0.7.8",
+      "lockChecksum": "be1cf194d3158f0a305eaed0334e478d0d0f2c827e7c1f8f0e1e2a667da5a8ac",
+      "archiveChecksum": "52de5b42b718df2534fb9a55780d8a05bbaea539f867c3e7c0a8e7e1d5f149d9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_keccak-0.7.8.tar",
+      "license": [
+        "Apache License 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_machina",
+      "type": "hex",
+      "hexName": "ex_machina",
+      "version": "2.8.0",
+      "lockChecksum": "a0e847b5712065055ec3255840e2c78ef9366634d62390839d4880483be38abe",
+      "archiveChecksum": "79fe1a9c64c0c1c1fab6c4fa5d871682cb90de5885320c187d117004627a7729",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_machina-2.8.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_pbkdf2",
+      "type": "hex",
+      "hexName": "ex_pbkdf2",
+      "version": "0.8.5",
+      "lockChecksum": "583733a1134a0c8b4df70c6b3e874d1896bf48f2aaafdf332ec5480c7b5117bf",
+      "archiveChecksum": "f138b2acdc5a4d87880e42742e9bead4d1235fd9b1b2b29be0d1da1e01c3a312",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_pbkdf2-0.8.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_rlp",
+      "type": "hex",
+      "hexName": "ex_rlp",
+      "version": "0.6.0",
+      "lockChecksum": "985391d2356a7cb8712a4a9a2deb93f19f2fbca0323f5c1203fcaf64d077e31e",
+      "archiveChecksum": "7135db93b861d9e76821039b60b00a6a22d2c4e751bf8c444bffe7a042f1abaf",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_rlp-0.6.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ex_secp256k1",
+      "type": "hex",
+      "hexName": "ex_secp256k1",
+      "version": "0.8.0",
+      "lockChecksum": "aade42e790638de82a2b951a83f55b9cc6545b8c105b20a0112ff6b78e1800cd",
+      "archiveChecksum": "87257ef7110c45ac396a110eb93023371db96b6f65ed0676046a11e866d1e3a0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_secp256k1-0.8.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ex_utils",
+      "type": "hex",
+      "hexName": "ex_utils",
+      "version": "0.1.7",
+      "lockChecksum": "2c133e0bcdc49a858cf8dacf893308ebc05bc5fba501dc3d2935e65365ec0bf3",
+      "archiveChecksum": "66d4fe75285948f2d1e69c2a5ddd651c398c813574f8d36a9eef11dc20356ef6",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ex_utils-0.1.7.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "exactor",
+      "type": "hex",
+      "hexName": "exactor",
+      "version": "2.2.4",
+      "lockChecksum": "5efb4ddeb2c48d9a1d7c9b465a6fffdd82300eb9618ece5d34c3334d5d7245b1",
+      "archiveChecksum": "1222419f706e01bfa1095aec9acf6421367dcfab798a6f67c54cf784733cd6b5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/exactor-2.2.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "exjsx",
+      "type": "hex",
+      "hexName": "exjsx",
+      "version": "4.0.0",
+      "lockChecksum": "60548841e0212df401e38e63c0078ec57b33e7ea49b032c796ccad8cde794b5c",
+      "archiveChecksum": "32e95820a97cffea67830e91514a2ad53b888850442d6d395f53a1ac60c82e07",
+      "metadataUrl": "https://repo.hex.pm/tarballs/exjsx-4.0.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "expo",
+      "type": "hex",
+      "hexName": "expo",
+      "version": "1.1.1",
+      "lockChecksum": "4202e1d2ca6e2b3b63e02f69cfe0a404f77702b041d02b58597c00992b601db5",
+      "archiveChecksum": "5fb308b9cb359ae200b7e23d37c76978673aa1b06e2b3075d814ce12c5811640",
+      "metadataUrl": "https://repo.hex.pm/tarballs/expo-1.1.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "exvcr",
+      "type": "hex",
+      "hexName": "exvcr",
+      "version": "0.16.0",
+      "lockChecksum": "11579f43c88ae81f57c82ce4f09e3ebda4c40117c859ed39e61a653c3a0b4ff4",
+      "archiveChecksum": "8f576af22369942f7a1482baff1f31e2f45983cf6fac45d49d2bd2e84b4d5be8",
+      "metadataUrl": "https://repo.hex.pm/tarballs/exvcr-0.16.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ezstd",
+      "type": "hex",
+      "hexName": "ezstd",
+      "version": "1.2.3",
+      "lockChecksum": "98748f4099e6e2a067f77ace43041ebaa53c13194b08ce22370e4c93079e9e16",
+      "archiveChecksum": "de32e0b41ba36a9ed46db8215da74777d2f141bb75f67bfc05dbb4b7c3386dee",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ezstd-1.2.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "file_info",
+      "type": "hex",
+      "hexName": "file_info",
+      "version": "0.0.4",
+      "lockChecksum": "2e0e77f211e833f38ead22cb29ce53761d457d80b3ffe0ffe0eb93880b0963b2",
+      "archiveChecksum": "50e7ad01c2c8b9339010675fe4dc4a113b8d6ca7eddce24d1d74fd0e762781a5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/file_info-0.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "file_system",
+      "type": "hex",
+      "hexName": "file_system",
+      "version": "1.1.1",
+      "lockChecksum": "31864f4685b0148f25bd3fbef2b1228457c0c89024ad67f7a81a3ffbc0bbad3a",
+      "archiveChecksum": "7a15ff97dfe526aeefb090a7a9d3d03aa907e100e262a0f8f7746b78f8f87a5d",
+      "metadataUrl": "https://repo.hex.pm/tarballs/file_system-1.1.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "finch",
+      "type": "hex",
+      "hexName": "finch",
+      "version": "0.18.0",
+      "lockChecksum": "944ac7d34d0bd2ac8998f79f7a811b21d87d911e77a786bc5810adb75632ada4",
+      "archiveChecksum": "69f5045b042e531e53edc2574f15e25e735b522c37e2ddb766e15b979e03aa65",
+      "metadataUrl": "https://repo.hex.pm/tarballs/finch-0.18.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "floki",
+      "type": "hex",
+      "hexName": "floki",
+      "version": "0.38.0",
+      "lockChecksum": "62b642386fa3f2f90713f6e231da0fa3256e41ef1089f83b6ceac7a3fd3abf33",
+      "archiveChecksum": "a5943ee91e93fb2d635b612caf5508e36d37548e84928463ef9dd986f0d1abd9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/floki-0.38.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "flow",
+      "type": "hex",
+      "hexName": "flow",
+      "version": "1.2.4",
+      "lockChecksum": "1dd58918287eb286656008777cb32714b5123d3855956f29aa141ebae456922d",
+      "archiveChecksum": "874adde96368e71870f3510b91e35bc31652291858c86c0e75359cbdd35eb211",
+      "metadataUrl": "https://repo.hex.pm/tarballs/flow-1.2.4.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "gen_stage",
+      "type": "hex",
+      "hexName": "gen_stage",
+      "version": "1.2.1",
+      "lockChecksum": "19d8b5e9a5996d813b8245338a28246307fd8b9c99d1237de199d21efc4c76a1",
+      "archiveChecksum": "83e8be657fa05b992ffa6ac1e3af6d57aa50aace8f691fcf696ff02f8335b001",
+      "metadataUrl": "https://repo.hex.pm/tarballs/gen_stage-1.2.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "gettext",
+      "type": "hex",
+      "hexName": "gettext",
+      "version": "0.26.2",
+      "lockChecksum": "5978aa7b21fada6deabf1f6341ddba50bc69c999e812211903b169799208f2a8",
+      "archiveChecksum": "aa978504bcf76511efdc22d580ba08e2279caab1066b76bb9aa81c4a1e0a32a5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/gettext-0.26.2.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "hackney",
+      "type": "hex",
+      "hexName": "hackney",
+      "version": "1.25.0",
+      "lockChecksum": "390e9b83f31e5b325b9f43b76e1a785cbdb69b5b6cd4e079aa67835ded046867",
+      "archiveChecksum": "7209bfd75fd1f42467211ff8f59ea74d6f2a9e81cbcee95a56711ee79fd6b1d4",
+      "metadataUrl": "https://repo.hex.pm/tarballs/hackney-1.25.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "hammer",
+      "type": "hex",
+      "hexName": "hammer",
+      "version": "7.2.0",
+      "lockChecksum": "73113eca87f0fd20a6d3679c1182e8c4c1778266f61de4e9dc8c589dee156c30",
+      "archiveChecksum": "c50fa865ddfe7b3d4f8a6941f56940679e02a9a1465b00668a95d140b101d828",
+      "metadataUrl": "https://repo.hex.pm/tarballs/hammer-7.2.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "hammer_backend_redis",
+      "type": "hex",
+      "hexName": "hammer_backend_redis",
+      "version": "7.1.0",
+      "lockChecksum": "b1e3d5d9cb9a549d90109d17c12eb0c57ffe4658163e597542ad77c3c5464a46",
+      "archiveChecksum": "b0c22a0121a293002c09f415fc3a04e153c993db8702b4320b1aa9a6edd6de1a",
+      "metadataUrl": "https://repo.hex.pm/tarballs/hammer_backend_redis-7.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "hpax",
+      "type": "hex",
+      "hexName": "hpax",
+      "version": "1.0.3",
+      "lockChecksum": "ed67ef51ad4df91e75cc6a1494f851850c0bd98ebc0be6e81b026e765ee535aa",
+      "archiveChecksum": "8eab6e1cfa8d5918c2ce4ba43588e894af35dbd8e91e6e55c817bca5847df34a",
+      "metadataUrl": "https://repo.hex.pm/tarballs/hpax-1.0.3.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "html_entities",
+      "type": "hex",
+      "hexName": "html_entities",
+      "version": "0.5.2",
+      "lockChecksum": "9e47e70598da7de2a9ff6af8758399251db6dbb7eebe2b013f2bbd2515895c3c",
+      "archiveChecksum": "c53ba390403485615623b9531e97696f076ed415e8d8058b1dbaa28181f4fdcc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/html_entities-0.5.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "httpoison",
+      "type": "hex",
+      "hexName": "httpoison",
+      "version": "2.3.0",
+      "lockChecksum": "10eef046405bc44ba77dc5b48957944df8952cc4966364b3cf6aa71dce6de587",
+      "archiveChecksum": "d388ee70be56d31a901e333dbcdab3682d356f651f93cf492ba9f06056436a2c",
+      "metadataUrl": "https://repo.hex.pm/tarballs/httpoison-2.3.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "idna",
+      "type": "hex",
+      "hexName": "idna",
+      "version": "6.1.1",
+      "lockChecksum": "8a63070e9f7d0c62eb9d9fcb360a7de382448200fbbd1b106cc96d3d8099df8d",
+      "archiveChecksum": "92376eb7894412ed19ac475e4a86f7b413c1b9fbb5bd16dccd57934157944cea",
+      "metadataUrl": "https://repo.hex.pm/tarballs/idna-6.1.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "image",
+      "type": "hex",
+      "hexName": "image",
+      "version": "0.63.0",
+      "lockChecksum": "03efcfeb1cfaac10d6ab364acce2bfa35e6b33b08947f291fdc17df796b36226",
+      "archiveChecksum": "63b39a312f889bb61a04a4957977a7cd3fa23974ff56de3feebf46f69c5fa60e",
+      "metadataUrl": "https://repo.hex.pm/tarballs/image-0.63.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "inet_cidr",
+      "type": "hex",
+      "hexName": "inet_cidr",
+      "version": "1.0.9",
+      "lockChecksum": "e0ef72a2942529da78c8e4147d53f2ef5f6f5293335c3637b0fdf83c012cc816",
+      "archiveChecksum": "172da15ff7cf635b1feaf14f5818be28c811b37cc5fb7c5f7c01058c1c1066cc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/inet_cidr-1.0.9.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "inflex",
+      "type": "hex",
+      "hexName": "inflex",
+      "version": "2.1.0",
+      "lockChecksum": "a365cf0821a9dacb65067abd95008ca1b0bb7dcdd85ae59965deef2aa062924c",
+      "archiveChecksum": "14c17d05db4ee9b6d319b0bff1bdf22aa389a25398d1952c7a0b5f3d93162dd8",
+      "metadataUrl": "https://repo.hex.pm/tarballs/inflex-2.1.0.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "jason",
+      "type": "hex",
+      "hexName": "jason",
+      "version": "1.4.4",
+      "lockChecksum": "b9226785a9aa77b6857ca22832cffa5d5011a667207eb2a0ad56adb5db443b8a",
+      "archiveChecksum": "c5eb0cab91f094599f94d55bc63409236a8ec69a21a67814529e8d5f6cc90b3b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/jason-1.4.4.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "joken",
+      "type": "hex",
+      "hexName": "joken",
+      "version": "2.6.2",
+      "lockChecksum": "5daaf82259ca603af4f0b065475099ada1b2b849ff140ccd37f4b6828ca6892a",
+      "archiveChecksum": "5134b5b0a6e37494e46dbf9e4dad53808e5e787904b7c73972651b51cce3d72b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/joken-2.6.2.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "joken_jwks",
+      "type": "hex",
+      "hexName": "joken_jwks",
+      "version": "1.7.0",
+      "lockChecksum": "5db750732dddbfb51068c16da6e43439ad8a3932020bdd505e944dd918ec0771",
+      "archiveChecksum": "c1dd2d5161f079f660bda773c338d3ff2b90bb79673a0852becc0433416797d3",
+      "metadataUrl": "https://repo.hex.pm/tarballs/joken_jwks-1.7.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+          "text": "                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright [yyyy] [name of copyright owner]\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License.\n"
+        }
+      ]
+    },
+    {
+      "name": "jose",
+      "type": "hex",
+      "hexName": "jose",
+      "version": "1.11.10",
+      "lockChecksum": "a903f5227417bd2a08c8a00a0cbcc458118be84480955e8d251297a425723f83",
+      "archiveChecksum": "0d6cd36ff8ba174db29148fc112b5842186b68a90ce9fc2b3ec3afe76593e614",
+      "metadataUrl": "https://repo.hex.pm/tarballs/jose-1.11.10.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "jsx",
+      "type": "hex",
+      "hexName": "jsx",
+      "version": "2.8.3",
+      "lockChecksum": "a05252d381885240744d955fbe3cf810504eb2567164824e19303ea59eef62cf",
+      "archiveChecksum": "fc3499fed7a726995aa659143a248534adc754ebd16ccd437cd93b649a95091f",
+      "metadataUrl": "https://repo.hex.pm/tarballs/jsx-2.8.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "jumper",
+      "type": "hex",
+      "hexName": "jumper",
+      "version": "1.0.2",
+      "lockChecksum": "68cdcd84472a00ac596b4e6459a41b3062d4427cbd4f1e8c8793c5b54f1406a7",
+      "archiveChecksum": "9b7782409021e01ab3c08270e26f36eb62976a38c1aa64b2eaf6348422f165e1",
+      "metadataUrl": "https://repo.hex.pm/tarballs/jumper-1.0.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "junit_formatter",
+      "type": "hex",
+      "hexName": "junit_formatter",
+      "version": "3.4.0",
+      "lockChecksum": "d0e8db6c34dab6d3c4154c3b46b21540db1109ae709d6cf99ba7e7a2ce4b1ac2",
+      "archiveChecksum": "bb36e2ae83f1ced6ab931c4ce51dd3dbef1ef61bb4932412e173b0cfa259dacd",
+      "metadataUrl": "https://repo.hex.pm/tarballs/junit_formatter-3.4.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "libcluster",
+      "type": "hex",
+      "hexName": "libcluster",
+      "version": "3.5.0",
+      "lockChecksum": "5ee4cfde4bdf32b2fef271e33ce3241e89509f4344f6c6a8d4069937484866ba",
+      "archiveChecksum": "ebf6561fcedd765a4cd43b4b8c04b1c87f4177b5fb3cbdfe40a780499d72f743",
+      "metadataUrl": "https://repo.hex.pm/tarballs/libcluster-3.5.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "33f027794fbf4f73ce27e51a4fe69aef2764a5f262e0f224896b6adccb7d72bb",
+          "text": "# The MIT License (MIT)\n\n## Copyright (c) 2016 Paul Schoenfelder\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "logger_file_backend",
+      "type": "hex",
+      "hexName": "logger_file_backend",
+      "version": "0.0.14",
+      "lockChecksum": "774bb661f1c3fed51b624d2859180c01e386eb1273dc22de4f4a155ef749a602",
+      "archiveChecksum": "071354a18196468f3904ef09413af20971d55164267427f6257b52cfba03f9e6",
+      "metadataUrl": "https://repo.hex.pm/tarballs/logger_file_backend-0.0.14.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "logger_json",
+      "type": "hex",
+      "hexName": "logger_json",
+      "version": "7.0.4",
+      "lockChecksum": "e315f2b9a755504658a745f3eab90d88d2cd7ac2ecfd08c8da94d8893965ab5c",
+      "archiveChecksum": "d1369f8094e372db45d50672c3b91e8888bcd695fdc444a37a0734e96717c45c",
+      "metadataUrl": "https://repo.hex.pm/tarballs/logger_json-7.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "makeup",
+      "type": "hex",
+      "hexName": "makeup",
+      "version": "1.2.1",
+      "lockChecksum": "e90ac1c65589ef354378def3ba19d401e739ee7ee06fb47f94c687016e3713d1",
+      "archiveChecksum": "d36484867b0bae0fea568d10131197a4c2e47056a6fbe84922bf6ba71c8d17ce",
+      "metadataUrl": "https://repo.hex.pm/tarballs/makeup-1.2.1.tar",
+      "license": [
+        "BSD-2-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "makeup_elixir",
+      "type": "hex",
+      "hexName": "makeup_elixir",
+      "version": "1.0.1",
+      "lockChecksum": "e928a4f984e795e41e3abd27bfc09f51db16ab8ba1aebdba2b3a575437efafc2",
+      "archiveChecksum": "7284900d412a3e5cfd97fdaed4f5ed389b8f2b4cb49efc0eb3bd10e2febf9507",
+      "metadataUrl": "https://repo.hex.pm/tarballs/makeup_elixir-1.0.1.tar",
+      "license": [
+        "BSD-2-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "makeup_erlang",
+      "type": "hex",
+      "hexName": "makeup_erlang",
+      "version": "1.0.3",
+      "lockChecksum": "4252d5d4098da7415c390e847c814bad3764c94a814a0b4245176215615e1035",
+      "archiveChecksum": "953297c02582a33411ac6208f2c6e55f0e870df7f80da724ed613f10e6706afd",
+      "metadataUrl": "https://repo.hex.pm/tarballs/makeup_erlang-1.0.3.tar",
+      "license": [
+        "BSD-2-Clause"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "math",
+      "type": "hex",
+      "hexName": "math",
+      "version": "0.7.0",
+      "lockChecksum": "12af548c3892abf939a2e242216c3e7cbfb65b9b2fe0d872d05c6fb609f8127b",
+      "archiveChecksum": "7987af97a0c6b58ad9db43eb5252a49fc1dfe1f6d98f17da9282e297f594ebc2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/math-0.7.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "meck",
+      "type": "hex",
+      "hexName": "meck",
+      "version": "0.9.2",
+      "lockChecksum": "85ccbab053f1db86c7ca240e9fc718170ee5bda03810a6292b5306bf31bae5f5",
+      "archiveChecksum": "81344f561357dc40a8344afa53767c32669153355b626ea9fcbc8da6b3045826",
+      "metadataUrl": "https://repo.hex.pm/tarballs/meck-0.9.2.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "memento",
+      "type": "hex",
+      "hexName": "memento",
+      "version": "0.3.2",
+      "lockChecksum": "38cfc8ff9bcb1adff7cbd0f3b78a762636b86dff764729d1c82d0464c539bdd0",
+      "archiveChecksum": "25cf691a98a0cb70262f4a7543c04bab24648cb2041d937eb64154a8d6f8012b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/memento-0.3.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "metrics",
+      "type": "hex",
+      "hexName": "metrics",
+      "version": "1.0.1",
+      "lockChecksum": "25f094dea2cda98213cecc3aeff09e940299d950904393b2a29d191c346a8486",
+      "archiveChecksum": "69b09adddc4f74a40716ae54d140f93beb0fb8978d8636eaded0c31b6f099f16",
+      "metadataUrl": "https://repo.hex.pm/tarballs/metrics-1.0.1.tar",
+      "license": [
+        "BSD"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mime",
+      "type": "hex",
+      "hexName": "mime",
+      "version": "2.0.7",
+      "lockChecksum": "b8d739037be7cd402aee1ba0306edfdef982687ee7e9859bee6198c1e7e2f128",
+      "archiveChecksum": "6171188e399ee16023ffc5b76ce445eb6d9672e2e241d2df6050f3c771e80ccd",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mime-2.0.7.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mimerl",
+      "type": "hex",
+      "hexName": "mimerl",
+      "version": "1.4.0",
+      "lockChecksum": "3882a5ca67fbbe7117ba8947f27643557adec38fa2307490c4c4207624cb213b",
+      "archiveChecksum": "13af15f9f68c65884ecca3a3891d50a7b57d82152792f3e19d88650aa126b144",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mimerl-1.4.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mimetype_parser",
+      "type": "hex",
+      "hexName": "mimetype_parser",
+      "version": "0.1.3",
+      "lockChecksum": "628ac9fe56aa7edcedb534d68397dd66674ab82493c8ebe39acb9a19b666099d",
+      "archiveChecksum": "7d8f80c567807ce78cd93c938e7f4b0a20b1aaaaab914bf286f68457d9f7a852",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mimetype_parser-0.1.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mint",
+      "type": "hex",
+      "hexName": "mint",
+      "version": "1.7.1",
+      "lockChecksum": "113fdb2b2f3b59e47c7955971854641c61f378549d73e829e1768de90fc1abf1",
+      "archiveChecksum": "fceba0a4d0f24301ddee3024ae116df1c3f4bb7a563a731f45fdfeb9d39a231b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mint-1.7.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mnemoniac",
+      "type": "hex",
+      "hexName": "mnemoniac",
+      "version": "0.1.5",
+      "lockChecksum": "d10bf14abb94adc1a98f6cee4d81d197e1b3986cad8ec43b2e21d2cd9f4d99b6",
+      "archiveChecksum": "518ae4b6ddda5285a5c02bf83e1eb6ce1af7e4d65d3f7f5bff3270689a00bcc3",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mnemoniac-0.1.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mock",
+      "type": "hex",
+      "hexName": "mock",
+      "version": "0.3.9",
+      "lockChecksum": "10e44ad1f5962480c5c9b9fa779c6c63de9bd31997c8e04a853ec990a9d841af",
+      "archiveChecksum": "9e1b244c4ca2551bb17bb8415eed89e40ee1308e0fbaed0a4fdfe3ec8a4adbd3",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mock-0.3.9.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "mox",
+      "type": "hex",
+      "hexName": "mox",
+      "version": "1.1.0",
+      "lockChecksum": "0f5e399649ce9ab7602f72e718305c0f9cdc351190f72844599545e4996af73c",
+      "archiveChecksum": "d44474c50be02d5b72131070281a5d3895c0e7a95c780e90bc0cfe712f633a13",
+      "metadataUrl": "https://repo.hex.pm/tarballs/mox-1.1.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "msgpax",
+      "type": "hex",
+      "hexName": "msgpax",
+      "version": "2.4.0",
+      "lockChecksum": "4647575c87cb0c43b93266438242c21f71f196cafa268f45f91498541148c15d",
+      "archiveChecksum": "ca933891b0e7075701a17507c61642bf6e0407bb244040d5d0a58597a06369d2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/msgpax-2.4.0.tar",
+      "license": [
+        "ISC"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nimble_csv",
+      "type": "hex",
+      "hexName": "nimble_csv",
+      "version": "1.3.0",
+      "lockChecksum": "b7f998dc62b222bce9596e46f028c7a5af04cb5dde6df2ea197c583227c54971",
+      "archiveChecksum": "41ccdc18f7c8f8bb06e84164fc51635321e80d5a3b450761c4997d620925d619",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nimble_csv-1.3.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nimble_options",
+      "type": "hex",
+      "hexName": "nimble_options",
+      "version": "1.1.1",
+      "lockChecksum": "e3a492d54d85fc3fd7c5baf411d9d2852922f66e69476317787a7b2bb000a61b",
+      "archiveChecksum": "821b2470ca9442c4b6984882fe9bb0389371b8ddec4d45a9504f00a66f650b44",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nimble_options-1.1.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nimble_ownership",
+      "type": "hex",
+      "hexName": "nimble_ownership",
+      "version": "1.0.1",
+      "lockChecksum": "f69fae0cdd451b1614364013544e66e4f5d25f36a2056a9698b793305c5aa3a6",
+      "archiveChecksum": "3825e461025464f519f3f3e4a1f9b68c47dc151369611629ad08b636b73bb22d",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nimble_ownership-1.0.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nimble_parsec",
+      "type": "hex",
+      "hexName": "nimble_parsec",
+      "version": "1.4.2",
+      "lockChecksum": "8efba0122db06df95bfaa78f791344a89352ba04baedd3849593bfce4d0dc1c6",
+      "archiveChecksum": "4b21398942dda052b403bbe1da991ccd03a053668d147d53fb8c4e0efe09c973",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nimble_parsec-1.4.2.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nimble_pool",
+      "type": "hex",
+      "hexName": "nimble_pool",
+      "version": "1.1.0",
+      "lockChecksum": "bf9c29fbdcba3564a8b800d1eeb5a3c58f36e1e11d7b7fb2e084a643f645f06b",
+      "archiveChecksum": "af2e4e6b34197db81f7aad230c1118eac993acc0dae6bc83bac0126d4ae0813a",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nimble_pool-1.1.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "number",
+      "type": "hex",
+      "hexName": "number",
+      "version": "1.0.5",
+      "lockChecksum": "d92136f9b9382aeb50145782f116112078b3465b7be58df1f85952b8bb399b0f",
+      "archiveChecksum": "c0733a0a90773a66582b9e92a3f01290987f395c972cb7d685f51dd927cd5169",
+      "metadataUrl": "https://repo.hex.pm/tarballs/number-1.0.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "numbers",
+      "type": "hex",
+      "hexName": "numbers",
+      "version": "5.2.4",
+      "lockChecksum": "f123d5bb7f6acc366f8f445e10a32bd403c8469bdbce8ce049e1f0972b607080",
+      "archiveChecksum": "eeccf5c61d5f4922198395bf87a465b6f980b8b862dd22d28198c5e6fab38582",
+      "metadataUrl": "https://repo.hex.pm/tarballs/numbers-5.2.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "nx",
+      "type": "hex",
+      "hexName": "nx",
+      "version": "0.10.0",
+      "lockChecksum": "128e4a094cb790f663e20e1334b127c1f2a4df54edfb8b13c22757ec33133b4f",
+      "archiveChecksum": "3db8892c124aeee091df0e6fbf8e5bf1b81f502eb0d4f5ba63e6378ebcae7da4",
+      "metadataUrl": "https://repo.hex.pm/tarballs/nx-0.10.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "oauth2",
+      "type": "hex",
+      "hexName": "oauth2",
+      "version": "2.1.0",
+      "lockChecksum": "beb657f393814a3a7a8a15bd5e5776ecae341fd344df425342a3b6f1904c2989",
+      "archiveChecksum": "8ac07f85b3307dd1acfeb0ec852f64161b22f57d0ce0c15e616a1dfc8ebe2b41",
+      "metadataUrl": "https://repo.hex.pm/tarballs/oauth2-2.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "open_api_spex",
+      "type": "hex",
+      "hexName": "open_api_spex",
+      "version": "3.22.2",
+      "lockChecksum": "0b3c4f572ee69cb6c936abf426b9d84d8eebd34960871fd77aead746f0d69cb0",
+      "archiveChecksum": "0a4fc08472d75e9cfe96e0748c6b1565b3b4398f97bf43fcce41b41b6fd3fb33",
+      "metadataUrl": "https://repo.hex.pm/tarballs/open_api_spex-3.22.2.tar",
+      "license": [
+        "MPL-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "optimal",
+      "type": "hex",
+      "hexName": "optimal",
+      "version": "0.3.6",
+      "lockChecksum": "46bbf52fbbbd238cda81e02560caa84f93a53c75620f1fe19e81e4ae7b07d1dd",
+      "archiveChecksum": "1a06ea6a653120226b35b283a1cd10039550f2c566edcdec22b29316d73640fd",
+      "metadataUrl": "https://repo.hex.pm/tarballs/optimal-0.3.6.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "parallel_stream",
+      "type": "hex",
+      "hexName": "parallel_stream",
+      "version": "1.1.0",
+      "lockChecksum": "f52f73eb344bc22de335992377413138405796e0d0ad99d995d9977ac29f1ca9",
+      "archiveChecksum": "684fd19191aedfaf387bbabbeb8ff3c752f0220c8112eb907d797f4592d6e871",
+      "metadataUrl": "https://repo.hex.pm/tarballs/parallel_stream-1.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "parse_trans",
+      "type": "hex",
+      "hexName": "parse_trans",
+      "version": "3.4.1",
+      "lockChecksum": "6e6aa8167cb44cc8f39441d05193be6e6f4e7c2946cb2759f015f8c56b76e5ff",
+      "archiveChecksum": "620a406ce75dada827b82e453c19cf06776be266f5a67cff34e1ef2cbb60e49a",
+      "metadataUrl": "https://repo.hex.pm/tarballs/parse_trans-3.4.1.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "phoenix",
+      "type": "hex",
+      "hexName": "phoenix",
+      "version": "1.6.16",
+      "lockChecksum": "e5bdd18c7a06da5852a25c7befb72246de4ddc289182285f8685a40b7b5f5451",
+      "archiveChecksum": "e15989ff34f670a96b95ef6d1d25bad0d9c50df5df40b671d8f4a669e050ac39",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix-1.6.16.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_ecto",
+      "type": "hex",
+      "hexName": "phoenix_ecto",
+      "version": "4.7.0",
+      "lockChecksum": "75c4b9dfb3efdc42aec2bd5f8bccd978aca0651dbcbc7a3f362ea5d9d43153c6",
+      "archiveChecksum": "1d75011e4254cb4ddf823e81823a9629559a1be93b4321a6a5f11a5306fbf4cc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_ecto-4.7.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_html",
+      "type": "hex",
+      "hexName": "phoenix_html",
+      "version": "4.2.1",
+      "lockChecksum": "35279e2a39140068fc03f8874408d58eef734e488fc142153f055c5454fd1c08",
+      "archiveChecksum": "cff108100ae2715dd959ae8f2a8cef8e20b593f8dfd031c9cba92702cf23e053",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_html-4.2.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_html_helpers",
+      "type": "hex",
+      "hexName": "phoenix_html_helpers",
+      "version": "1.0.1",
+      "lockChecksum": "7eed85c52eff80a179391036931791ee5d2f713d76a81d0d2c6ebafe1e11e5ec",
+      "archiveChecksum": "cffd2385d1fa4f78b04432df69ab8da63dc5cf63e07b713a4dcf36a3740e3090",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_html_helpers-1.0.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "f5692d451cbfe2a04e3721e99ffbe88d1e9a09f1ff2fc1115de700d7e7abdbe4",
+          "text": "Copyright (c) 2014 Chris McCord\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "phoenix_live_reload",
+      "type": "hex",
+      "hexName": "phoenix_live_reload",
+      "version": "1.6.2",
+      "lockChecksum": "b18b0773a1ba77f28c52decbb0f10fd1ac4d3ae5b8632399bbf6986e3b665f62",
+      "archiveChecksum": "d1f89c18114c50d394721365ffb428cce24f1c13de0467ffa773e2ff4a30d5b9",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_live_reload-1.6.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_live_view",
+      "type": "hex",
+      "hexName": "phoenix_live_view",
+      "version": "1.1.24",
+      "lockChecksum": "1a000a048d5971b61a9efe29a3c4144ca955afd42224998d841c5011a5354838",
+      "archiveChecksum": "0c724e6c65f197841cac49d73be4e0f9b93a7711eaa52d2d4d1b9f859c329267",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_live_view-1.1.24.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_pubsub",
+      "type": "hex",
+      "hexName": "phoenix_pubsub",
+      "version": "2.2.0",
+      "lockChecksum": "ff3a5616e1bed6804de7773b92cbccfc0b0f473faf1f63d7daf1206c7aeaaa6f",
+      "archiveChecksum": "adc313a5bf7136039f63cfd9668fde73bba0765e0614cba80c06ac9460ff3e96",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_pubsub-2.2.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "phoenix_template",
+      "type": "hex",
+      "hexName": "phoenix_template",
+      "version": "1.0.4",
+      "lockChecksum": "e2092c132f3b5e5b2d49c96695342eb36d0ed514c5b252a77048d5969330d639",
+      "archiveChecksum": "2c0c81f0e5c6753faf5cca2f229c9709919aba34fab866d3bc05060c9c444206",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_template-1.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "41a686069f0199ff369d7e5277d5267385cc54d9199f1efc960bacbe2e799255",
+          "text": "# MIT License\n\nCopyright (c) 2014 Chris McCord\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "phoenix_view",
+      "type": "hex",
+      "hexName": "phoenix_view",
+      "version": "2.0.4",
+      "lockChecksum": "b45c9d9cf15b3a1af5fb555c674b525391b6a1fe975f040fb4d913397b31abf4",
+      "archiveChecksum": "4e992022ce14f31fe57335db27a28154afcc94e9983266835bb3040243eb620b",
+      "metadataUrl": "https://repo.hex.pm/tarballs/phoenix_view-2.0.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE.md",
+          "sha256": "41a686069f0199ff369d7e5277d5267385cc54d9199f1efc960bacbe2e799255",
+          "text": "# MIT License\n\nCopyright (c) 2014 Chris McCord\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "plug",
+      "type": "hex",
+      "hexName": "plug",
+      "version": "1.19.1",
+      "lockChecksum": "09bac17ae7a001a68ae393658aa23c7e38782be5c5c00c80be82901262c394c0",
+      "archiveChecksum": "560a0017a8f6d5d30146916862aaf9300b7280063651dd7e532b8be168511e62",
+      "metadataUrl": "https://repo.hex.pm/tarballs/plug-1.19.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "plug_cowboy",
+      "type": "hex",
+      "hexName": "plug_cowboy",
+      "version": "2.8.0",
+      "lockChecksum": "07789e9c03539ee51bb14a07839cc95aa96999fd8846ebfd28c97f0b50c7b612",
+      "archiveChecksum": "9cbfaaf17463334ca31aed38ea7e08a68ee37cabc077b1e9be6d2fb68e0171d0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/plug_cowboy-2.8.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "plug_crypto",
+      "type": "hex",
+      "hexName": "plug_crypto",
+      "version": "1.2.5",
+      "lockChecksum": "918772575e48e81e455818229bf719d4ab4181fcbf7f85b68a35620f78d89ced",
+      "archiveChecksum": "26549a1d6345e2172eb1c233866756ae44a9609bd33ee6f99147ab3fd87fd842",
+      "metadataUrl": "https://repo.hex.pm/tarballs/plug_crypto-1.2.5.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "poison",
+      "type": "hex",
+      "hexName": "poison",
+      "version": "5.0.0",
+      "lockChecksum": "d2b54589ab4157bbb82ec2050757779bfed724463a544b6e20d79855a9e43b24",
+      "archiveChecksum": "11dc6117c501b80c62a7594f941d043982a1bd05a1184280c0d9166eb4d8d3fc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/poison-5.0.0.tar",
+      "license": [
+        "0BSD"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "poolboy",
+      "type": "hex",
+      "hexName": "poolboy",
+      "version": "1.5.2",
+      "lockChecksum": "392b007a1693a64540cead79830443abf5762f5d30cf50bc95cb2c1aaafa006b",
+      "archiveChecksum": "dad79704ce5440f3d5a3681c8590b9dc25d1a561e8f5a9c995281012860901e3",
+      "metadataUrl": "https://repo.hex.pm/tarballs/poolboy-1.5.2.tar",
+      "license": [
+        "Unlicense",
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "postgrex",
+      "type": "hex",
+      "hexName": "postgrex",
+      "version": "0.22.0",
+      "lockChecksum": "fb027b58b6eab1f6de5396a2abcdaaeb168f9ed4eccbb594e6ac393b02078cbd",
+      "archiveChecksum": "a68c4261e299597909e03e6f8ff5a13876f5caadaddd0d23af0d0a61afcc5d84",
+      "metadataUrl": "https://repo.hex.pm/tarballs/postgrex-0.22.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "prometheus",
+      "type": "hex",
+      "hexName": "prometheus",
+      "version": "6.1.2",
+      "lockChecksum": "e5c3c567cd8b0994425920763405635211183c15bdc47d0cd524807dde20ca1d",
+      "archiveChecksum": "109662001328112b860de112d49b575310be8ff33fe04bf0482eec4b1e5a1278",
+      "metadataUrl": "https://repo.hex.pm/tarballs/prometheus-6.1.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "prometheus_ecto",
+      "type": "hex",
+      "hexName": "prometheus_ecto",
+      "version": "1.4.3",
+      "lockChecksum": "3dd4da1812b8e0dbee81ea58bb3b62ed7588f2eae0c9e97e434c46807ff82311",
+      "archiveChecksum": "8d66289f77f913b37eda81fd287340c17e61a447549deb28efc254532b2bed82",
+      "metadataUrl": "https://repo.hex.pm/tarballs/prometheus_ecto-1.4.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "prometheus_ex",
+      "type": "hex",
+      "hexName": "prometheus_ex",
+      "version": "5.1.0",
+      "lockChecksum": "a978945b4be5923b87edae3537e3fd61f8d04d755fae865ec4cbb1be7b5ec2e5",
+      "archiveChecksum": "15d3cd752063a1b51ffcba727fc0276f62d2a4387b523963883d125ea5e0d9e7",
+      "metadataUrl": "https://repo.hex.pm/tarballs/prometheus_ex-5.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "69a0f9286f2bd443e798790b4277d1138f285e932b5595c1ff2964d570b7b4c8",
+          "text": "MIT License\n\nCopyright (c) 2016, Ilya Khaprov <dead.trickster@gmail.com>.\nCopyright (c) 2025, Nelson Vides <videsnelson@gmail.com>.\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "prometheus_phoenix",
+      "type": "hex",
+      "hexName": "prometheus_phoenix",
+      "version": "1.3.0",
+      "lockChecksum": "c4b527e0b3a9ef1af26bdcfbfad3998f37795b9185d475ca610fe4388fdd3bb5",
+      "archiveChecksum": "c4d1404ac4e9d3d963da601db2a7d8ea31194f0017057fabf0cfb9bf5a6c8c75",
+      "metadataUrl": "https://repo.hex.pm/tarballs/prometheus_phoenix-1.3.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "prometheus_plugs",
+      "type": "hex",
+      "hexName": "prometheus_plugs",
+      "version": "1.1.5",
+      "lockChecksum": "25933d48f8af3a5941dd7b621c889749894d8a1082a6ff7c67cc99dec26377c5",
+      "archiveChecksum": "0273a6483ccb936d79ca19b0ab629aef0dba958697c94782bb728b920dfc6a79",
+      "metadataUrl": "https://repo.hex.pm/tarballs/prometheus_plugs-1.1.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "prometheus_process_collector",
+      "type": "git",
+      "url": "https://github.com/Phybbit/prometheus_process_collector.git",
+      "commit": "3dc94dcff422d7b9cbd7ddf6bf2a896446705f3f",
+      "repository": "https://github.com/Phybbit/prometheus_process_collector.git",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Pinned upstream root license file",
+      "metadataUrl": "https://raw.githubusercontent.com/Phybbit/prometheus_process_collector/3dc94dcff422d7b9cbd7ddf6bf2a896446705f3f/LICENSE"
+    },
+    {
+      "name": "qrcode",
+      "type": "hex",
+      "hexName": "qrcode",
+      "version": "0.1.5",
+      "lockChecksum": "551271830515c150f34568345b060c625deb0e6691db2a01b0a6de3aafc93886",
+      "archiveChecksum": "a266b7fb7be0d3b713912055dde3575927eca920e5d604ded45cd534f6b7a447",
+      "metadataUrl": "https://repo.hex.pm/tarballs/qrcode-0.1.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "que",
+      "type": "hex",
+      "hexName": "que",
+      "version": "0.10.1",
+      "lockChecksum": "788ed0ec92ed69bdf9cfb29bf41a94ca6355b8d44959bd0669cf706e557ac891",
+      "archiveChecksum": "a737b365253e75dbd24b2d51acc1d851049e87baae08cd0c94e2bc5cd65088d5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/que-0.10.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ranch",
+      "type": "hex",
+      "hexName": "ranch",
+      "version": "1.8.1",
+      "lockChecksum": "208169e65292ac5d333d6cdbad49388c1ae198136e4697ae2f474697140f201c",
+      "archiveChecksum": "aed58910f4e21deea992a67bf51632b6d60114895eb03bb392bb733064594dd0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ranch-1.8.1.tar",
+      "license": [
+        "ISC"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "recon",
+      "type": "hex",
+      "hexName": "recon",
+      "version": "2.5.6",
+      "lockChecksum": "9052588e83bfedfd9b72e1034532aee2a5369d9d9343b61aeb7fbce761010741",
+      "archiveChecksum": "96c6799792d735cc0f0fd0f86267e9d351e63339cbe03df9d162010cefc26bb0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/recon-2.5.6.tar",
+      "license": [
+        "BSD-3-Clause"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "redix",
+      "type": "hex",
+      "hexName": "redix",
+      "version": "1.5.3",
+      "lockChecksum": "4eaae29c75e3285c0ff9957046b7c209aa7f72a023a17f0a9ea51c2a50ab5b0f",
+      "archiveChecksum": "7b06fb5246373af41f5826b03334dfa3f636347d4d5d98b4d455b699d425ae7e",
+      "metadataUrl": "https://repo.hex.pm/tarballs/redix-1.5.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "remote_ip",
+      "type": "hex",
+      "hexName": "remote_ip",
+      "version": "1.2.0",
+      "lockChecksum": "fb078e12a44414f4cef5a75963c33008fe169b806572ccd17257c208a7bc760f",
+      "archiveChecksum": "2ff91de19c48149ce19ed230a81d377186e4412552a597d6a5137373e5877cb7",
+      "metadataUrl": "https://repo.hex.pm/tarballs/remote_ip-1.2.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "req",
+      "type": "hex",
+      "hexName": "req",
+      "version": "0.5.6",
+      "lockChecksum": "8fe1eead4a085510fe3d51ad854ca8f20a622aae46e97b302f499dfb84f726ac",
+      "archiveChecksum": "cfaa8e720945d46654853de39d368f40362c2641c4b2153c886418914b372185",
+      "metadataUrl": "https://repo.hex.pm/tarballs/req-0.5.6.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "rustler_precompiled",
+      "type": "hex",
+      "hexName": "rustler_precompiled",
+      "version": "0.8.4",
+      "lockChecksum": "700a878312acfac79fb6c572bb8b57f5aae05fe1cf70d34b5974850bbf2c05bf",
+      "archiveChecksum": "3b33d99b540b15f142ba47944f7a163a25069f6d608783c321029bc1ffb09514",
+      "metadataUrl": "https://repo.hex.pm/tarballs/rustler_precompiled-0.8.4.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "siwe",
+      "type": "git",
+      "url": "https://github.com/royal-markets/siwe-ex.git",
+      "commit": "51c9c08240eb7eea3c35693011f8d260cd9bb3be",
+      "repository": "https://github.com/royal-markets/siwe-ex.git",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "MIT option from pinned upstream LICENSE-MIT; repository also includes LICENSE-APACHE",
+      "metadataUrl": "https://raw.githubusercontent.com/royal-markets/siwe-ex/51c9c08240eb7eea3c35693011f8d260cd9bb3be/LICENSE-MIT"
+    },
+    {
+      "name": "sleeplocks",
+      "type": "hex",
+      "hexName": "sleeplocks",
+      "version": "1.1.3",
+      "lockChecksum": "96a86460cc33b435c7310dbd27ec82ca2c1f24ae38e34f8edde97f756503441a",
+      "archiveChecksum": "d3b3958552e6eb16f463921e70ae7c767519ef8f5be46d7696cc1ed649421321",
+      "metadataUrl": "https://repo.hex.pm/tarballs/sleeplocks-1.1.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "sobelow",
+      "type": "hex",
+      "hexName": "sobelow",
+      "version": "0.14.1",
+      "lockChecksum": "2f81e8632f15574cba2402bcddff5497b413c01e6f094bc0ab94e83c2f74db81",
+      "archiveChecksum": "8fac9a2bd90fdc4b15d6fca6e1608efb7f7c600fa75800813b794ee9364c87f2",
+      "metadataUrl": "https://repo.hex.pm/tarballs/sobelow-0.14.1.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "spandex",
+      "type": "hex",
+      "hexName": "spandex",
+      "version": "3.2.0",
+      "lockChecksum": "f8cd40146ea988c87f3c14054150c9a47ba17e53cd4515c00e1f93c29c45404d",
+      "archiveChecksum": "d0a7d5aef4c5af9cf5467f2003e8a5d8d2bdae3823a6cc95d776b9a2251d4d03",
+      "metadataUrl": "https://repo.hex.pm/tarballs/spandex-3.2.0.tar",
+      "license": [
+        "MIT License"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "spandex_datadog",
+      "type": "hex",
+      "hexName": "spandex_datadog",
+      "version": "1.4.0",
+      "lockChecksum": "0594b9655b0af00ab9137122616bc0208b68ceec01e9916ab13d6fbb33dcce35",
+      "archiveChecksum": "360f8e1b4db238c1749c4872b1697b096429927fa42b8858d0bb782067380123",
+      "metadataUrl": "https://repo.hex.pm/tarballs/spandex_datadog-1.4.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "spandex_ecto",
+      "type": "hex",
+      "hexName": "spandex_ecto",
+      "version": "0.7.0",
+      "lockChecksum": "259ad2feb7c834e774ec623f99c0fbacca8d60a73be212f92b75e37f853c81be",
+      "archiveChecksum": "c64784be79d95538013b7c60828830411c5c7aff1f4e8d66dfe564b3c83b500e",
+      "metadataUrl": "https://repo.hex.pm/tarballs/spandex_ecto-0.7.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "spandex_phoenix",
+      "type": "hex",
+      "hexName": "spandex_phoenix",
+      "version": "1.1.0",
+      "lockChecksum": "9cff829d05258dd49a227c56711b19b69a8fd5d4873d8e9a92a4f4097e7322ab",
+      "archiveChecksum": "265fe05c1736485fbb75d66ef7576682ebf6428c391dd54d22217f612fd4ddad",
+      "metadataUrl": "https://repo.hex.pm/tarballs/spandex_phoenix-1.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ssl_verify_fun",
+      "type": "hex",
+      "hexName": "ssl_verify_fun",
+      "version": "1.1.7",
+      "lockChecksum": "354c321cf377240c7b8716899e182ce4890c5938111a1296add3ec74cf1715df",
+      "archiveChecksum": "fe4c190e8f37401d30167c8c405eda19469f34577987c76dde613e838bbc67f8",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ssl_verify_fun-1.1.7.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "statistex",
+      "type": "hex",
+      "hexName": "statistex",
+      "version": "1.1.0",
+      "lockChecksum": "7fec1eb2f580a0d2c1a05ed27396a084ab064a40cfc84246dbfb0c72a5c761e5",
+      "archiveChecksum": "f5950ea26ad43246ba2cce54324ac394a4e7408fdcf98b8e230f503a0cba9cf5",
+      "metadataUrl": "https://repo.hex.pm/tarballs/statistex-1.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "sweet_xml",
+      "type": "hex",
+      "hexName": "sweet_xml",
+      "version": "0.7.5",
+      "lockChecksum": "803a563113981aaac202a1dbd39771562d0ad31004ddbfc9b5090bdcd5605277",
+      "archiveChecksum": "193b28a9b12891cae351d81a0cead165ffe67df1b73fe5866d10629f4faefb12",
+      "metadataUrl": "https://repo.hex.pm/tarballs/sweet_xml-0.7.5.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "telemetry",
+      "type": "hex",
+      "hexName": "telemetry",
+      "version": "1.3.0",
+      "lockChecksum": "fedebbae410d715cf8e7062c96a1ef32ec22e764197f70cda73d82778d61e7a2",
+      "archiveChecksum": "7015fc8919dbe63764f4b4b87a95b7c0996bd539e0d499be6ec9d7f3875b79e6",
+      "metadataUrl": "https://repo.hex.pm/tarballs/telemetry-1.3.0.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "tesla",
+      "type": "hex",
+      "hexName": "tesla",
+      "version": "1.16.0",
+      "lockChecksum": "de77d083aea08ebd1982600693ff5d779d68a4bb835d136a0394b08f69714660",
+      "archiveChecksum": "eb3bdfc0c6c8a23b4e3d86558e812e3577acff1cb4acb6cfe2da1985a1035b89",
+      "metadataUrl": "https://repo.hex.pm/tarballs/tesla-1.16.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "timex",
+      "type": "hex",
+      "hexName": "timex",
+      "version": "3.7.13",
+      "lockChecksum": "0688ce11950f5b65e154e42b47bf67b15d3bc0e0c3def62199991b8a8079a1e2",
+      "archiveChecksum": "09588e0522669328e973b8b4fd8741246321b3f0d32735b589f78b136e6d4c54",
+      "metadataUrl": "https://repo.hex.pm/tarballs/timex-3.7.13.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ton",
+      "type": "hex",
+      "hexName": "ton",
+      "version": "0.5.1",
+      "lockChecksum": "79745434a93e5f7de3572fdcf04feb048620f0edab9794fc412a73528672927d",
+      "archiveChecksum": "916f656c870902a61690347da9500c5ce27f04c02e02441363bac7b128030f07",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ton-0.5.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "typed_ecto_schema",
+      "type": "hex",
+      "hexName": "typed_ecto_schema",
+      "version": "0.4.3",
+      "lockChecksum": "1e5f3b6c763f9b5725975d3ab7f1554525f1f1399b966f2425acf04f9d8dd4fe",
+      "archiveChecksum": "dcbd9b35b9fda5fa9258e0ae629a99cf4473bd7adfb85785d3f71dfe7a9b2bc0",
+      "metadataUrl": "https://repo.hex.pm/tarballs/typed_ecto_schema-0.4.3.tar",
+      "license": [
+        "Apache-2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "tzdata",
+      "type": "hex",
+      "hexName": "tzdata",
+      "version": "1.1.3",
+      "lockChecksum": "b1cef7bb6de1de90d4ddc25d33892b32830f907e7fc2fccd1e7e22778ab7dfbc",
+      "archiveChecksum": "d4ca85575a064d29d4e94253ee95912edfb165938743dbf002acdf0dcecb0c28",
+      "metadataUrl": "https://repo.hex.pm/tarballs/tzdata-1.1.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ueberauth",
+      "type": "hex",
+      "hexName": "ueberauth",
+      "version": "0.10.8",
+      "lockChecksum": "ba78fbcbb27d811a6cd06ad851793aaf7d27c3b30c9e95349c2c362b344cd8f0",
+      "archiveChecksum": "f2d3172e52821375bccb8460e5fa5cb91cfd60b19b636b6e57e9759b6f8c10c1",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ueberauth-0.10.8.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "ueberauth_auth0",
+      "type": "hex",
+      "hexName": "ueberauth_auth0",
+      "version": "2.1.0",
+      "lockChecksum": "0632d5844049fa2f26823f15e1120aa32f27df6f27ce515a4b04641736594bf4",
+      "archiveChecksum": "8d3b30fa27c95c9e82c30c4afb016251405706d2e9627e603c3c9787fd1314fc",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ueberauth_auth0-2.1.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "unicode_util_compat",
+      "type": "hex",
+      "hexName": "unicode_util_compat",
+      "version": "0.7.1",
+      "lockChecksum": "a48703a25c170eedadca83b11e88985af08d35f37c6f664d6dcfb106a97782fc",
+      "archiveChecksum": "b3a917854ce3ae233619744ad1e0102e05673136776fb2fa76234f3e03b23642",
+      "metadataUrl": "https://repo.hex.pm/tarballs/unicode_util_compat-0.7.1.tar",
+      "license": [
+        "Apache 2.0"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "unsafe",
+      "type": "hex",
+      "hexName": "unsafe",
+      "version": "1.0.2",
+      "lockChecksum": "23c6be12f6c1605364801f4b47007c0c159497d0446ad378b5cf05f1855c0581",
+      "archiveChecksum": "b485231683c3ab01a9cd44cb4a79f152c6f3bb87358439c6f68791b85c2df675",
+      "metadataUrl": "https://repo.hex.pm/tarballs/unsafe-1.0.2.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "varint",
+      "type": "hex",
+      "hexName": "varint",
+      "version": "1.5.1",
+      "lockChecksum": "17160c70d0428c3f8a7585e182468cac10bbf165c2360cf2328aaa39d3fb1795",
+      "archiveChecksum": "24f3deb61e91cb988056de79d06f01161dd01be5e0acae61d8d936a552f1be73",
+      "metadataUrl": "https://repo.hex.pm/tarballs/varint-1.5.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "vix",
+      "type": "hex",
+      "hexName": "vix",
+      "version": "0.38.0",
+      "lockChecksum": "77529ee4f6ced339c3d5f90a9eacf306f5b7109d3d1b5e3ef391a984ad404f75",
+      "archiveChecksum": "dca58f654922fa678d5df8e028317483d9c0f8acb2e2714076a8468695687aa7",
+      "metadataUrl": "https://repo.hex.pm/tarballs/vix-0.38.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "wallaby",
+      "type": "hex",
+      "hexName": "wallaby",
+      "version": "0.30.12",
+      "lockChecksum": "1736bad495b222053a04307e22075bf3a38e7978363294d1eacdea1417bbb208",
+      "archiveChecksum": "03b33244213b53af7c7e354a6ce129b1ffec9c57cac613eb76543f1fd46fcf70",
+      "metadataUrl": "https://repo.hex.pm/tarballs/wallaby-0.30.12.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "web_driver_client",
+      "type": "hex",
+      "hexName": "web_driver_client",
+      "version": "0.2.0",
+      "lockChecksum": "63b76cd9eb3b0716ec5467a0f8bead73d3d9612e63f7560d21357f03ad86e31a",
+      "archiveChecksum": "83cc6092bc3e74926d1c8455f0ce927d5d1d36707b74d9a65e38c084aab0350f",
+      "metadataUrl": "https://repo.hex.pm/tarballs/web_driver_client-0.2.0.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    },
+    {
+      "name": "websock",
+      "type": "hex",
+      "hexName": "websock",
+      "version": "0.5.3",
+      "lockChecksum": "2f69a6ebe810328555b6fe5c831a851f485e303a7c8ce6c5f675abeb20ebdadc",
+      "archiveChecksum": "6105453d7fac22c712ad66fab1d45abdf049868f253cf719b625151460b8b453",
+      "metadataUrl": "https://repo.hex.pm/tarballs/websock-0.5.3.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "26f042d624e62b760e707842347e9e08cb981491d3cecfdd63bc48fc32e870e3",
+          "text": "MIT License\n\nCopyright (c) 2022 Mat Trudel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "websock_adapter",
+      "type": "hex",
+      "hexName": "websock_adapter",
+      "version": "0.5.8",
+      "lockChecksum": "3b97dc94e407e2d1fc666b2fb9acf6be81a1798a2602294aac000260a7c4a47d",
+      "archiveChecksum": "315b9a1865552212b5f35140ad194e67ce31af45bcee443d4ecb96b5fd3f3782",
+      "metadataUrl": "https://repo.hex.pm/tarballs/websock_adapter-0.5.8.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true,
+      "noticeFiles": [
+        {
+          "path": "LICENSE",
+          "sha256": "26f042d624e62b760e707842347e9e08cb981491d3cecfdd63bc48fc32e870e3",
+          "text": "MIT License\n\nCopyright (c) 2022 Mat Trudel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n"
+        }
+      ]
+    },
+    {
+      "name": "websockex",
+      "type": "hex",
+      "hexName": "websockex",
+      "version": "0.5.1",
+      "lockChecksum": "9de28d37bbe34f371eb46e29b79c94c94fff79f93c960d842fbf447253558eb4",
+      "archiveChecksum": "8ef39576ed56bc3804c9cd8626f8b5d6b5721848d2726c0ccd4f05385a3c9f14",
+      "metadataUrl": "https://repo.hex.pm/tarballs/websockex-0.5.1.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "Exact-version Hex archive metadata.config, full tar SHA-256 verified against mix.lock outer checksum",
+      "archiveChecksumVerified": true
+    },
+    {
+      "name": "ymlr",
+      "type": "hex",
+      "hexName": "ymlr",
+      "version": "5.1.4",
+      "lockChecksum": "b924d61e1fc1ec371cde6ab3ccd9311110b1e052fc5c2460fb322e8380e7712a",
+      "archiveChecksum": "75f16cf0709fbd911b30311a0359a7aa4b5476346c01882addefd5f2b1cfaa51",
+      "metadataUrl": "https://repo.hex.pm/tarballs/ymlr-5.1.4.tar",
+      "license": [
+        "MIT"
+      ],
+      "licenseEvidence": "licenses field from exact-version Hex tarball metadata.config; package bytes were not fully downloaded or independently checksum verified",
+      "evidenceOrigin": "Unchanged package identity/checksum; previous exact-version metadata review retained"
+    }
+  ]
+}

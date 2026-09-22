@@ -1,0 +1,412 @@
+<!doctype html>
+<!-- ColossusX: legal/source links added 2026-09-21; GPL-3.0-only. -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="How ColossusX validators finalize blocks, common miners admit transactions, and Common RPC rewards are paid. Inspect a transaction's admission and reward fields."
+    />
+    <title>Validators &amp; Common Miners · ColossusX</title>
+    <link rel="icon" href="/network-info/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/network-info/apple-touch-icon.png" />
+    <link rel="stylesheet" href="/network-info/style.css" />
+    <script type="module" src="/network-info/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="/" aria-label="ColossusX explorer home">
+          <img class="brand-mark" src="/network-info/logo.png" alt="" width="39" height="39" />
+          <span>ColossusX <span class="brand-caption">Explorer</span></span>
+        </a>
+        <a class="back-link" href="/"
+          >Back to explorer <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </header>
+
+    <main id="main" class="page-shell">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Explorer</a><span aria-hidden="true">/</span
+        ><span aria-current="page">Network guide</span>
+      </nav>
+
+      <section class="hero" aria-labelledby="page-title">
+        <p class="eyebrow">
+          <span class="status-dot" aria-hidden="true"></span>COLOSSUSX NETWORK
+          GUIDE
+        </p>
+        <h1 id="page-title">Validators &amp;<br />Common Miners</h1>
+        <p class="hero-description">
+          Two roles, one network. Validators finalize blocks. Common miners
+          receive user transactions through public RPC and prove that they
+          accepted them.
+        </p>
+        <div class="network-facts" aria-label="Network information">
+          <span>Chain ID <strong>10101919</strong></span>
+          <span>Currency <strong>colossusX · CLX</strong></span>
+          <span>Decimals <strong>18</strong></span>
+        </div>
+      </section>
+
+      <section class="role-grid" aria-label="Network roles">
+        <article class="role-card validator-card">
+          <span class="card-kicker">CONSENSUS &amp; FINALITY</span>
+          <h2>Validators</h2>
+          <p>
+            Create and verify blocks, run HotStuff finality, and decide the
+            final state of the chain.
+          </p>
+          <p class="card-detail">
+            Their core job is block production, verification, and finalization.
+            They do not need to expose public RPC endpoints.
+          </p>
+        </article>
+        <article class="role-card miner-card">
+          <span class="card-kicker">PUBLIC TRANSACTION ADMISSION</span>
+          <h2>Common miners</h2>
+          <p>
+            Open public RPC endpoints, receive user transactions, create signed
+            <code>CommonTxAdmission</code> records, and relay admissions to the
+            validator leader.
+          </p>
+          <p class="card-detail">
+            This admission layer operates in front of the validator network.
+            Common miners do not replace validator consensus.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel lookup-panel" aria-labelledby="lookup-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">EXPLORE A TRANSACTION</p>
+            <h2 id="lookup-title">Admission &amp; reward lookup</h2>
+          </div>
+          <span class="quiet-tag">Read-only RPC data</span>
+        </div>
+        <p>
+          Inspect the admission signer, reward recipient, reward, and burn
+          fields returned by the network for a transaction.
+        </p>
+        <form id="lookup-form" class="lookup-form">
+          <label for="tx-hash">Transaction hash</label>
+          <div class="input-row">
+            <input
+              id="tx-hash"
+              name="txHash"
+              type="text"
+              placeholder="0x…"
+              pattern="0x[a-fA-F0-9]{64}"
+              minlength="66"
+              maxlength="66"
+              title="Enter 0x followed by 64 hexadecimal characters."
+              autocomplete="off"
+              autocapitalize="none"
+              spellcheck="false"
+              aria-describedby="lookup-status"
+              required
+            />
+            <button class="primary-button" type="submit">
+              Look up transaction <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <div class="lookup-links">
+            <button id="sample-transaction" class="text-button" type="button">
+              Use example transaction
+            </button>
+            <a
+              href="/tx/0xc376f07d78ce2eb9d3e79c4264d8d76d5814196fcaa2b887b2b0fd8d4b51c9ca"
+              >View example in explorer <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </form>
+        <p
+          id="lookup-status"
+          class="lookup-status"
+          role="status"
+          aria-live="polite"
+        >
+          Enter a transaction hash to inspect its available Common RPC fields.
+          Older transactions may not contain admission data.
+        </p>
+        <div id="lookup-results" hidden></div>
+        <noscript
+          ><p class="notice">
+            Enable JavaScript to use transaction lookup. The network guide below
+            is available without JavaScript.
+          </p></noscript
+        >
+      </section>
+
+      <section class="content-section" aria-labelledby="flow-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FROM SUBMISSION TO FINALITY</p>
+            <h2 id="flow-title">How a transaction reaches the chain</h2>
+          </div>
+        </div>
+        <ol class="flow-grid">
+          <li>
+            <span class="step-number">01</span>
+            <h3>Choose an RPC</h3>
+            <p>
+              Users can send transactions through any common miner RPC endpoint
+              and switch to another if one is unavailable.
+            </p>
+          </li>
+          <li>
+            <span class="step-number">02</span>
+            <h3>Sign the admission</h3>
+            <p>
+              A common miner accepts the transaction and relays a signed
+              admission to the validator leader.
+            </p>
+          </li>
+          <li>
+            <span class="step-number">03</span>
+            <h3>Verify &amp; finalize</h3>
+            <p>
+              Validators verify the proofs and execute transactions, then
+              finalize the chain state through consensus.
+            </p>
+          </li>
+        </ol>
+        <aside class="notice" aria-label="TxQUIC endpoint access">
+          <h3>TxQUIC access and authentication</h3>
+          <p>
+            TxQUIC verifies each sender's signature. Optional
+            <code>AllowedSigners</code> and <code>AllowIPs</code> settings
+            restrict a local endpoint only when populated. Empty lists accept
+            any correctly signed sender from any source IP. The supplied network
+            configuration leaves both filters empty; this guide does not
+            independently verify live endpoint settings.
+            <strong
+              >Validator committee authentication remains required.</strong
+            >
+          </p>
+        </aside>
+      </section>
+
+      <section class="content-section" aria-labelledby="rewards-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">COMMON RPC REWARD RULE</p>
+            <h2 id="rewards-title">A signs. B receives the reward.</h2>
+          </div>
+        </div>
+        <p class="section-intro">
+          Every admission identifies a signing account <strong>A</strong> and a
+          distinct reward recipient <strong>B</strong>. A signs the complete
+          proof, including B. Validators require matching A and B in the reward
+          record; their local reward preference does not determine block
+          payouts.
+        </p>
+        <div class="reward-grid">
+          <article class="panel reward-card">
+            <span class="card-kicker">ACTUAL TRANSACTION FEE</span>
+            <h3>The fee calculation stays the same</h3>
+            <pre class="formula"><code>actualTxFee = gasUsed * effectiveGasPrice
+commonRpcReward = floor(actualTxFee / 5)
+commonRpcBurn = actualTxFee - commonRpcReward</code></pre>
+            <div
+              class="split-bar"
+              role="img"
+              aria-label="One fifth of the fee, rounded down in wei, goes to B. The remainder is burned."
+            >
+              <span class="reward-share"></span><span class="burn-share"></span>
+            </div>
+            <div class="split-labels">
+              <span
+                ><i class="reward-dot" aria-hidden="true"></i
+                ><strong>20%</strong> to B, rounded down</span
+              ><span
+                ><i class="burn-dot" aria-hidden="true"></i>Remainder
+                burned</span
+              >
+            </div>
+          </article>
+          <article class="panel payout-card">
+            <span class="card-kicker">DIRECT CREDIT TO B</span>
+            <h3>No claim transaction needed</h3>
+            <p>
+              After all transactions in the block have executed, rewards are
+              aggregated by recipient and credited directly to B.
+            </p>
+            <ul class="compact-list">
+              <li>No intermediate credit to A or automatic transfer.</li>
+              <li>No contract call to B or claim transaction.</li>
+              <li>
+                A missing B prevents a new admission. Payment never falls back
+                to A.
+              </li>
+            </ul>
+            <p class="small-copy">
+              Other reward types retain their existing recipients and amounts.
+              Fee calculation and rounding are unchanged.
+            </p>
+          </article>
+        </div>
+        <div class="example-panel">
+          <div class="example-intro">
+            <span class="card-kicker">WORKED EXAMPLE</span>
+            <h3>21,000 gas × 1 gwei</h3>
+            <p>Effective gas price: 1,000,000,000 wei</p>
+          </div>
+          <div class="table-scroll">
+            <table class="example-table">
+              <caption class="visually-hidden">
+                Example Common RPC transaction fee split
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Amount</th>
+                  <th scope="col">CLX</th>
+                  <th scope="col">Wei</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Actual transaction fee</th>
+                  <td>0.000021</td>
+                  <td>21,000,000,000,000</td>
+                </tr>
+                <tr>
+                  <th scope="row">Reward credited to B</th>
+                  <td>0.0000042</td>
+                  <td>4,200,000,000,000</td>
+                </tr>
+                <tr>
+                  <th scope="row">Burned remainder</th>
+                  <td>0.0000168</td>
+                  <td>16,800,000,000,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <p class="section-note">
+          Common miners can earn more transaction admission rewards as more
+          users send transactions through their public RPC endpoints. Receiving
+          these fees does not make B or the common miner operator a validator.
+        </p>
+      </section>
+
+      <section class="content-section" aria-labelledby="rpc-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">RPC REFERENCE</p>
+            <h2 id="rpc-title">Read the admission and reward records</h2>
+          </div>
+        </div>
+        <p class="section-intro">
+          Use <code>eth_getTransactionReceipt</code> and
+          <code>eth_getTransactionByHash</code>, or the console equivalents
+          <code>eth.getTransactionReceipt(txHash)</code> and
+          <code>eth.getTransaction(txHash)</code>.
+        </p>
+        <div class="panel table-panel table-scroll">
+          <table class="rpc-table">
+            <caption class="visually-hidden">
+              Common RPC admission and reward fields
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">Field</th>
+                <th scope="col">Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row"><code>commonTxApprover</code></th>
+                <td>Admission signer A.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxRewardRecipient</code></th>
+                <td>Actual reward recipient B.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxApproverReward</code></th>
+                <td>
+                  Common RPC fee reward credited to B. The existing field name
+                  is retained.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxBurn</code></th>
+                <td>Burned remainder of the actual fee.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxAdmissionRoot</code></th>
+                <td>
+                  Block commitment to the signed admissions and references.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxRewardRoot</code></th>
+                <td>Block commitment to reward records.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxAdmissionChainId</code></th>
+                <td>Chain ID bound to the proof.</td>
+              </tr>
+              <tr>
+                <th scope="row">
+                  <code>commonTxAdmissionKeyBlockNumber</code>
+                </th>
+                <td>Admission's key-block boundary.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxAdmissionTimestamp</code></th>
+                <td>Signed admission timestamp.</td>
+              </tr>
+              <tr>
+                <th scope="row"><code>commonTxAdmissionSignature</code></th>
+                <td>A's signature over the admission payload.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="console-grid">
+          <div>
+            <h3>Check a receipt in the console</h3>
+            <p>
+              For a client connected to public RPC, inspect the receipt and B's
+              balance.
+            </p>
+            <p class="small-copy">
+              Compare B's balance against its initial balance and ordinary
+              transfers. A balance increase alone does not establish the source
+              of a reward.
+            </p>
+          </div>
+          <pre
+            class="console-code"
+          ><code>var receipt = eth.getTransactionReceipt(txHash);
+receipt.commonTxApprover;
+receipt.commonTxRewardRecipient;
+receipt.commonTxApproverReward;
+receipt.commonTxBurn;
+eth.getBalance(receipt.commonTxRewardRecipient);</code></pre>
+        </div>
+        <p class="notice final-note">
+          Validators remain responsible for verifying proofs, reward amounts,
+          roots, signatures, chain identity, and final state.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer page-shell">
+      <p>
+        Based on the supplied ColossusX network specification. Currency amounts
+        use CLX with 18 decimals.
+      </p>
+      <a href="/legal/">Licenses &amp; Notices</a>
+      <a href="/source/">Source code</a>
+      <a href="/">ColossusX explorer <span aria-hidden="true">↗</span></a>
+    </footer>
+  </body>
+</html>

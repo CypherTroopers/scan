@@ -1,0 +1,110 @@
+# Modified for ColossusX on 2026-09-21. SPDX-License-Identifier: GPL-3.0-only
+# Based on the pinned v10.2.6 docker/Dockerfile; bounded compiler concurrency and source provenance.
+ARG ELIXIR_IMAGE=hexpm/elixir:1.19.4-erlang-27.3.4.6-alpine-3.22.2@sha256:c129490fa75f7d00a28e293eb8ee5e00d1b7b34da03748b998369e41ef8a0a1e
+FROM ${ELIXIR_IMAGE} AS builder-deps
+
+WORKDIR /app
+
+ENV ERL_FLAGS="+S 2:2"
+
+RUN apk --no-cache --update add \
+    alpine-sdk gmp-dev automake libtool inotify-tools autoconf python3 file gcompat libstdc++ curl ca-certificates git make bash
+
+# Cache elixir deps
+COPY mix.exs mix.lock ./
+COPY apps/block_scout_web/mix.exs ./apps/block_scout_web/
+COPY apps/explorer/mix.exs ./apps/explorer/
+COPY apps/ethereum_jsonrpc/mix.exs ./apps/ethereum_jsonrpc/
+COPY apps/indexer/mix.exs ./apps/indexer/
+COPY apps/utils/mix.exs ./apps/utils/
+COPY apps/nft_media_handler/mix.exs ./apps/nft_media_handler/
+
+ENV MIX_ENV="prod"
+ENV MIX_HOME=/opt/mix
+RUN mix local.hex --force
+RUN MIX_OS_DEPS_COMPILE_PARTITION_COUNT=2 mix do deps.get + local.rebar --force + deps.compile --skip-umbrella-children
+
+COPY config ./config
+COPY rel ./rel
+COPY apps ./apps
+
+##############################################################
+FROM builder-deps AS builder
+
+ENV DISABLE_WEBAPP=true
+ENV ADMIN_PANEL_ENABLED=false
+ARG DISABLE_API
+ENV DISABLE_API=${DISABLE_API}
+ARG API_V1_READ_METHODS_DISABLED
+ENV API_V1_READ_METHODS_DISABLED=${API_V1_READ_METHODS_DISABLED}
+ARG API_V1_WRITE_METHODS_DISABLED
+ENV API_V1_WRITE_METHODS_DISABLED=${API_V1_WRITE_METHODS_DISABLED}
+ARG CHAIN_TYPE
+ENV CHAIN_TYPE=${CHAIN_TYPE}
+ARG BRIDGED_TOKENS_ENABLED
+ENV BRIDGED_TOKENS_ENABLED=${BRIDGED_TOKENS_ENABLED}
+ARG API_GRAPHQL_MAX_COMPLEXITY
+ENV API_GRAPHQL_MAX_COMPLEXITY=${API_GRAPHQL_MAX_COMPLEXITY}
+ARG MUD_INDEXER_ENABLED
+ENV MUD_INDEXER_ENABLED=${MUD_INDEXER_ENABLED}
+
+# Run backend compilation
+RUN mix compile
+
+RUN mkdir -p /opt/release && \
+    mix release blockscout && \
+    mv _build/${MIX_ENV}/rel/blockscout /opt/release
+
+##############################################################
+FROM ${ELIXIR_IMAGE}
+
+WORKDIR /app
+
+ARG BLOCKSCOUT_USER=blockscout
+ARG BLOCKSCOUT_GROUP=blockscout
+ARG BLOCKSCOUT_UID=10001
+ARG BLOCKSCOUT_GID=10001
+
+RUN apk --no-cache --update add jq curl && \
+    addgroup --system --gid ${BLOCKSCOUT_GID} ${BLOCKSCOUT_GROUP} && \
+    adduser --system --uid ${BLOCKSCOUT_UID} --ingroup ${BLOCKSCOUT_GROUP} --disabled-password --home /app ${BLOCKSCOUT_USER}
+
+ENV DISABLE_WEBAPP=true
+ENV ADMIN_PANEL_ENABLED=false
+ARG DISABLE_API
+ENV DISABLE_API=${DISABLE_API}
+ARG API_V1_READ_METHODS_DISABLED
+ENV API_V1_READ_METHODS_DISABLED=${API_V1_READ_METHODS_DISABLED}
+ARG API_V1_WRITE_METHODS_DISABLED
+ENV API_V1_WRITE_METHODS_DISABLED=${API_V1_WRITE_METHODS_DISABLED}
+ARG CHAIN_TYPE
+ENV CHAIN_TYPE=${CHAIN_TYPE}
+ARG BRIDGED_TOKENS_ENABLED
+ENV BRIDGED_TOKENS_ENABLED=${BRIDGED_TOKENS_ENABLED}
+ARG API_GRAPHQL_MAX_COMPLEXITY
+ENV API_GRAPHQL_MAX_COMPLEXITY=${API_GRAPHQL_MAX_COMPLEXITY}
+ARG MUD_INDEXER_ENABLED
+ENV MUD_INDEXER_ENABLED=${MUD_INDEXER_ENABLED}
+
+ARG COLOSSUSX_SOURCE_SHA256
+ARG COLOSSUSX_SOURCE_URL
+LABEL org.opencontainers.image.title="ColossusX Backend" \
+      org.opencontainers.image.version="10.2.6-colossusx" \
+      org.opencontainers.image.licenses="GPL-3.0-only" \
+      org.opencontainers.image.revision="90f7dd8e9348123b74dfd23f69ab7da76191a820" \
+      org.opencontainers.image.source="${COLOSSUSX_SOURCE_URL}" \
+      community.colossusx.source.sha256="${COLOSSUSX_SOURCE_SHA256}"
+
+ARG RELEASE_VERSION
+ENV RELEASE_VERSION=${RELEASE_VERSION}
+ARG BLOCKSCOUT_VERSION
+ENV BLOCKSCOUT_VERSION=${BLOCKSCOUT_VERSION}
+
+COPY --from=builder --chown=${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP} /opt/release/blockscout .
+COPY --from=builder --chown=${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP} /app/config/config_helper.exs ./config/config_helper.exs
+COPY --from=builder --chown=${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP} /app/config/config_helper.exs /app/releases/${RELEASE_VERSION}/config_helper.exs
+COPY --from=builder --chown=${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP} /app/config/assets/precompiles-arbitrum.json ./config/assets/precompiles-arbitrum.json
+
+RUN mkdir dets && mkdir temp && chown -R ${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP} /app
+
+USER ${BLOCKSCOUT_USER}:${BLOCKSCOUT_GROUP}

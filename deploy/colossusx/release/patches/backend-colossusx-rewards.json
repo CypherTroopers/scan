@@ -1,0 +1,167 @@
+{
+  "upstream_commit": "90f7dd8e9348123b74dfd23f69ab7da76191a820",
+  "patch_sha256": "08cceab51655b78c284e312c7926bea1223f14e0f8bb0073ff30aef65f7bbd98",
+  "changes": [
+    {
+      "path": "apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block/colossusx_rewards.ex",
+      "upstream_sha256": null,
+      "modified_sha256": "0f869793523fc2fa4a91823bd2cb570d9435644b0d74cffcdd0b1bdcdc50234f",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/lib/block_scout_web/schemas/api/v2/block.ex",
+      "upstream_sha256": "5b74d57a64d084ea4b183275377338d4ef5921f833c8d1333ec20aa47e37b458",
+      "modified_sha256": "02db956079906a324eb910a34dc5cfb3b2d199d2d462dcfea81a89533d6b9e91",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/lib/block_scout_web/views/api/rpc/block_view.ex",
+      "upstream_sha256": "13fca3e992597fa5df7fe0cbd957221f64ddb1b739f9b39f50800c884ba7fc78",
+      "modified_sha256": "ef75ee17d454f53497eedc087def30bd78082e8eb11743fe2c6c13430609387d",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/lib/block_scout_web/views/api/v2/block_view.ex",
+      "upstream_sha256": "bfaf16581108d8cdd2e89a77096cd8a35b731b30d2316187051253399411520f",
+      "modified_sha256": "728f5de33efdf0db26469b9ad693b522424930d437f6a20fed01ea132328ecf1",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/lib/block_scout_web/views/block_view.ex",
+      "upstream_sha256": "93bf16712e01ea394d817270b5735341507c4fac31cdb025f7fe2abd1da73122",
+      "modified_sha256": "7ce06afe063e1e7b9c1ad47403139da53a6098b3d4fde74db4c1a2962303e24d",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/test/block_scout_web/controllers/api/v2/colossusx_block_controller_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "5da8630186ad08f30ae79832ed29dcf3cb7d52b5447c261a73c0614b7d1ce1a2",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/test/block_scout_web/schemas/api/v2/colossusx_rewards_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "7898a1a90d7bba57841b268d77ea5337cc3f8bfde0374668a4cb41f3ab35f6e3",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/block_scout_web/test/block_scout_web/views/api/rpc/colossusx_block_view_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "d96609b3ec0619c0a2ffdf7e82e8328325aad800f673c09a2645a55c28bf1292",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/ethereum_jsonrpc/lib/ethereum_jsonrpc/colossusx.ex",
+      "upstream_sha256": null,
+      "modified_sha256": "652a54124498184c024daa9a8c8b76466636044f47afcc2be71f4ae16cf58753",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/ethereum_jsonrpc/test/ethereum_jsonrpc/colossusx_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "8c3c1f78f43aed83a2ea92b59a281eeb519e65d302d03fce8f3b3153413d7ca3",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/ethereum_jsonrpc/test/support/ethereum_jsonrpc/colossusx_fixture.ex",
+      "upstream_sha256": null,
+      "modified_sha256": "1299b22179fed0b38ab1d0209e49833102146c01a119e33e1466b5cca7db44cb",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/explorer/lib/explorer/chain/block/colossusx_rewards.ex",
+      "upstream_sha256": null,
+      "modified_sha256": "b4349ec4d23f1a7c544c4aaa4c0694668aaff7012446ae5eb9162082d7b2da97",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/explorer/lib/explorer/chain/block/reward/address_type.ex",
+      "upstream_sha256": "b8eeb29845608cd415a527fea5a245dba11eb98f082a9868241145cbb9c5c43c",
+      "modified_sha256": "d6e21e9b3fc3cc658a9c69e57063cd2669d0d35f602db6ce31e065c32521eb80",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/explorer/lib/explorer/chain/block/reward.ex",
+      "upstream_sha256": "6e0a80f7eaac89ef2be8e88cdce99303769ff0a3cac93b7cee89c46b35477106",
+      "modified_sha256": "1fdee49ac986d877f0df72747fbebe4331a87502a68a77c1edc72152631fde62",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/explorer/lib/explorer/chain.ex",
+      "upstream_sha256": "b6b9255c759c7fd22af65d7c37da29496e07b7e26da74235af0adc1cc3f422ad",
+      "modified_sha256": "107955a278e48534449677d11f38c7d2a4cac5732c966b5646d6458f4b4c1ca7",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/explorer/test/explorer/chain/block/colossusx_rewards_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "7bfdf22699cc0558c60356c8913cca73ce11533868d6315dbd0a91ffe257bcdb",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/indexer/lib/indexer/block/fetcher.ex",
+      "upstream_sha256": "180dd94c06e132665feda887d1b7672d2eaad0d4af10d879055e27d30a84d822",
+      "modified_sha256": "2b40fcbd1a2730012271eb58d02f2e46489215ac4d0fa09a46a4bf4f8fd24476",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/indexer/lib/indexer/fetcher/block_reward.ex",
+      "upstream_sha256": "1459acc824175e7c9f852630b122b94d5549641eb361bda7f40e031bac38647e",
+      "modified_sha256": "3446c6a43a20ce6329dcd3f652ae05b685cf266e193e7a34ccac7ec5d8b2dd36",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/indexer/lib/indexer/supervisor.ex",
+      "upstream_sha256": "672dca9f0884fdac010d3fc90bc01330fab8f8e192ba710b11eef6684c361f51",
+      "modified_sha256": "f440f92e45ee560d5c169af279268eef88ebc6e97cd85cd944d07f1e2e1df7f5",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/indexer/test/indexer/colossusx_supervisor_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "9cfaf28dc49c227514ff733407ec6c503267e6f1793571833ede19c0d17e31ef",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "apps/indexer/test/indexer/fetcher/colossusx_block_reward_test.exs",
+      "upstream_sha256": null,
+      "modified_sha256": "d9a1f530285eec2ee6619901c28abff6a6d4596735e78db4c846d40c67fbf76f",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "config/runtime.exs",
+      "upstream_sha256": "5193bf48635767486371204db801ff09e1e9d35e382eaa3db66e16285687ebd3",
+      "modified_sha256": "ac8c9a3733e60aa7767b8b4dd35680e66aff72dffa5d537c56b0dd0d649d0f44",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    },
+    {
+      "path": "docker-compose/envs/common-blockscout.env",
+      "upstream_sha256": "f7c4beef49521f94f5b94dc7ec8c4c6fb3ec264624868c416f3680b566ad1e8a",
+      "modified_sha256": "7fc4b3d882fbd205442a35ba747b9b8de6f576a44d2e4e415460d9d5b8deeb42",
+      "modification_date": "2026-09-21",
+      "reason": "Add opt-in verified FHS-D reward indexing, API distribution, and regression coverage without Ethereum fee additions."
+    }
+  ]
+}

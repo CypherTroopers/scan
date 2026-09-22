@@ -1,0 +1,14 @@
+.env
+**/.env.local
+**/.env.production
+**/.env.production.local
+**/node_modules/
+**/.next/
+**/deps/
+**/_build/
+**/backups/
+**/source-dist/
+*.dump
+*.pem
+*.key
+__pycache__/

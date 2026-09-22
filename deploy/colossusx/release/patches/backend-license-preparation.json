@@ -1,0 +1,28 @@
+{
+  "prepared_on": "2026-09-21",
+  "upstream_commit": "90f7dd8e9348123b74dfd23f69ab7da76191a820",
+  "description": "Hash-checked source exclusions. Restricted source and embedded bytecode are deliberately not copied into a deletion diff.",
+  "operations": [
+    {
+      "path": "config/assets/precompiles-arbitrum.json",
+      "upstream_sha256": "cc0659d5699f5446ea465b971f5b24bab8f0bbd53ebf771a73fe1208d64a670a",
+      "action": "replace_with_empty_json_array",
+      "reason": "Remove the Arbitrum metadata preset, including 15 BUSL-1.1 interfaces. This ColossusX release does not provide Arbitrum precompile metadata."
+    },
+    {
+      "path": "apps/explorer/test/support/fixture/smart_contract/issue_4758.sol",
+      "upstream_sha256": "e315d87dcb4a3c7c1c98604a060ec93a84138dc2ac37e5a764e756aa73c17e4a",
+      "action": "delete_file",
+      "reason": "Remove a contract fixture labeled UNLICENSED that also refers to separate crypto.post.at terms."
+    },
+    {
+      "path": "apps/explorer/test/explorer/smart_contract/solidity/verifier_test.exs",
+      "upstream_sha256": "9a4bbf7219806b9774d5bb6a279e2cfbf89ada97e79bfaa88991ea99dc490174",
+      "action": "remove_test_block",
+      "start_marker": "      test \"issue 4758\" do\n",
+      "next_test_marker": "      test \"issue 5430, 5434\" do\n",
+      "removed_block_sha256": "f92bb8a97b7c9164bc4a889b7d7c6e9f16e79fbddb2bf900edfd2d6854389bbf",
+      "reason": "Remove only the test consuming the excluded contract fixture, including its embedded compiled bytecode; retain the rest of the verifier tests."
+    }
+  ]
+}

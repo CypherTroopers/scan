@@ -1,0 +1,153 @@
+name: colossusx
+
+x-service: &service
+  restart: unless-stopped
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "3"
+
+services:
+  db:
+    <<: *service
+    image: postgres@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675
+    mem_limit: 1g
+    cpus: 1
+    shm_size: 256m
+    environment:
+      POSTGRES_DB: blockscout
+      POSTGRES_USER: blockscout
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set DB_PASSWORD in .env}
+    command: [postgres, -c, max_connections=150, -c, shared_buffers=256MB]
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U blockscout -d blockscout"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    <<: *service
+    image: redis@sha256:bd999b5cfee25fb24b8320a31fddbd69f462df44c8138c66e369582937beebc0
+    mem_limit: 192m
+    cpus: 0.125
+    command: [redis-server, --maxmemory, 128mb, --maxmemory-policy, allkeys-lru]
+    volumes:
+      - redis-data:/data
+
+  backend:
+    <<: *service
+    image: colossusx-backend:10.2.6
+    pull_policy: never
+    mem_limit: 3g
+    cpus: 1.5
+    stop_grace_period: 5m
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    command:
+      - sh
+      - -c
+      - bin/blockscout eval 'Elixir.Explorer.ReleaseTasks.create_and_migrate()' && exec bin/blockscout start
+    env_file: backend.env
+    environment:
+      DATABASE_URL: postgresql://blockscout:${DB_PASSWORD}@db:5432/blockscout
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE in .env}
+      BLOCKSCOUT_HOST: ${PUBLIC_IP}:18080
+      WEBAPP_URL: http://${PUBLIC_IP}:18080
+      API_URL: http://${PUBLIC_IP}:18080
+    volumes:
+      - backend-dets:/app/dets
+
+  stats-db:
+    <<: *service
+    image: postgres@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675
+    mem_limit: 384m
+    cpus: 0.25
+    environment:
+      POSTGRES_DB: stats
+      POSTGRES_USER: stats
+      POSTGRES_PASSWORD: ${STATS_DB_PASSWORD:?Set STATS_DB_PASSWORD in .env}
+    volumes:
+      - stats-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U stats -d stats"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  stats:
+    <<: *service
+    image: ghcr.io/blockscout/stats@sha256:d5a1ba8fbd10365b37cb056a395f8298b0a93802a4d84037bea07e3847b43a0a
+    mem_limit: 512m
+    cpus: 0.25
+    depends_on:
+      stats-db:
+        condition: service_healthy
+      backend:
+        condition: service_started
+    environment:
+      STATS__SERVER__HTTP__ENABLED: "true"
+      STATS__SERVER__HTTP__ADDR: 0.0.0.0:8050
+      STATS__SERVER__GRPC__ENABLED: "false"
+      STATS__DB_URL: postgresql://stats:${STATS_DB_PASSWORD}@stats-db:5432/stats_v2150
+      STATS__BLOCKSCOUT_DB_URL: postgresql://blockscout:${DB_PASSWORD}@db:5432/blockscout
+      STATS__BLOCKSCOUT_API_URL: http://backend:4000
+      STATS__CREATE_DATABASE: "true"
+      STATS__RUN_MIGRATIONS: "true"
+      STATS__DEFAULT_SCHEDULE: "0 */10 * * * * *"
+      # Chart-specific schedules override DEFAULT_SCHEDULE; keep homepage data current.
+      STATS_UPDATE_GROUPS__SCHEDULES__TOTAL_BLOCKS_GROUP: "0 * * * * * *"
+      STATS_UPDATE_GROUPS__SCHEDULES__TOTAL_TXNS_GROUP: "0 * * * * * *"
+      STATS_UPDATE_GROUPS__SCHEDULES__TOTAL_ADDRESSES_GROUP: "0 * * * * * *"
+      STATS_UPDATE_GROUPS__SCHEDULES__NEW_TXNS_GROUP: "0 * * * * * *"
+      # Recover promptly if the first 24-hour fee/count aggregation sees an empty DB.
+      # The bundled schedule otherwise retries only at minute 30 of each hour.
+      STATS_UPDATE_GROUPS__SCHEDULES__TXNS_STATS_24H_GROUP: "0 * * * * * *"
+      STATS_UPDATE_GROUPS__SCHEDULES__PENDING_TXNS_30M_GROUP: "0 * * * * * *"
+      STATS__FORCE_UPDATE_ON_START: "true"
+      STATS__CONCURRENT_START_UPDATES: "1"
+      STATS_CHARTS__TEMPLATE_VALUES__NATIVE_COIN_SYMBOL: CLX
+
+  frontend:
+    <<: *service
+    image: colossusx-frontend:2.7.2-branding
+    pull_policy: never
+    mem_limit: 768m
+    cpus: 0.75
+    depends_on:
+      - backend
+    env_file: frontend.env
+    environment:
+      NEXT_PUBLIC_APP_HOST: ${PUBLIC_IP}
+      NEXT_PUBLIC_API_HOST: ${PUBLIC_IP}
+      NEXT_PUBLIC_STATS_API_HOST: http://${PUBLIC_IP}:18080
+      NEXT_PUBLIC_OTHER_LINKS: "[{'url':'http://${PUBLIC_IP}:18080/network-info/','text':'Validators & Common Miners'}]"
+
+  proxy:
+    <<: *service
+    image: nginx@sha256:cb29e33d254e8b72164ad5b8b9014f44e98e6e5f6d51ef02ee859f96708c90fe
+    mem_limit: 128m
+    cpus: 0.125
+    depends_on:
+      - backend
+      - frontend
+      - stats
+    ports:
+      - "18080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./network-info:/usr/share/nginx/html/network-info:ro
+      - ./public-legal:/usr/share/nginx/html/legal:ro
+      - ./source-dist:/usr/share/nginx/html/source:ro
+      - ./frontend/assets/favicons:/usr/share/nginx/html/colossusx-favicons:ro
+
+volumes:
+  db-data:
+  stats-db-data:
+  redis-data:
+  backend-dets:
