@@ -30,6 +30,44 @@ Use `docker compose logs -f --tail=100 backend stats` to follow logs, `docker co
 
 Each service uses `restart: unless-stopped` to restart after an unexpected exit or a Docker restart. Services stopped manually remain stopped until explicitly resumed. Docker and host Nginx are enabled to start automatically.
 
+## Resetting After Network Initialization
+
+After restarting the chain, run [reset-explorer.sh](../../reset-explorer.sh) from this checkout:
+
+```bash
+cd ~/blockscout
+./reset-explorer.sh --check  # Optional: validate Docker, images, settings and RPC.
+./reset-explorer.sh         # Delete explorer data and restart.
+```
+
+Use `sudo ./reset-explorer.sh` if your account cannot access Docker or the
+configuration files. Requirements: Bash, Python 3, and Docker Compose v2 with
+`config --no-env-resolution` support (the installed Compose version supports it).
+The script works from any current directory when invoked by its full path.
+
+The reset deletes the four ColossusX data volumes: block database, statistics
+database, Redis cache, and backend DETS state. It creates no backup. Existing
+images, chain ID, RPC URLs, passwords, branding, resource settings and host Nginx
+are retained. If initialization changes Genesis, only
+`COLOSSUSX_REWARDS_GENESIS_HASH` in `deploy/colossusx/backend.env` is updated after
+RPC verification; this can produce a one-line Git change. An unreachable RPC,
+wrong chain ID, missing image or unexpected Compose resource stops the script
+before deletion. Concurrent reset invocations are rejected.
+
+The script waits up to ten minutes for the frontend/API, running services and an
+indexed block matching the RPC. Success means restart and indexing have begun;
+historical synchronization and statistics aggregation continue automatically.
+Check progress at the explorer or with:
+
+```bash
+curl -fsS http://127.0.0.1:18080/api/v2/main-page/indexing-status
+```
+
+If startup fails or times out, inspect `docker compose ps` and the service logs
+from `deploy/colossusx` before rerunning: each normal invocation deletes data
+again. To stop services without deleting data, use the normal maintenance
+commands above.
+
 ## Host Nginx and HTTPS
 
 Installed versions: Docker `29.1.3`, Compose `2.40.3`, and host Nginx `1.28.3`. The source configuration for host Nginx is `host-nginx/colossusx.conf`, installed at `/etc/nginx/sites-available/colossusx` and enabled through the `/etc/nginx/sites-enabled/colossusx` symlink. The package's default site is disabled.
