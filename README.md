@@ -50,10 +50,17 @@ allow additional memory/swap or use a separate host for builds.
      90f7dd8e9348123b74dfd23f69ab7da76191a820
    ```
 
-2. Generate local secrets from the repository root. This refuses to overwrite an
-   existing `.env`:
+2. Copy the public configuration templates and generate local secrets from the
+   repository root. These commands preserve existing service settings and refuse
+   to overwrite an existing `.env`:
 
    ```bash
+   for service in backend frontend; do
+     target="deploy/colossusx/$service.env"
+     if [ ! -e "$target" ]; then
+       install -m 600 "deploy/colossusx/$service.example.env" "$target"
+     fi
+   done
    python3 - <<'PY'
    import os
    import secrets
@@ -66,7 +73,12 @@ allow additional memory/swap or use a separate host for builds.
    PY
    ```
 
-   Set `PUBLIC_IP` in that file. Review `backend.env` and `frontend.env` under
+   The blank secret fields are documented in `deploy/colossusx/example.env`.
+   Runtime `.env`, `backend.env`, and `frontend.env` files are ignored by Git;
+   commit sanitized changes to their templates instead. Keep existing database
+   passwords when upgrading a deployment with stored data.
+
+   Set `PUBLIC_IP` in `.env`. Review `backend.env` and `frontend.env` under
    `deploy/colossusx` for the RPC, chain ID, currency and FHS-D genesis settings.
    For your own domain, update `compose.override.yml`, `nginx.conf` and
    `host-nginx/*.conf` under `deploy/colossusx`, then configure DNS and host

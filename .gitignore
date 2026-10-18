@@ -66,9 +66,15 @@ dump.rdb
 
 **.dec**
 
-*.env.example
-*.env.local
-*.env.staging
+# Local environment settings and secrets. Commit only sanitized templates.
+.env
+.env.*
+*.env
+*.env.*
+!example.env
+!*.example.env
+!.env.example
+!*.env.example
 .devcontainer/.blockscout_config*
 
 # dets tables

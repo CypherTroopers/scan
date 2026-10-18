@@ -21,8 +21,10 @@ builder with memory/CPU limits and adequate swap; avoid compiling both applicati
 concurrently on a small production server. `BUILDX_BUILDER` can select an existing
 builder configured for that host.
 
-`backend.env` and `frontend.env` contain public ColossusX network settings and
-nonsecret operational settings. Review the RPC endpoint, chain ID, network/currency
+`backend.example.env` and `frontend.example.env` contain public ColossusX network
+settings and nonsecret operational settings. Copy them to the ignored local
+`backend.env` and `frontend.env` files using the initialization block below.
+Review the RPC endpoint, chain ID, network/currency
 names, image versions, memory/CPU limits, and hostnames for your own installation.
 `compose.override.yml` and the Nginx configurations describe the ColossusX HTTPS
 domain; adapt them before deploying under a different host. The local `.env` is
@@ -37,13 +39,21 @@ payouts without adding Ethereum gas rewards. Historical rewards are backfilled
 automatically, with no database reset. See [the rules and API](backend/REWARDS.md)
 before changing the protocol or adapting this deployment to another chain.
 
-Generate secrets from the `deployment` directory. Exclusive creation refuses to
-overwrite an existing `.env`:
+Initialize local configuration and generate secrets from the `deployment`
+directory. Exclusive creation refuses to overwrite an existing runtime file;
+for an existing installation, keep its local files and review template changes
+instead of rerunning this initialization:
 
 ```sh
 python3 - <<'PY'
 import os
+from pathlib import Path
 import secrets
+
+for component in ('backend', 'frontend'):
+    fd = os.open(component + '.env', os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(fd, 'w') as handle:
+        handle.write(Path(component + '.example.env').read_text())
 
 fd = os.open('.env', os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
 with os.fdopen(fd, 'w') as handle:
@@ -54,7 +64,10 @@ with os.fdopen(fd, 'w') as handle:
 PY
 ```
 
-Set `PUBLIC_IP` in your local `.env`. Do not commit this file, share expanded
+Set `PUBLIC_IP` in your local `.env`. `.env`, `backend.env`, and `frontend.env`
+are ignored by Git. Keep secrets in `.env`; Compose supplies the database
+credentials and `SECRET_KEY_BASE` to the services from that file. Do not commit
+these local files, share expanded
 Compose configuration, copy production volumes, or reuse another operator's
 secrets. Certificate paths in `host-nginx/` refer to certificates that you obtain
 for your own domain; no certificate or private key is bundled.

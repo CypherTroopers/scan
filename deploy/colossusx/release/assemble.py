@@ -32,7 +32,7 @@ BACKEND_ENGLISH_FILES = {
 
 # Each path is deliberately reviewed. Do not replace this with a directory copy.
 OPS_FILES = (
-    "LICENSE", "compose.yml", "compose.override.yml", "backend.env", "frontend.env", "nginx.conf",
+    "LICENSE", "compose.yml", "compose.override.yml", "backend.example.env", "frontend.example.env", "nginx.conf",
     "frontend/Dockerfile", "frontend/Dockerfile.deps", "frontend/build.sh", "frontend/branding.patch",
     "frontend/build-from-source.sh", "frontend/SOURCE-README.md", "frontend/update-source-index.py",
     "backend/Dockerfile", "backend/build.sh", "backend/build-from-source.sh", "backend/SOURCE-README.md", "backend/REWARDS.md",
@@ -112,7 +112,11 @@ def copy_ops(source, target):
     shutil.copytree(RELEASE_DIR, target / "release", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
     shutil.copy2(RELEASE_DIR / "templates/env.example", target / ".env.example")
     shutil.copy2(RELEASE_DIR / "templates/DEPLOYMENT.md", target / "README.md")
-    (target / ".gitignore").write_text(".env\nbackups/\nsource-dist/\n.build/\nnetwork-info/maintenance.flag\n__pycache__/\n*.pyc\n*.dump\n", encoding="utf-8")
+    (target / ".gitignore").write_text(
+        ".env\n.env.*\n*.env\n!.env.example\n!*.example.env\n"
+        "backups/\nsource-dist/\n.build/\nnetwork-info/maintenance.flag\n__pycache__/\n*.pyc\n*.dump\n",
+        encoding="utf-8",
+    )
 
 
 def prepare_backend(backend):
@@ -250,16 +254,21 @@ def check_source_licenses(path, relative):
 def scan_local_material(root):
     for path in files(root):
         relative = path.relative_to(root)
-        if path.name in {".env", "maintenance.flag"} or ".git" in relative.parts or "backups" in relative.parts:
+        if path.name in {".env", "backend.env", "frontend.env", "maintenance.flag"} or ".git" in relative.parts or "backups" in relative.parts:
             raise ValueError(f"Private/generated path in release: {relative}")
         if SECRET_PATTERN.search(path.read_bytes()):
             raise ValueError(f"Credential-like material found in: {relative}")
         check_source_licenses(path, relative)
-        if path.name in {"backend.env", "frontend.env"}:
+        # Upstream source examples are verified against their pinned baseline;
+        # these checks apply to the separately maintained deployment templates.
+        deployment_path = relative.relative_to("deployment") if relative.parts[0] == "deployment" else relative
+        if deployment_path.as_posix() in {
+            "backend.example.env", "frontend.example.env", ".env.example", "release/templates/env.example",
+        }:
             for line in path.read_text(encoding="utf-8").splitlines():
                 key, separator, value = line.partition("=")
                 if separator and re.search(r"(?:PASSWORD|SECRET|SECRET_KEY_BASE|PRIVATE_KEY|API_KEY|ACCESS_TOKEN|AUTH_TOKEN)$", key.strip()):
-                    if value.strip().strip("\"'") not in {"", "false", "null"}:
+                    if value.strip().strip("\"'"):
                         raise ValueError(f"Nonempty credential setting in: {relative} ({key.strip()})")
                 if separator and re.search(r"://[^/\s:@]+:[^/\s@]+@", value):
                     raise ValueError(f"Credential-bearing URL in: {relative} ({key.strip()})")

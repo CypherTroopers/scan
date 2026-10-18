@@ -12,6 +12,9 @@ services:
       - 'host.docker.internal:host-gateway'
     env_file:
       -  ../envs/common-blockscout.env
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql://blockscout:${DB_PASSWORD:-}@db:5432/blockscout}
+      SECRET_KEY_BASE: ${SECRET_KEY_BASE:?Set SECRET_KEY_BASE in .env}
     volumes:
       - ./logs/:/app/logs/
       - ./dets/:/app/dets/
